@@ -1,0 +1,50 @@
+
+#app {
+  .layout {
+    // 主体内容
+    .layout-main {
+      
+      .header-nav {
+          z-index: 999;
+          background-color: white;
+          box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
+          width: calc(100% - @sideBarWidth);
+          position: fixed;
+          top: 0;
+          left: @sideBarWidth;
+          height: auto;
+          transition: width .28s, left .28s;
+
+          .navbar {
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0,21,41,.08);
+          }     
+          
+          .page-tags {
+            height: @pageTagsHeight;
+            width: 100%;
+            // background: red;  
+          }
+      }
+
+      &.fixed-header .app-main {
+        padding-top: @navbarHeight;
+      }
+    }
+
+    // 显示页签
+    &.hasTagsView {
+      .app-main {
+        /* 84 = navbar + tags-view = 50 + 34 */
+        min-height: calc(100vh - @navbarHeight - @pageTagsHeight);
+      }
+
+      .fixed-header .app-main {
+        padding-top: @navbarHeight + @pageTagsHeight;
+      }
+    }
+  } 
+}
