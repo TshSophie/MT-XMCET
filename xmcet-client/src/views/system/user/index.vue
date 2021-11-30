@@ -708,10 +708,7 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          this.download(
-            process.env.VUE_APP_BASE_API + 'sysuser/exportExcel',
-            queryParams
-          )
+          this.download('sysuser/exportExcel', queryParams)
         })
         .catch(function() {})
     }

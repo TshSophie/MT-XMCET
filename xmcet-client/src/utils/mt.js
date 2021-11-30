@@ -214,21 +214,11 @@ export function rightExists(string, find, lower = false) {
 // 通用下载方法
 export function download(path, params) {
   params.Authorization = getToken()
-  const url = path + '?' + querystring.stringify(params)
+  const url =
+    process.env.VUE_APP_BASE_API +
+    'api/v1/' +
+    path +
+    '?' +
+    querystring.stringify(params)
   window.location.href = url
-}
-
-export function isJSON(str) {
-  if (typeof str === 'string') {
-    try {
-      var obj = JSON.parse(str)
-      if (typeof obj === 'object' && obj) {
-        return true
-      } else {
-        return false
-      }
-    } catch (e) {
-      return false
-    }
-  }
 }

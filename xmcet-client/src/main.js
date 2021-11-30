@@ -58,7 +58,7 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
-  zIndex: 2000 // 弹出层的z-index默认值
+  zIndex: 1000 // 弹出层的z-index默认值
 })
 
 new Vue({

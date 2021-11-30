@@ -1,9 +1,14 @@
 <template>
   <div class="contentmenu-list" @click="rowClick">
-    <div v-for="item in menulist" :key="item.value" :data-value="item.value" class="contentmenu-item">
-      <i :class="item.icon"></i>
+    <div
+      v-for="item in menulist"
+      :key="item.value"
+      :data-value="item.value"
+      class="contentmenu-item"
+    >
+      <i :class="item.icon" />
       <div class="contentmenu-item-title">
-        {{item.title}}
+        {{ item.title }}
       </div>
     </div>
   </div>
@@ -19,7 +24,7 @@ export default {
     }
   },
   methods: {
-    rowClick (event) {
+    rowClick(event) {
       let target = event.target
       while (!target.dataset.value) {
         target = target.parentNode
@@ -31,7 +36,7 @@ export default {
 </script>
 
 <style lang="less">
-.contentmenu-list {   
+.contentmenu-list {
   .contentmenu-item {
     padding: 8px 20px 8px 30px;
     margin: 0;
@@ -43,7 +48,7 @@ export default {
       background: #ecf5ff;
       color: #66b1ff;
     }
-    i{
+    i {
       position: absolute;
       left: 15px;
       top: 10px;

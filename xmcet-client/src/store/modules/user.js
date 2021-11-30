@@ -53,21 +53,24 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo(state.token)
           .then(res => {
-            const user = res.data.user
-            const avatar =
-              user.avatar === ''
-                ? require('@/assets/logo.png')
-                : process.env.VUE_APP_BASE_API + user.avatar
-            if (res.roles && res.roles.length > 0) {
-              // 验证返回的roles是否是一个非空数组
-              commit('SET_ROLES', res.roles)
-              commit('SET_PERMISSIONS', res.permissions)
-            } else {
-              commit('SET_ROLES', ['ROLE_DEFAULT'])
+            if (res.code === 200) {
+              const data = res.data
+              const user = data.user
+              const avatar =
+                user.avatar === ''
+                  ? require('@/assets/logo.png')
+                  : process.env.VUE_APP_BASE_API + user.avatar
+              if (data.roles && data.roles.length > 0) {
+                // 验证返回的roles是否是一个非空数组
+                commit('SET_ROLES', data.roles)
+                commit('SET_PERMISSIONS', data.permissions)
+              } else {
+                commit('SET_ROLES', ['ROLE_DEFAULT'])
+              }
+              commit('SET_NAME', user.userName)
+              commit('SET_AVATAR', avatar)
+              resolve(data)
             }
-            commit('SET_NAME', user.userName)
-            commit('SET_AVATAR', avatar)
-            resolve(res)
           })
           .catch(error => {
             reject(error)

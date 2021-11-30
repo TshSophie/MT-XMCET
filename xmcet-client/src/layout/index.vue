@@ -3,7 +3,7 @@
     <!-- 搜索 -->
     <transition name="fade-scale">
       <div v-if="searchPanelStatus" class="panel-search-container">
-        <panel-search ref="panelSearch"/>
+        <panel-search ref="panelSearch" />
       </div>
     </transition>
     <!-- 布局主体 -->
@@ -11,7 +11,7 @@
       <!-- 主体头部导航 -->
       <header-nav />
       <!-- 主体内容 -->
-      <app-main class="app-main" />
+      <app-main />
     </div>
     <!-- 左侧导航栏 -->
     <left-nav />

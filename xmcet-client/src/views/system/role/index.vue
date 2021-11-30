@@ -523,7 +523,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.download(
-          process.env.VUE_APP_BASE_API + 'sysrole/exportExcel',
+          'sysrole/exportExcel',
           queryParams
         )
       })

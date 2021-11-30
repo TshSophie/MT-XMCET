@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true">
+    <el-form ref="queryForm" :model="queryParams" :inline="true">
       <el-form-item label="字典名称" prop="dictType">
         <el-select v-model="queryParams.dictType" size="small">
           <el-option
@@ -41,11 +41,13 @@
           icon="el-icon-search"
           size="mini"
           @click="handleQuery"
-          >搜索</el-button
-        >
-        <el-button icon="el-icon-refresh" type="warning" size="mini" @click="resetQuery"
-          >重置</el-button
-        >
+        >搜索</el-button>
+        <el-button
+          icon="el-icon-refresh"
+          type="warning"
+          size="mini"
+          @click="resetQuery"
+        >重置</el-button>
       </el-form-item>
     </el-form>
 
@@ -56,8 +58,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          >新增</el-button
-        >
+        >新增</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -66,8 +67,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          >修改</el-button
-        >
+        >修改</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -76,8 +76,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          >删除</el-button
-        >
+        >删除</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -85,8 +84,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          >导出</el-button
-        >
+        >导出</el-button>
       </el-col>
     </el-row>
 
@@ -133,15 +131,13 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            >修改</el-button
-          >
+          >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            >删除</el-button
-          >
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -179,8 +175,7 @@
               v-for="dict in statusOptions"
               :key="dict.dictValue"
               :label="dict.dictValue"
-              >{{ dict.dictLabel }}</el-radio
-            >
+            >{{ dict.dictLabel }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
@@ -188,7 +183,7 @@
             v-model="form.remark"
             type="textarea"
             placeholder="请输入内容"
-          ></el-input>
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -205,14 +200,14 @@ import {
   getData,
   delData,
   addData,
-  updateData, 
-  listType, 
+  updateData,
+  listType,
   getType
 } from '@/api/system/dict'
 
 export default {
   name: 'Data',
-  data () {
+  data() {
     return {
       // 遮罩层
       loading: true,
@@ -260,7 +255,7 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     const dictId = this.$route.params && this.$route.params.dictId
     this.getType(dictId)
     this.getTypeList()
@@ -270,7 +265,7 @@ export default {
   },
   methods: {
     /** 查询字典类型详细 */
-    getType (dictId) {
+    getType(dictId) {
       getType(dictId).then(response => {
         this.queryParams.dictType = response.data.dictType
         this.defaultDictType = response.data.dictType
@@ -278,13 +273,13 @@ export default {
       })
     },
     /** 查询字典类型列表 */
-    getTypeList () {
+    getTypeList() {
       listType().then(response => {
         this.typeOptions = response.data.rows
       })
     },
     /** 查询字典数据列表 */
-    getList () {
+    getList() {
       this.loading = true
       listData(this.queryParams).then(response => {
         this.dataList = response.data.rows
@@ -293,16 +288,16 @@ export default {
       })
     },
     // 数据状态字典翻译
-    statusFormat (row, column) {
+    statusFormat(row, column) {
       return this.selectDictLabel(this.statusOptions, row.status)
     },
     // 取消按钮
-    cancel () {
+    cancel() {
       this.open = false
       this.reset()
     },
     // 表单重置
-    reset () {
+    reset() {
       this.form = {
         dictCode: undefined,
         dictLabel: undefined,
@@ -314,31 +309,31 @@ export default {
       this.resetForm('form')
     },
     /** 搜索按钮操作 */
-    handleQuery () {
+    handleQuery() {
       this.queryParams.pageNum = 1
       this.getList()
     },
     /** 重置按钮操作 */
-    resetQuery () {
+    resetQuery() {
       this.resetForm('queryForm')
       this.queryParams.dictType = this.defaultDictType
       this.handleQuery()
     },
     /** 新增按钮操作 */
-    handleAdd () {
+    handleAdd() {
       this.reset()
       this.open = true
       this.title = '添加字典数据'
       this.form.dictType = this.queryParams.dictType
     },
     // 多选框选中数据
-    handleSelectionChange (selection) {
+    handleSelectionChange(selection) {
       this.ids = selection.map(item => item.dictCode)
       this.single = selection.length != 1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
-    handleUpdate (row) {
+    handleUpdate(row) {
       this.reset()
       const dictCode = row.dictCode || this.ids
       getData(dictCode).then(response => {
@@ -348,7 +343,7 @@ export default {
       })
     },
     /** 提交按钮 */
-    submitForm () {
+    submitForm() {
       this.$refs.form.validate(valid => {
         if (valid) {
           if (this.form.dictCode != undefined) {
@@ -372,7 +367,7 @@ export default {
       })
     },
     /** 删除按钮操作 */
-    handleDelete (row) {
+    handleDelete(row) {
       const dictCodes = row.dictCode || this.ids
       this.$confirm(
         '是否确认删除字典编码为"' + dictCodes + '"的数据项?',
@@ -383,25 +378,24 @@ export default {
           type: 'warning'
         }
       )
-        .then(function () {
+        .then(function() {
           return delData(dictCodes)
         })
         .then(() => {
           this.getList()
           this.msgSuccess('删除成功')
         })
-        .catch(function () {})
+        .catch(function() {})
     },
     /** 导出按钮操作 */
-    handleExport () {
+    handleExport() {
       const queryParams = this.queryParams
       this.$confirm('是否确认导出所有数据项?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      })
-      .then(() =>{
-        this.download(process.env.VUE_APP_BASE_API + "sysdict/data/exportExcel", queryParams)
+      }).then(() => {
+        this.download('sysdict/data/exportExcel', queryParams)
       })
     }
   }

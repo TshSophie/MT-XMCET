@@ -19,11 +19,8 @@
           slot="label"
           style="display: inline-block;"
           @click.right.prevent="handClickRight($event, page)"
-        ><i
-           :class="
-             page.meta.icon ? 'el-icon-' + page.meta.icon : 'el-icon-document'
-           "
-         />
+        >
+          <svg-icon v-if="page.meta.icon" :icon-class="page.meta.icon" />
           {{ page.meta.title || '未命名' }}</span>
       </el-tab-pane>
     </el-tabs>
