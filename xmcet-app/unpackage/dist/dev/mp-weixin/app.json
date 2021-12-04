@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/mine/mine"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "小麦CET",
+    "navigationBarBackgroundColor": "#86d461"
+  },
+  "tabBar": {
+    "selectedColor": "#86d461",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "static/assets/home.png",
+        "selectedIconPath": "static/assets/home_active.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/assets/user.png",
+        "selectedIconPath": "static/assets/user_active.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
