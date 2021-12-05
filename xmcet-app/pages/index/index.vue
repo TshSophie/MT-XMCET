@@ -36,11 +36,11 @@
 	</view>
 	<!-- 主体内容 -->
 	<view class="content">
-		<!-- 我的课程 -->
+		<!-- 闯关课程 -->
 		<view class='card course'>
-			<view class='card-title'>我的课程</view>
+			<view class='card-title'>闯关课程</view>
 			<view class='item-list'>
-				<view class='item' v-for="item in courses" :key="item.id">
+				<view class='item' v-for="item in courses" :key="item.id" @click="navigateToBookMenu(item.id)">
 					<image :src='item.img' class="item-image"></image>
 					<text class="item-title">{{item.name}}</text>
 				</view>
@@ -145,7 +145,12 @@
 
 		},
 		methods: {
-
+			navigateToBookMenu(id) {
+				console.log(id)
+				uni.navigateTo({
+				    url: '/pages/bookMenu/bookMenu?bookid=' + id
+				});
+			}
 		}
 	}
 </script>

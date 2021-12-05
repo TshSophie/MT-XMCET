@@ -1,0 +1,27 @@
+.list.data-v-f6a444b4 {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+.list .item.data-v-f6a444b4 {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-align-items: center;
+  background-color: #fff;
+  margin: 20rpx 30rpx;
+  padding: 25rpx;
+  border-radius: 10rpx;
+  min-height: 90rpx;
+}
+.list .item text.data-v-f6a444b4 {
+  font-size: 28rpx;
+}
+.list .item image.data-v-f6a444b4 {
+  width: 50rpx;
+  height: 50rpx;
+}
+

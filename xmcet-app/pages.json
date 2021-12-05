@@ -13,6 +13,24 @@
                 "enablePullDownRefresh": false
             }
         }
+        ,{
+            "path" : "pages/bookMenu/bookMenu",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "闯关",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/courseList/courseList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar":{
 		"selectedColor":"#86d461",
