@@ -31,6 +31,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/readingCourse/readingCourse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar":{
 		"selectedColor":"#86d461",

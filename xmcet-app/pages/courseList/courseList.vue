@@ -15,9 +15,11 @@
 			return {
 				list:[
 					{
+						id: 1,
 						name: '语法课',
 						status: 1,
 					},{
+						id: 2,
 						name: '作文课',
 						status: 2,
 					},
@@ -36,8 +38,10 @@
 				    title: this.title
 				});
 			},
-			gotoCourse() {
-				
+			gotoCourse(item) {
+				uni.navigateTo({
+				  url: '/pages/readingCourse/readingCourse?id=' + item.id,
+				})
 			}
 		}
 	}

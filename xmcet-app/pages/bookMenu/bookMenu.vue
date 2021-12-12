@@ -42,7 +42,7 @@
 						  { 
 						    "id": 1, 
 						    "title": "第1关", 
-						    "sub_title": "Reading", 
+						    "subTitle": "Reading", 
 						    "week": 1, 
 						    "catid": 1, 
 						    "status": 1 
@@ -50,42 +50,42 @@
 						 {
 						   "id": 2, 
 						   "title": "第2关", 
-						   "sub_title": "Reading", 
+						   "subTitle": "Reading", 
 						   "week": 1, 
 						   "catid": 1, 
 						   "status": 1 
 						 },{
 						   "id": 3, 
 						   "title": "第1关", 
-						   "sub_title": "Reading", 
+						   "subTitle": "Reading", 
 						   "week": 1, 
 						   "catid": 1, 
 						   "status": 1 
 						 }, {
 						   "id": 4, 
 						   "title": "第1关", 
-						   "sub_title": "Reading", 
+						   "subTitle": "Reading", 
 						   "week": 1, 
 						   "catid": 1, 
 						   "status": 1 
 						 },{
 						   "id": 5, 
 						   "title": "第1关", 
-						   "sub_title": "Reading", 
+						   "subTitle": "Reading", 
 						   "week": 1, 
 						   "catid": 1, 
 						   "status": 1 
 						 },{
 						   "id": 6, 
 						   "title": "第1关", 
-						   "sub_title": "Reading", 
+						   "subTitle": "Reading", 
 						   "week": 1, 
 						   "catid": 1, 
 						   "status": 1 
 						 },  {
 						   "id": 7, 
 						   "title": "第1关", 
-						   "sub_title": "Reading", 
+						   "subTitle": "Reading", 
 						   "week": 1, 
 						   "catid": 1, 
 						   "status": 1 
@@ -98,7 +98,7 @@
 						  { 
 						    "id": 33, 
 						    "title": "第1关", 
-						    "sub_title": "Reading", 
+						    "subTitle": "Reading", 
 						    "week": 1, 
 						    "catid": 1, 
 						    "status": 1 
