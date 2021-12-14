@@ -1,0 +1,23 @@
+.tabs.data-v-21da2544 {
+  width: 100%;
+  height: 80rpx;
+}
+.tabs .tab-nav.data-v-21da2544 {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  background: #F7F7F7;
+  font-size: 16px;
+  white-space: nowrap;
+}
+.tabs .tab-nav .tab-nav-item.data-v-21da2544 {
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+}
+.tabs .tab-nav .tab-nav-item.active.data-v-21da2544 {
+  color: #86d461;
+  border-bottom: solid 3px #86d461;
+}
+

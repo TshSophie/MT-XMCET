@@ -1,0 +1,13 @@
+.content.data-v-6e63ea9a {
+  height: 100%;
+  padding: 15rpx;
+}
+.content .title.data-v-6e63ea9a {
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.content .richText.data-v-6e63ea9a {
+  margin-top: 10rpx;
+  font-size: 32rpx;
+}
+

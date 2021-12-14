@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "tabs": "/components/tabs/tabs",
+    "practice": "/pages/readingCourse/components/Practise"
+  }
+}

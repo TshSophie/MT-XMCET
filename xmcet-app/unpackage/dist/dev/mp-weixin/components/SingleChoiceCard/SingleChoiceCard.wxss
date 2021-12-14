@@ -1,0 +1,18 @@
+.cards .card.data-v-1e5d6e24 {
+  background: #fff;
+  border-radius: 15rpx;
+  padding: 15rpx;
+  box-shadow: #10161a1a 2px 2px;
+  font-size: 28rpx;
+  margin: 15rpx;
+}
+.cards .card .card-question.data-v-1e5d6e24 {
+  font-weight: bolder;
+}
+.cards .card .card-label.data-v-1e5d6e24 {
+  margin: 3rpx;
+}
+.cards .card-btn.data-v-1e5d6e24 {
+  margin: 20rpx;
+}
+
