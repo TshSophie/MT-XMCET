@@ -4,14 +4,16 @@
             <text class="card-question">{{card.question}}</text>
             <radio-group @change="radioChange($event, card.id)">
                 <label class="card-label" v-for="item in card.options" :key="item.value">
-                    <view>
-                        <radio :value="item.value" />
+                    <view :style="{color: renderOption(item.value, card.answer, card.choice)}">
+                        <radio :value="item.value" disabled :checked="renderChecked(item.value, card.answer, card.choice)" :color="renderOption(item.value, card.answer, card.choice)"/>
                         {{item.label}}
                     </view>
                 </label>
             </radio-group>
+            <view class="answer">
+              正确答案：{{renderAnswer(card.answer)}}，你的答案：{{renderAnswer(card.choice)}} 
+            </view>
         </view>
-        <button type="primary" class="card-btn" @click="submitAnswer">提交答案</button>
     </view>
 </template>
 
@@ -43,6 +45,29 @@ export default {
         },
         submitAnswer() {
             this.$emit('submit', this.cards)
+        },
+        renderOption(value, answer, choice) {
+            if(value == answer) {
+                return 'green'
+            } else {
+                if(value == choice && choice != answer) {
+                    return 'red'
+                } else {
+                    return 'black'
+                }
+            }
+        },
+        renderChecked(value, answer, choice) {
+            if(value == answer) {
+                return true
+            } else {
+                return false
+            }
+        },
+        renderAnswer(value) {
+            let arr = ['A','B','C','D','E','F','G','H','I','J','K','L',
+            'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+            return arr[parseInt(value) - 1]
         }
     },
 }
@@ -63,6 +88,14 @@ export default {
         }
         .card-label {
             margin: 3rpx;
+        }
+        .answer {
+            background: #eeeeee;
+            font-weight: bolder;
+            height: 80rpx;
+            line-height: 80rpx;
+            border-radius: 5rpx;
+            padding-left: 15rpx;
         }
     }
 

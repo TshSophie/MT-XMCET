@@ -1,10 +1,12 @@
 <template>
     <view class="content">
-        <text class="title">
-            {{title}}
-        </text>
-        <rich-text :nodes="strings" class="richText"></rich-text>
-        <SingleChoiceCard :cards="cards" @submit="submitAnswer"/>
+        <view class="article">
+            <view class="title">
+                {{title}}
+            </view>
+            <rich-text :nodes="strings" class="richText"></rich-text>
+        </view>
+        <SingleChoiceCard :cards="cards" @submit="submitAnswer" class="question"/>
     </view>
 </template>
 
@@ -23,30 +25,50 @@ export default {
                 {
                     id: 1,
                     question: "49. Why can certain species of tilapia sometimes survive around Lake Natron?",
-                    answers: [
+                    options: [
                         {
                             value: '1',
                             label: "A) They can take refuge in the less salty waters."
                         },
                         {
-                            value: '3',
+                            value: '2',
                             label: "B) They can flee quick enough from predators."
                         },
-                    ]
+                        {
+                            value: '3',
+                            label: "C) They can take refuge in the less salty waters."
+                        },
+                        {
+                            value: '4',
+                            label: "D) They can flee quick enough from predators."
+                        },
+                    ],
+                    answer: '1',
+                    choice: '1'
                 },
                 {
                     id: 2,
                     question: "49. Why can certain species of tilapia sometimes survive around Lake Natron?",
-                    answers: [
+                    options: [
                         {
                             value: '1',
                             label: "A) They can take refuge in the less salty waters."
                         },
                         {
-                            value: '3',
+                            value: '2',
                             label: "B) They can flee quick enough from predators."
                         },
-                    ]
+                        {
+                            value: '3',
+                            label: "C) They can take refuge in the less salty waters."
+                        },
+                        {
+                            value: '4',
+                            label: "D) They can flee quick enough from predators."
+                        },
+                    ],
+                    answer: '1',
+                    choice: '3'
                 },
             ]
         }
@@ -62,15 +84,21 @@ export default {
 <style lang="less" scoped>
 .content {
     height: 100%;
-    padding: 15rpx;
-    
-    .title {
-        font-weight: bold;
-        font-size: 32rpx;
-    }
-    .richText {
-        margin-top: 10rpx;
-        font-size: 32rpx;
+    padding: 0 15rpx;
+    .article {
+        background: #fff;
+        border-radius: 15rpx;
+        box-shadow: #10161a1a 2px 2px 20px 2px;
+        padding: 15rpx;
+        margin-bottom: 15rpx;
+        .title {
+            font-weight: bold;
+            font-size: 32rpx;
+        }
+        .richText {
+            margin-top: 10rpx;
+            font-size: 32rpx;
+        }
     }
 }
 </style>

@@ -3,6 +3,9 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "tabs": "/components/tabs/tabs",
-    "practice": "/pages/readingCourse/components/Practise"
+    "practice": "/pages/readingCourse/components/Practise",
+    "answer": "/pages/readingCourse/components/Answer",
+    "analysis": "/pages/readingCourse/components/Analysis",
+    "translate": "/pages/readingCourse/components/Translate"
   }
 }

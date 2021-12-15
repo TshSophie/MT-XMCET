@@ -105,11 +105,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/tabs/tabs":1,"pages/readingCourse/components/Practise":1,"components/SingleChoiceCard/SingleChoiceCard":1};
+/******/ 		var cssChunks = {"components/tabs/tabs":1,"pages/readingCourse/components/Analysis":1,"pages/readingCourse/components/Answer":1,"pages/readingCourse/components/Practise":1,"pages/readingCourse/components/Translate":1,"components/SingleChoiceForResultCard/SingleChoiceForResultCard":1,"components/SingleChoiceCard/SingleChoiceCard":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/tabs/tabs":"components/tabs/tabs","pages/readingCourse/components/Practise":"pages/readingCourse/components/Practise","components/SingleChoiceCard/SingleChoiceCard":"components/SingleChoiceCard/SingleChoiceCard"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/tabs/tabs":"components/tabs/tabs","pages/readingCourse/components/Analysis":"pages/readingCourse/components/Analysis","pages/readingCourse/components/Answer":"pages/readingCourse/components/Answer","pages/readingCourse/components/Practise":"pages/readingCourse/components/Practise","pages/readingCourse/components/Translate":"pages/readingCourse/components/Translate","components/SingleChoiceForResultCard/SingleChoiceForResultCard":"components/SingleChoiceForResultCard/SingleChoiceForResultCard","components/SingleChoiceCard/SingleChoiceCard":"components/SingleChoiceCard/SingleChoiceCard"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

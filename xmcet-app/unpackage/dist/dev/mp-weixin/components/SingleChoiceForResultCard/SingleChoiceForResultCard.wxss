@@ -1,0 +1,26 @@
+.cards .card.data-v-73578cc0 {
+  background: #fff;
+  border-radius: 15rpx;
+  padding: 15rpx;
+  box-shadow: #10161a1a 2px 2px 20px 2px;
+  font-size: 28rpx;
+  margin-bottom: 15rpx;
+}
+.cards .card .card-question.data-v-73578cc0 {
+  font-weight: bolder;
+}
+.cards .card .card-label.data-v-73578cc0 {
+  margin: 3rpx;
+}
+.cards .card .answer.data-v-73578cc0 {
+  background: #eeeeee;
+  font-weight: bolder;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 5rpx;
+  padding-left: 15rpx;
+}
+.cards .card-btn.data-v-73578cc0 {
+  margin: 20rpx;
+}
+

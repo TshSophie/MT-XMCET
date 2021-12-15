@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="page">
 		<tabs v-model="currentTab" @tab-click="handleClick" :tabs="tabs"></tabs>
 		<!--内容合子  -->
 		<swiper class="tab-content" :current="currentTab" duration="300" @change="switchTab">        
@@ -9,13 +9,19 @@
 				</scroll-view>
 			</swiper-item>
 			<swiper-item>
-				22222222222222
+				<scroll-view scroll-y="true" class="scoll-h" >
+				   <Answer />
+				</scroll-view>
 			</swiper-item>
 			<swiper-item>
-				333333333333
+				<scroll-view scroll-y="true" class="scoll-h" >
+					<Translate/>
+				</scroll-view>
 			</swiper-item>
 			<swiper-item>
-				444444444444
+				<scroll-view scroll-y="true" class="scoll-h" >
+					<Analysis/>
+				</scroll-view>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -24,10 +30,16 @@
 <script>
 	import tabs from '@/components/tabs/tabs.vue'
 	import Practice from './components/Practise.vue'
+	import Answer from './components/Answer.vue'
+	import Analysis from './components/Analysis.vue'
+	import Translate from './components/Translate.vue'
 	export default {
 		components: {
 			tabs,
-			Practice
+			Practice,
+			Answer,
+			Analysis,
+			Translate
 		},
 		data() {
 			return {
@@ -61,6 +73,9 @@
 </script>
 
 <style lang="less" scoped>
+.page {
+	// background: #fff;
+}
 .tabs {
 	// position: fixed;
 	// top: 0;
@@ -69,6 +84,7 @@
 	// margin-top: 90rpx;
 }
 .tab-content {
+	margin-top: 15rpx;
 	height: calc(100vh - 182rpx);
 	.scoll-h {
 		height: 100%;

@@ -1,0 +1,1 @@
+<view class="content data-v-008e21c6"><single-choice-for-result-card class="question data-v-008e21c6" vue-id="11369800-1" cards="{{cards}}" data-event-opts="{{[['^submit',[['submitAnswer']]]]}}" bind:submit="__e" bind:__l="__l"></single-choice-for-result-card></view>
