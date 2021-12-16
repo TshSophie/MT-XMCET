@@ -1,8 +1,11 @@
-.tab-content.data-v-51502a16 {
-  margin-top: 15rpx;
-  height: calc(100vh - 182rpx);
+.page.data-v-51502a16 {
+  height: calc(100vh --window-top);
 }
-.tab-content .scoll-h.data-v-51502a16 {
+.page .tab-content.data-v-51502a16 {
+  margin-top: 10px;
+  height: 100vh;
+}
+.page .tab-content .scoll-h.data-v-51502a16 {
   height: 100%;
 }
 

@@ -1,29 +1,18 @@
 <template>
     <view class="content">
-        <view class="article">
-            <view class="title">
-                {{title}}
-            </view>
-            <rich-text :nodes="strings" class="richText"></rich-text>
-        </view>
-        <SingleChoiceCard :cards="cards" @submit="submitAnswer" class="question"/>
-        <AudioPlayer :src="audioSrc" class="audio"/>
+        <SingleChoiceForResultCard :cards="cards" @submit="submitAnswer" class="question"/>
     </view>
 </template>
 
 <script>
-import SingleChoiceCard from '@/components/SingleChoiceCard/SingleChoiceCard.vue'
-import AudioPlayer from "@/components/AudioPlayer/AudioPlayer.vue"
+import SingleChoiceForResultCard from '@/components/SingleChoiceForResultCard/SingleChoiceForResultCard.vue'
 export default {
     name: 'Practice',
     components: {
-        SingleChoiceCard,
-        AudioPlayer
+        SingleChoiceForResultCard
     },
     data() {
         return {
-            title: '精读2017年12月六级真题，用词典查出所有不认识的词，并做笔',
-            strings: '<p>At the base of a mountain in TanzaniaAt the base ofAt the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of  a mountainAt the base of a mountainAt the base of a mountainAt the base of a mountainAt the base of a mountain</p><div style="text-align:center;"><img src="https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-uni-app-doc/d8590190-4f28-11eb-b680-7980c8a877b8.png"/></div>',
             cards: [
                 {
                     id: 1,
@@ -73,13 +62,7 @@ export default {
                     answer: '1',
                     choice: '3'
                 },
-            ],
-            audioSrc: "https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-hello-uniapp/2cc220e0-c27a-11ea-9dfb-6da8e309e0d8.mp3",
-        }
-    },
-    methods: {
-        submitAnswer(result) {
-            console.log(result)
+            ]
         }
     },
 }
@@ -87,28 +70,7 @@ export default {
 
 <style lang="less" scoped>
 .content {
-    position: relative;
     height: 100%;
     padding: 0 15rpx;
-    .article {
-        background: #fff;
-        border-radius: 15rpx;
-        box-shadow: #10161a1a 2px 2px 20px 2px;
-        padding: 15rpx;
-        margin-bottom: 15rpx;
-        .title {
-            font-weight: bold;
-            font-size: 32rpx;
-        }
-        .richText {
-            margin-top: 10rpx;
-            font-size: 32rpx;
-        }
-    }
-    .audio {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-    }
 }
 </style>

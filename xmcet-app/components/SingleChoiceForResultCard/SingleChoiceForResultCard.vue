@@ -92,8 +92,8 @@ export default {
         .answer {
             background: #eeeeee;
             font-weight: bolder;
-            height: 80rpx;
-            line-height: 80rpx;
+            height: 40px;
+            line-height: 40px;
             border-radius: 5rpx;
             padding-left: 15rpx;
         }

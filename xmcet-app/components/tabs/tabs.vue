@@ -59,12 +59,12 @@
 <style lang="less" scoped>
 .tabs {
 	width: 100%;
-	height: 80rpx;
+	height: 40px;
 	.tab-nav {
 		width: 100%;
 		box-sizing: border-box;
 		overflow: hidden;
-		line-height: 80rpx;
+		line-height: 40px;
 		background: #F7F7F7; 
 		font-size: 16px; 
 		white-space: nowrap;
