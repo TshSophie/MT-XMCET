@@ -1,7 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "single-choice-card": "/components/SingleChoiceCard/SingleChoiceCard",
-    "audio-player": "/components/AudioPlayer/AudioPlayer"
+    "single-choice-card": "/components/SingleChoiceCard/SingleChoiceCard"
   }
 }

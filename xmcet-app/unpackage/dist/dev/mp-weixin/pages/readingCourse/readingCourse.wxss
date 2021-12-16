@@ -1,11 +1,25 @@
 .page.data-v-51502a16 {
-  height: calc(100vh --window-top);
+  position: relative;
+}
+.page .tabs.data-v-51502a16 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 .page .tab-content.data-v-51502a16 {
-  margin-top: 10px;
-  height: 100vh;
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  left: 0;
 }
 .page .tab-content .scoll-h.data-v-51502a16 {
   height: 100%;
+}
+.page .audio.data-v-51502a16 {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 

@@ -4,7 +4,7 @@
   padding: 15px 0;
 }
 .wrap swiper.data-v-3d7dbb86 {
-  height: calc(100vh - 160rpx);
+  height: calc(100vh - 0px - 30px);
 }
 .wrap .card.data-v-3d7dbb86 {
   height: 100%;
@@ -42,6 +42,7 @@
   align-items: center;
   -webkit-align-items: center;
   background-color: rgba(233, 230, 230, 0.801);
+  box-shadow: #fffffff2 2px 2px 20px 2px;
   margin: 10rpx;
   padding: 25rpx;
   border-radius: 10rpx;

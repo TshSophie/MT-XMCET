@@ -18,9 +18,4 @@
   margin-top: 10rpx;
   font-size: 32rpx;
 }
-.content .audio.data-v-6e63ea9a {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-}
 

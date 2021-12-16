@@ -7,18 +7,15 @@
             <rich-text :nodes="strings" class="richText"></rich-text>
         </view>
         <SingleChoiceCard :cards="cards" @submit="submitAnswer" class="question"/>
-        <AudioPlayer :src="audioSrc" class="audio"/>
     </view>
 </template>
 
 <script>
 import SingleChoiceCard from '@/components/SingleChoiceCard/SingleChoiceCard.vue'
-import AudioPlayer from "@/components/AudioPlayer/AudioPlayer.vue"
 export default {
     name: 'Practice',
     components: {
         SingleChoiceCard,
-        AudioPlayer
     },
     data() {
         return {
@@ -74,7 +71,6 @@ export default {
                     choice: '3'
                 },
             ],
-            audioSrc: "https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-hello-uniapp/2cc220e0-c27a-11ea-9dfb-6da8e309e0d8.mp3",
         }
     },
     methods: {
@@ -104,11 +100,6 @@ export default {
             margin-top: 10rpx;
             font-size: 32rpx;
         }
-    }
-    .audio {
-        position: fixed;
-        bottom: 0;
-        left: 0;
     }
 }
 </style>

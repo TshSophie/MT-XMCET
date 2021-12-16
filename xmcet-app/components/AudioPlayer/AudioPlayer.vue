@@ -62,7 +62,9 @@ export default {
         this.isOpen = false;
     })
   },
-  created() {},
+  destroyed() {
+    innerAudioContext.destroy()
+  },
   methods: {
     // 播放
     listenerButtonPlay() {
@@ -108,12 +110,8 @@ export default {
 
 <style lang="less" scoped>
 .audiosBox {
-//   position: absolute;
-//   bottom: 0;
-//   left: 0;
   width: 100%;
-  margin: auto;
-  height: 120rpx;
+  height: 60px;
   display: flex;
   display: -webkit-flex;
   justify-content: space-between;

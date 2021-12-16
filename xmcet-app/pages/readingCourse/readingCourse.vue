@@ -1,8 +1,8 @@
 <template>
 	<view class="page">
-		<tabs v-model="currentTab" @tab-click="handleClick" :tabs="tabs"></tabs>
+		<Tabs v-model="currentTab" @tab-click="handleClick" :tabs="tabs"></Tabs>
 		<!--内容合子  -->
-		<swiper class="tab-content" :current="currentTab" duration="300" @change="switchTab">        
+		<swiper class="tab-content" :current="currentTab" duration="300" @change="switchTab" :style="{height: (windowHeight - 120) + 'px'}">        
 			<swiper-item>
 				<scroll-view scroll-y="true" class="scoll-h" >
 				   <Practice />
@@ -24,22 +24,26 @@
 				</scroll-view>
 			</swiper-item>
 		</swiper>
+        <AudioPlayer :src="audioSrc" class="audio"/>
 	</view>
 </template>
 
 <script>
-	import tabs from '@/components/tabs/tabs.vue'
+	import Tabs from '@/components/Tabs/Tabs.vue'
 	import Practice from './components/Practise.vue'
 	import Answer from './components/Answer.vue'
 	import Analysis from './components/Analysis.vue'
 	import Translate from './components/Translate.vue'
+	import AudioPlayer from "@/components/AudioPlayer/AudioPlayer.vue"
+
 	export default {
 		components: {
-			tabs,
+			Tabs,
 			Practice,
 			Answer,
 			Analysis,
-			Translate
+			Translate,
+        	AudioPlayer
 		},
 		data() {
 			return {
@@ -48,12 +52,16 @@
 				id: '',
 				currentTab: 0,
 				tabs:["练习", "答案", "翻译", "解析"],
+            	audioSrc: "https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-hello-uniapp/2cc220e0-c27a-11ea-9dfb-6da8e309e0d8.mp3",
+				windowHeight: 0
 			}
 		},
 		onLoad(option) {
-			 this.id = option.id
-			 // 重新设置标题
-			 this.setNavBarTitle()
+			this.id = option.id
+			// 重新设置标题
+			this.setNavBarTitle()
+			const res = uni.getSystemInfoSync();
+			this.windowHeight = res.windowHeight
 		},
 		methods: {
 			setNavBarTitle() {
@@ -74,22 +82,30 @@
 
 <style lang="less" scoped>
 .page {
-	height: calc(100vh - --window-top);
+	position: relative;
 	.tabs {
-		// position: fixed;
-		// top: 0;
-		// left: 0;
-		// z-index: 9999;
-		// margin-top: 90rpx;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 9999;
 	}
 	.tab-content {
-		margin-top: 10px;
-		// height: calc(100vh - 95px);
-		height: 100vh;
+		position: absolute;
+		width: 100%;
+		top: 50px;
+		left: 0;
+	    // height: calc(100vh - 40px - 60px - var(--window-top));
+
 		.scoll-h {
 			height: 100%;
 		}
 	}
+    .audio {
+		width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
 }
 
 </style>

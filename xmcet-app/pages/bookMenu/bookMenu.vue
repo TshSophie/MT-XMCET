@@ -158,7 +158,7 @@
 	height: 100%;
 	padding: 15px 0;
 	swiper {
-		height: calc(100vh - 160rpx);
+		height: calc(100vh - var(--window-top) - 30px);
 	}
 	.card {
 			  height: 100%;			  
@@ -192,7 +192,8 @@
 					   flex-direction: row;
 					   justify-content: space-between;
 					   align-items: center; -webkit-align-items: center;
-					   background-color: rgba(233, 230, 230, 0.801);    
+					   background-color: rgba(233, 230, 230, 0.801);  
+        			   box-shadow: #fffffff2 2px 2px 20px 2px;
 					   margin: 10rpx;
 					   padding: 25rpx;
 					   border-radius: 10rpx;
