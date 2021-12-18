@@ -7,33 +7,28 @@
                 <view class="translate">{{item.mean}}</view>
             </view>
         </view>
-        <view class="tab-content" v-if="!listMode">
-            <swiper previous-margin="50rpx" next-margin="50rpx" easing-function="linear">
-                <swiper-item v-for="item in wordDataList" :key="item.id" >
-                    <view class='card'>
-                        <view class='card-content'>
-                            <view class="word">   
-                                {{item.word}}
-                            </view>
-                            <view class="mean">
-                                释义： {{item.mean}}
-                            </view>
-                            <view class="mean">
-                                释义： {{item.mean}}
-                            </view>
-                            <view class="detail">
-                                <view class="detail-item" v-for="(detail, index) in item.detail" :key="detail.word">
-                                    <view class="item-word">{{index+1}}. {{detail.word}}</view>
-                                    <view class="item-translare">{{detail.translate}}</view>
-                                </view>     
-                            </view>
+        <swiper class="tab-card" v-if="!listMode" previous-margin="50rpx" next-margin="50rpx" easing-function="linear">
+            <swiper-item v-for="item in wordDataList" :key="item.id" >
+                <view class='card'>
+                    <view class='card-content'>
+                        <view class="word">   
+                            {{item.word}}
                         </view>
-                        <!-- <view class='card-bottom'>
-                        </view> -->
+                        <view class="mean">
+                            释义： {{item.mean}}
+                        </view>
+                        <view class="detail">
+                            <view class="detail-item" v-for="(detail, index) in item.detail" :key="detail.word">
+                                <view class="item-word">{{index+1}}. {{detail.word}}</view>
+                                <view class="item-translare">{{detail.translate}}</view>
+                            </view>     
+                        </view>
                     </view>
-                </swiper-item>
-            </swiper>
-        </view>
+                    <!-- <view class='card-bottom'>
+                    </view> -->
+                </view>
+            </swiper-item>
+        </swiper>
         <view class="tab-bottom"> 
 			<image class="logo-left" src="../../static/assets/list.png" v-if="listMode" @click="switchListMode(false)"></image>
 			<image class="logo-left" src="../../static/assets/card.png" v-if="!listMode" @click="switchListMode(true)"></image>
@@ -235,13 +230,42 @@
             }
         }
 	}
+    .tab-card {
+        position: absolute;
+        height: calc(100vh - @tabTopHeight - var(--window-top) - @tabBottomHeight);
+		width: 100%;
+		top: 60px;
+		left: 0;
+        box-sizing: border-box;
+        padding: 15px 0;
+    
+        .card {
+            box-sizing: border-box;
+            height: 100%;			  
+            margin-right: 10px;
+            border-radius: 15px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            .word{
+                text-align: center;
+                font-size: 40rpx;
+                font-weight: bold;
+            }
+            .detail-item{
+                margin: 15rpx;
+            }
+        }
+    }
+
     .tab-bottom {
         position: absolute;
         height: @tabBottomHeight;
 		width: 100%;
 		bottom: 0;
 		left: 0;
-
+        background: #f7f7f7;
         display: flex;
         justify-content: space-around;
         align-items: center;
