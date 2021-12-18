@@ -1,19 +1,44 @@
 <template>
 	<view class="page">
 		<TabsUd v-model="currentTab" @tab-click="handleClick" :tabs="tabs"></TabsUd>
-        <view class="tab-content">
+        <view class="tab-content" v-if="listMode">
             <view class="wordList-item" v-for="item in wordDataList" :key="item.id" @click="gotoWordRootDetail(item)">
                 <view class="word"> {{item.word}}</view>
                 <view class="translate">{{item.mean}}</view>
             </view>
         </view>
+        <view class="tab-content" v-if="!listMode">
+            <swiper previous-margin="50rpx" next-margin="50rpx" easing-function="linear">
+                <swiper-item v-for="item in wordDataList" :key="item.id" >
+                    <view class='card'>
+                        <view class='card-content'>
+                            <view class="word">   
+                                {{item.word}}
+                            </view>
+                            <view class="mean">
+                                释义： {{item.mean}}
+                            </view>
+                            <view class="mean">
+                                释义： {{item.mean}}
+                            </view>
+                            <view class="detail">
+                                <view class="detail-item" v-for="(detail, index) in item.detail" :key="detail.word">
+                                    <view class="item-word">{{index+1}}. {{detail.word}}</view>
+                                    <view class="item-translare">{{detail.translate}}</view>
+                                </view>     
+                            </view>
+                        </view>
+                        <!-- <view class='card-bottom'>
+                        </view> -->
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
         <view class="tab-bottom"> 
-            <view class="logo-left">
-                卡片
-            </view>
-            <view class="logo-right">
-                顺序
-            </view>
+			<image class="logo-left" src="../../static/assets/list.png" v-if="listMode" @click="switchListMode(false)"></image>
+			<image class="logo-left" src="../../static/assets/card.png" v-if="!listMode" @click="switchListMode(true)"></image>
+			<image class="logo-right" src="../../static/assets/shunxu.png" v-if="orderMode" @click="switchOrderMode(false)"></image>
+			<image class="logo-right" src="../../static/assets/suiji.png" v-if="!orderMode" @click="switchOrderMode(true)"></image>
         </view>
 	</view>
 </template>
@@ -43,22 +68,99 @@
                       "word":"1amphi",
                       "mean":"两个，两种"
                     },
-                    {"id": 2,"word":"2amphi","mean":"两个，两种两个，两种两个，两种"},
-                    {"id": 3,"word":"amphi","mean":"两个，两种"},
-                    {"id": 4,"word":"amphi","mean":"两个，两种"},
-                    {"id": 5,"word":"amphi","mean":"两个，两两个，两种两个，两种两个，两种两个，两种两个，两种两个，两种两个，两种种"},
-                    {"id": 6,"word":"amphi","mean":"两个，两种"},
-                    {"id": 7,"word":"amphi","mean":"两个，两种"},
-                    {"id": 8,"word":"amphi","mean":"两个，两种"},
-                    {"id": 9,"word":"amphi","mean":"两个，两种"},
-                    {"id": 10,"word":"amphi","mean":"两个，两种"},
-                    {"id": 11,"word":"amphi","mean":"两个，两种"},
-                    {"id": 12,"word":"amphi","mean":"两个，两种"},
-                    {"id": 13,"word":"amphi","mean":"两个，两种"},
-                    {"id": 14,"word":"amphi","mean":"两个，两种"},
-                    {"id": 15,"word":"amphi","mean":"两个，两种"},
-                    {"id": 16,"word":"16.amphi","mean":"两个，两种"},
-                ]
+                    {"id": 2,"word":"2amphi","mean":"两个，两种两个，两种两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 3,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 4,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 5,"word":"amphi","mean":"两个，两两个，两种两个，两种两个，两种两个，两种两个，两种两个，两种两个，两种种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 6,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 7,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 8,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 9,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 10,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 11,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 12,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 13,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 14,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 15,"word":"amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                    {"id": 16,"word":"16.amphi","mean":"两个，两种",
+                        "detail":[ {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                        }],
+                    },
+                ],
+                listMode: true,
+                orderMode: true
 			}
 		},
 		onLoad(option) {
@@ -79,6 +181,12 @@
 			},
             gotoWordRootDetail() {
 
+            },
+            switchListMode(mode) {
+                this.listMode = mode
+            },
+            switchOrderMode(mode) {
+                this.orderMode = mode
             }
 		}
 	}
@@ -118,6 +226,12 @@
             }
             .translate {
                 font-size: 12px;
+                width:100%;
+                margin-top: 3px;
+                color: #b0b0b0;
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
             }
         }
 	}
@@ -132,8 +246,11 @@
         justify-content: space-around;
         align-items: center;
 
-        .logo-left {
+        image {
             // padding-left: 10px;
+            width: 35px;
+            height: 35px;
+
         }
         .logo-right {
             // padding-right: 10px;
