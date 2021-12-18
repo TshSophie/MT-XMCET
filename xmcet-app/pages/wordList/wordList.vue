@@ -64,10 +64,56 @@
                       "mean":"两个，两种"
                     },
                     {"id": 2,"word":"2amphi","mean":"两个，两种两个，两种两个，两种",
-                        "detail":[ {
+                        "detail":[
+                            {
                             "word": "introduce",
                             "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                            {
+                            "word": "introduce",
+                            "translate": "提出；介绍；引进；作为…的开头；"
+                            },
+                        ],
                     },
                     {"id": 3,"word":"amphi","mean":"两个，两种",
                         "detail":[ {
@@ -248,13 +294,19 @@
             display: flex;
             flex-direction: column;
             padding: 10px;
-            .word{
+            overflow-y: scroll;
+            .word {
                 text-align: center;
-                font-size: 40rpx;
+                font-size: 16px;
+                line-height: 40px;
                 font-weight: bold;
             }
-            .detail-item{
-                margin: 15rpx;
+            .mean {
+                font-size: 14px;
+            }
+            .detail-item {
+                font-size: 13px;
+                margin-top: 10px;
             }
         }
     }
