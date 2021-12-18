@@ -256,7 +256,7 @@ var _default =
       helpers: [
       {
         "name": "词根词缀",
-        "router": "/pages/wordlist/wordlist",
+        "router": "/pages/wordList/wordList",
         "img": __webpack_require__(/*! static/assets/function01.png */ 20) },
 
       {
@@ -284,9 +284,13 @@ var _default =
   },
   methods: {
     navigateToBookMenu: function navigateToBookMenu(id) {
-      console.log(id);
       uni.navigateTo({
         url: '/pages/bookMenu/bookMenu?bookid=' + id });
+
+    },
+    navigateToHelper: function navigateToHelper(item) {
+      uni.navigateTo({
+        url: item.router });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

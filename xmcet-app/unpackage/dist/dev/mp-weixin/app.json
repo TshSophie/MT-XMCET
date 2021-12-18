@@ -4,7 +4,8 @@
     "pages/mine/mine",
     "pages/bookMenu/bookMenu",
     "pages/courseList/courseList",
-    "pages/readingCourse/readingCourse"
+    "pages/readingCourse/readingCourse",
+    "pages/wordList/wordList"
   ],
   "subPackages": [],
   "window": {
@@ -29,5 +30,6 @@
       }
     ]
   },
+  "permission": {},
   "usingComponents": {}
 }

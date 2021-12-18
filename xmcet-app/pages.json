@@ -39,6 +39,14 @@
                 "enablePullDownRefresh": false
             }
             
+        },{
+            "path" : "pages/wordList/wordList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	"tabBar":{

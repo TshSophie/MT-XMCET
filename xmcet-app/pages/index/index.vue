@@ -50,7 +50,7 @@
 		<view class='card helper'>
 			<view class='card-title'>辅助功能</view>
 			<view class='item-list'>
-				<view class='item' v-for="item in helpers" :key="item.name">
+				<view class='item' v-for="item in helpers" :key="item.name" @click="navigateToHelper(item)">
 					<image :src='item.img' class="item-image"></image>
 					<text class="item-title">{{item.name}}</text>
 				</view>
@@ -118,7 +118,7 @@
 				helpers: [
 				  {
 					"name": "词根词缀",
-					"router": "/pages/wordlist/wordlist",
+					"router": "/pages/wordList/wordList",
 					"img": require("static/assets/function01.png")
 				  },
 				  {
@@ -146,9 +146,13 @@
 		},
 		methods: {
 			navigateToBookMenu(id) {
-				console.log(id)
 				uni.navigateTo({
 				    url: '/pages/bookMenu/bookMenu?bookid=' + id
+				});
+			},
+			navigateToHelper(item) {
+				uni.navigateTo({
+				    url: item.router
 				});
 			}
 		}
