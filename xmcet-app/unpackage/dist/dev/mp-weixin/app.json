@@ -5,7 +5,8 @@
     "pages/bookMenu/bookMenu",
     "pages/courseList/courseList",
     "pages/readingCourse/readingCourse",
-    "pages/wordList/wordList"
+    "pages/wordList/wordList",
+    "pages/wordBookIntro/wordBookIntro"
   ],
   "subPackages": [],
   "window": {

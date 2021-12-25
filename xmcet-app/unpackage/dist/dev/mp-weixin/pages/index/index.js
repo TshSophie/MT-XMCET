@@ -256,7 +256,7 @@ var _default =
       helpers: [
       {
         "name": "词根词缀",
-        "router": "/pages/wordList/wordList",
+        "router": "/pages/wordBookIntro/wordBookIntro",
         "img": __webpack_require__(/*! static/assets/function01.png */ 20) },
 
       {

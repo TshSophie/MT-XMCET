@@ -259,15 +259,17 @@
             flex-direction: column;
             justify-content: space-around;
             background: #fff;
-            padding: 10px 20px;
+            padding: 0 20px;
 
             .word {
                 font-size: 18px;
                 font-weight: bolder;
             }
             .translate {
+                height: 20px;
                 font-size: 12px;
-                width:100%;
+                line-height: 12px;
+                width: 100%;
                 margin-top: 3px;
                 color: #b0b0b0;
                 overflow: hidden;

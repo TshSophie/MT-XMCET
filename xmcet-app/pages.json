@@ -48,6 +48,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/wordBookIntro/wordBookIntro",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar":{
 		"selectedColor":"#86d461",

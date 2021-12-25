@@ -118,7 +118,7 @@
 				helpers: [
 				  {
 					"name": "词根词缀",
-					"router": "/pages/wordList/wordList",
+					"router": "/pages/wordBookIntro/wordBookIntro",
 					"img": require("static/assets/function01.png")
 				  },
 				  {
