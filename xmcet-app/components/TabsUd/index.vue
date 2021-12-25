@@ -19,11 +19,11 @@
 		},
 		props: {
       		activeName: {
-				type: Number,
+				type: Number|String,
 				default: 0
 			},
 			value: {
-				type: Number,
+				type: Number|String,
 				default: 0
 			},
 			tabs: {

@@ -24,10 +24,14 @@
 				<qiun-data-charts
 					type="arcbar"
 					:chartData="chartData"
+					:canvas2d="true"
 					background="none"
+					:opts="{
+					title:{name:'0%',color:'#2fc25b',fontSize:35},
+					subtitle:{name:'进度',color:'#666666',fontSize:25}}" 
 				/>
 			</view>
-			<button type="primary" class="btn">开始闯关</button>
+			<button type="primary" class="btn" @click="handleStart" style="margin-top: 20px">开始闯关</button>
 		</view>
 		<uni-popup ref="popup" type="dialog">
 			<view class="dialog">
@@ -36,7 +40,7 @@
 					<text>
 						每日最大学习量
 					</text>
-					<uni-number-box v-model="vModelValue" :min="10" :step="10"></uni-number-box>
+					<uni-number-box v-model="dailyCount" :min="10" :step="10"></uni-number-box>
 				</view>
 				<view class="content">
 					<span class="close" @click="close">x</span>
@@ -53,7 +57,7 @@
 						<text class="value">3天</text>
 					</view>
 				</view>
-				<button type="primary">确认</button>
+				<button type="primary" @click="submitPlan">确认</button>
 			</view>
 		</uni-popup>
 	</view>
@@ -67,6 +71,7 @@
 		},
 		data() {
 			return {
+				bookInfo: {},
 				currentTab: -1,
 				tabs:[
                     {u: "全部", d: "120"},
@@ -75,32 +80,42 @@
                     {u: "已掌握", d: "0"},
                 ],
 				chartData:{
-					categories:[],
 					series:[
 						{
 							"name": "正确率",
-							"data": 0.9,
+							"data": 0.0,
 							"color": "#2fc25b"
-						}
+						},
 					],
 				},
-				vModelValue: 10
+				dailyCount: 10
 			}
 		},
 		methods: {
 			handleClick(item) {
 				this.currentTab = item
+				// 跳转到词汇列表页面
+				uni.navigateTo({
+				    url: '/pages/wordList/wordList?type=' + item + '&id=' + this.bookInfo.id
+				});
+			},
+			handleStart() {
+				// 跳转到词汇闯关页面
+				uni.navigateTo({
+				    url: '/pages/wordCard/wordCard'
+				});
+			},
+			submitPlan() {
+				console.log(this.dailyCount)
 			},
 			open() {
 				// 通过组件定义的ref调用uni-popup方法 ,如果传入参数 ，type 属性将失效 ，仅支持 ['top','left','bottom','right','center']
 				this.$refs.popup.open()
 			},
 			close() {
+				this.dailyCount = 10
 				this.$refs.popup.close()
 			},
-			bindPickerChange() {
-
-			}
 		}
 	}
 </script>
@@ -167,6 +182,8 @@
 	}
 	.dialog {
 		.close {
+			font-size: 20px;
+			font-weight: bolder;
 			position: absolute;
 			right: 15px;
 			top: 5px;
@@ -202,9 +219,6 @@
 					font-weight: normal;
 				}
 			}
-		}
-		button {
-
 		}
 	}
 }

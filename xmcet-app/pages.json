@@ -57,6 +57,16 @@
             }
             
         }
+        ,{
+            "path" : "pages/wordCard/wordCard",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+                "navigationStyle": "custom"
+            }
+            
+        }
     ],
 	"tabBar":{
 		"selectedColor":"#86d461",

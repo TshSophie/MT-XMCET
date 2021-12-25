@@ -206,6 +206,7 @@
 		},
 		onLoad(option) {
 			this.id = option.id
+			this.currentTab = option.type
 			// 重新设置标题
 			this.setNavBarTitle()
 			const res = uni.getSystemInfoSync();
