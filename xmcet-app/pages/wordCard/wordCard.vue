@@ -137,11 +137,12 @@
 		justify-content: space-around;
 		padding-bottom: 40px;
 		.btn {
+			@btnSize: 80px;
 			border-radius: 10px;	
-			width: 70px;
-			height: 70px;
+			width: @btnSize;
+			height: @btnSize;
 			text-align: center;
-			line-height: 70px;
+			line-height: @btnSize;
 			color: #fff;
 			&.btn-left {
 				background: green;

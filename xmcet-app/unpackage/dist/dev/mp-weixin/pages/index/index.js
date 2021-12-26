@@ -292,6 +292,11 @@ var _default =
       uni.navigateTo({
         url: item.router });
 
+    },
+    handleReadMore: function handleReadMore() {
+      uni.navigateTo({
+        url: '/pages/postHome/postHome' });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

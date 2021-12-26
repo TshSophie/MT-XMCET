@@ -7,7 +7,9 @@
     "pages/readingCourse/readingCourse",
     "pages/wordList/wordList",
     "pages/wordBookIntro/wordBookIntro",
-    "pages/wordCard/wordCard"
+    "pages/wordCard/wordCard",
+    "pages/postHome/postHome",
+    "pages/postDetail/postDetail"
   ],
   "subPackages": [],
   "window": {

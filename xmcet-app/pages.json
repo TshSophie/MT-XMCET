@@ -67,6 +67,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/postHome/postHome",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "推文列表",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/postDetail/postDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar":{
 		"selectedColor":"#86d461",

@@ -67,7 +67,7 @@
 					<image :src='item.cover_img' class="item-image"></image>
 				</view>
 			</view>
-			<view class="readMore arrow">阅读更多</view>
+			<view class="readMore arrow" @click="handleReadMore">阅读更多</view>
 		</view>
 	</view>
 </view>
@@ -153,6 +153,11 @@
 			navigateToHelper(item) {
 				uni.navigateTo({
 				    url: item.router
+				});
+			},
+			handleReadMore() {
+				uni.navigateTo({
+				    url: '/pages/postHome/postHome'
 				});
 			}
 		}
