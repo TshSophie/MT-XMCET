@@ -85,6 +85,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/postList/postList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar":{
 		"selectedColor":"#86d461",

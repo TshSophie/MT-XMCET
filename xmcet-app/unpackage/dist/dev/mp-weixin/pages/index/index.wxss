@@ -106,7 +106,7 @@
 }
 .content .article .item-col-list .item-row.data-v-57280228 {
   display: flex;
-  border-bottom: 1rpx dotted #e6dede;
+  border-bottom: 1rpx solid #e6dede;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

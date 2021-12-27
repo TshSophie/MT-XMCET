@@ -274,6 +274,16 @@ var _default =
       {
         id: 1,
         title: "xxxxxx1",
+        cover_img: __webpack_require__(/*! static/assets/function03.png */ 22) },
+
+      {
+        id: 2,
+        title: "xxxxxx1",
+        cover_img: __webpack_require__(/*! static/assets/function03.png */ 22) },
+
+      {
+        id: 3,
+        title: "xxxxxx1",
         cover_img: __webpack_require__(/*! static/assets/function03.png */ 22) }] };
 
 

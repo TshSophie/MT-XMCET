@@ -137,7 +137,17 @@
 						id: 1,
 						title: "xxxxxx1",
 						cover_img: require("static/assets/function03.png")
-					}
+					},
+					{
+						id: 2,
+						title: "xxxxxx1",
+						cover_img: require("static/assets/function03.png")
+					},
+					{
+						id: 3,
+						title: "xxxxxx1",
+						cover_img: require("static/assets/function03.png")
+					},
 				]
 			}
 		},
@@ -278,7 +288,7 @@
 		  
 		  .item-row {
 			display: flex; 
-			border-bottom: 1rpx dotted rgb(230, 222, 222);
+			border-bottom: 1rpx solid rgb(230, 222, 222);
 			flex-direction: row; 
 			justify-content: space-between;  
 			align-items: center; -webkit-align-items: center;

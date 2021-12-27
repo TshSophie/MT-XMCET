@@ -11,16 +11,16 @@
 		</view>
 		<view class="menu">
 			<view class="menu-item" @click="navigateToPostList(1)">
-				语法
+				<span>语法</span>
 			</view>
 			<view class="menu-item" @click="navigateToPostList(2)">
-				作文
+				<span>作文</span>
 			</view>
 			<view class="menu-item" @click="navigateToPostList(3)">
-				词汇
+				<span>词汇</span>
 			</view>
 			<view class="menu-item last" @click="navigateToPostList(4)">
-				听力
+				<span>听力</span>
 			</view>
 		</view>
 	</view>
@@ -59,7 +59,9 @@
 				});
 			},
 			navigateToPostList(menuType) {
-
+				uni.navigateTo({
+				    url: '/pages/postList/postList?menuId=' + menuType
+				});
 			},
 			// 下拉刷新
 			onPullDownRefresh() {
@@ -74,7 +76,7 @@
 
 <style lang="less">
 .container {
-	@bottomMenuHeight: 45px;
+	@bottomMenuHeight: 65px;
 	height: calc(100vh - var(--window-top));
 	box-sizing: border-box;
 	position: relative;
@@ -128,7 +130,7 @@
 		border-top: 1px #ddd solid;
 		display: flex;
 		justify-content: space-around;
-		align-items: center;
+		align-items: flex-start;
 		box-shadow: 13px -2px 4px 1px rgb(223 224 225 / 60%);
 		.menu-item {
 			box-sizing: border-box;
@@ -136,9 +138,15 @@
 			width: 25%;
 			display: flex;
 			justify-content: center;
-			align-items: center;
-			border-right: 1px solid #ddd;
-			&.last {
+			align-items: flex-start;
+			padding-top: 10px;
+			span {
+				text-align: center;
+				width: 100%;
+				border-right: 1px solid #ddd;
+			}
+			
+			&.last span{
 				border-right: 0;
 			}
 		}

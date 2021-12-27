@@ -13,6 +13,7 @@
 </script>
 
 <style>
+	@import "@/static/fonts/iconfont.css";
 	/*每个页面公共css */
 	page{
 		background: #eeeeee;

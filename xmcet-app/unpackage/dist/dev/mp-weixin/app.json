@@ -9,7 +9,8 @@
     "pages/wordBookIntro/wordBookIntro",
     "pages/wordCard/wordCard",
     "pages/postHome/postHome",
-    "pages/postDetail/postDetail"
+    "pages/postDetail/postDetail",
+    "pages/postList/postList"
   ],
   "subPackages": [],
   "window": {
@@ -35,5 +36,6 @@
     ]
   },
   "permission": {},
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }
