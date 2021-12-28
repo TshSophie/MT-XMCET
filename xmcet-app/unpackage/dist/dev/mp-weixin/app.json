@@ -10,7 +10,9 @@
     "pages/wordCard/wordCard",
     "pages/postHome/postHome",
     "pages/postDetail/postDetail",
-    "pages/postList/postList"
+    "pages/postList/postList",
+    "pages/wrongCollection/wrongCollection",
+    "pages/vocabularyCollection/vocabularyCollection"
   ],
   "subPackages": [],
   "window": {
@@ -36,6 +38,5 @@
     ]
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

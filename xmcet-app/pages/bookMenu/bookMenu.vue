@@ -20,8 +20,8 @@
 						</view>
 					</view>
 					<view class='card-bottom'>
-						<view class='left' @click="gotoVocabularySet(card)">词汇</view>
-						<view class='right' @click="gotoWrongSet(card)">错题集</view>
+						<view class='left' @click="gotoVocabularyCollection(card)">词汇</view>
+						<view class='right' @click="gotoWrongCollection(card)">错题集</view>
 					</view>
 				</view>
 		    </swiper-item>
@@ -131,29 +131,24 @@
 				})
 			  },
 		    // 跳转到词汇页面
-		    gotoVocabularySet(e){
-				var week = courseList.getDataSet(e, 'week')
-				var catId = this.data.cateId
+		    gotoVocabularyCollection(card){
 				uni.navigateTo({
-				  url: '/pages/vocabularySet/vocabularySet?week=' + week + '&catId=' + catId
+				  url: '/pages/vocabularyCollection/vocabularyCollection?week=' + card.week + '&catId=' + card.catId
 				})
 			},
 			// 跳转到错题集页面
-			gotoWrongSet(e){
-				var week = courseList.getDataSet(e, 'week')
-				var catId = this.data.cateId
+			gotoWrongCollection(card){
 				uni.navigateTo({
-				  url: '/pages/wrongSet/wrongSet?week=' + week + '&catId=' + catId
-				})      
+				  url: '/pages/wrongCollection/wrongCollection?week=' + card.week + '&catId=' + card.catId
+				})
 			}
-			
 		}
 	}
 </script>
 
 <style scoped lang="less">
 
-.wrap{
+.wrap {
     width: 100%;
 	height: 100%;
 	padding: 15px 0;
@@ -161,76 +156,76 @@
 		height: calc(100vh - var(--window-top) - 30px);
 	}
 	.card {
-			  height: 100%;			  
-			  padding-bottom: 100rpx;
-			  margin-right: 10px;
-			  border-radius: 20rpx;
-			  background: white;
-			  border: 1rpx solid #eee; 
-			 display: flex;
-			 flex-direction: column;
-				 
-			   .card-title{
-				   height: 100rpx;
-				   line-height: 100rpx;
-				   background: #86d461;
-				   color: #fff;
-				   border-top-left-radius: 20rpx;
-				   border-top-right-radius: 20rpx;
-				   padding-left: 15rpx;
-				   text-shadow: 1px 1px 1px rgb(99, 90, 90); 
-			   }
-			   .card-content{
-				   flex: 1;
-				   display: flex; display: -webkit-flex; 
-				   flex-direction: column;    
-				   background-color: white;
-				   overflow-y: scroll;
-				   
-				   .item{
-					   display: flex; display: -webkit-flex; 
-					   flex-direction: row;
-					   justify-content: space-between;
-					   align-items: center; -webkit-align-items: center;
-					   background-color: rgba(233, 230, 230, 0.801);  
-        			   box-shadow: #fffffff2 2px 2px 20px 2px;
-					   margin: 10rpx;
-					   padding: 25rpx;
-					   border-radius: 10rpx;
-					   min-height: 90rpx;
-					   image{
-						   width: 50rpx;
-						   height: 50rpx;
-					   }
-					   .level-num{
-						   font-size: 26rpx;
-						   font-weight: bold;
-					   }
-					   .level-name{
-						   font-size: 28rpx;
-						   font-weight: bold;
-					   }
-				   }
-		  }
-		  .card-bottom{
-			  height: 100rpx; 
-			  line-height: 100rpx;   
-			  display: flex;
-			  flex-direction: row;
-			  justify-content: space-around;
-			  align-items: center;
-			  font-size: 28rpx;
-			  color: #8a8484;  
-				view{
-					width: 50%;
-					height: 100%;
-					text-align: center; 
-					border-top:  1rpx solid rgb(240, 231, 231); 
+		height: 100%;			  
+		padding-bottom: 100rpx;
+		margin-right: 10px;
+		border-radius: 20rpx;
+		background: white;
+		border: 1rpx solid #eee; 
+		display: flex;
+		flex-direction: column;
+		
+		.card-title {
+			height: 100rpx;
+			line-height: 100rpx;
+			background: #86d461;
+			color: #fff;
+			border-top-left-radius: 20rpx;
+			border-top-right-radius: 20rpx;
+			padding-left: 15rpx;
+			text-shadow: 1px 1px 1px rgb(99, 90, 90); 
+		}
+		.card-content {
+			flex: 1;
+			display: flex; display: -webkit-flex; 
+			flex-direction: column;    
+			background-color: white;
+			overflow-y: scroll;
+			
+			.item {
+				display: flex; display: -webkit-flex; 
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center; -webkit-align-items: center;
+				background-color: rgba(233, 230, 230, 0.801);  
+				box-shadow: #fffffff2 2px 2px 20px 2px;
+				margin: 10rpx;
+				padding: 25rpx;
+				border-radius: 10rpx;
+				min-height: 90rpx;
+				image {
+					width: 50rpx;
+					height: 50rpx;
 				}
-				.left{
-					border-right: 1rpx solid rgb(202, 199, 199);
+				.level-num {
+					font-size: 26rpx;
+					font-weight: bold;
 				}
-		  }
+				.level-name {
+					font-size: 28rpx;
+					font-weight: bold;
+				}
+			}
+		}
+		.card-bottom {
+			height: 100rpx; 
+			line-height: 100rpx;   
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+			font-size: 28rpx;
+			color: #8a8484;  
+			view {
+				width: 50%;
+				height: 100%;
+				text-align: center; 
+				border-top:  1rpx solid rgb(240, 231, 231); 
+			}
+			.left {
+				border-right: 1rpx solid rgb(202, 199, 199);
+			}
+		}
 	}
 }
 

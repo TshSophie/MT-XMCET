@@ -94,6 +94,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/wrongCollection/wrongCollection",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/vocabularyCollection/vocabularyCollection",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar":{
 		"selectedColor":"#86d461",

@@ -263,19 +263,15 @@ var _default =
 
     },
     // 跳转到词汇页面
-    gotoVocabularySet: function gotoVocabularySet(e) {
-      var week = courseList.getDataSet(e, 'week');
-      var catId = this.data.cateId;
+    gotoVocabularyCollection: function gotoVocabularyCollection(card) {
       uni.navigateTo({
-        url: '/pages/vocabularySet/vocabularySet?week=' + week + '&catId=' + catId });
+        url: '/pages/vocabularyCollection/vocabularyCollection?week=' + card.week + '&catId=' + card.catId });
 
     },
     // 跳转到错题集页面
-    gotoWrongSet: function gotoWrongSet(e) {
-      var week = courseList.getDataSet(e, 'week');
-      var catId = this.data.cateId;
+    gotoWrongCollection: function gotoWrongCollection(card) {
       uni.navigateTo({
-        url: '/pages/wrongSet/wrongSet?week=' + week + '&catId=' + catId });
+        url: '/pages/wrongCollection/wrongCollection?week=' + card.week + '&catId=' + card.catId });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
