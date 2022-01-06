@@ -86,14 +86,14 @@
 
 <style lang="less">
 .container {
-	.title{
+	.title {
 		font-size: 35rpx;
 		font-weight: bold;
 		text-align: center;
 		height: 120rpx;
 		line-height: 120rpx;  
 	}
-	.list-box{
+	.list-box {
 		width: 100%;
 		display: flex;
 		display: -webkit-flex; 
@@ -103,20 +103,20 @@
 		-webkit-align-items: center;
 		flex-direction: column;  
 
-		.word-course{
+		.word-course {
 			width: 90%;  
 			padding: 10rpx;  
 			background: white;
 			margin-bottom: 20rpx;
 			border-radius: 10rpx;
-			.sub-title{
+			.sub-title {
 				height: 80rpx;
 				line-height: 80rpx;
 				font-size: 30rpx;
 				font-weight: bold;
 				text-align: center;
 			}
-			.word-list{
+			.word-list {
 				width: 100%;
 				display: flex;
 				display: -webkit-flex; 
@@ -125,7 +125,7 @@
 				align-items:center;
 				-webkit-align-items: center;
 				flex-direction: column;
-				.word-item{
+				.word-item {
 					width: 95%;
 					background: rgb(238, 240, 236);
 					margin-top: 10rpx;
