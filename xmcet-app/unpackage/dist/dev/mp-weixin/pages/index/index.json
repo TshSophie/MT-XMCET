@@ -1,4 +1,6 @@
 {
   "enablePullDownRefresh": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "authorize-bar": "/components/AuthorizeBar/AuthorizeBar"
+  }
 }

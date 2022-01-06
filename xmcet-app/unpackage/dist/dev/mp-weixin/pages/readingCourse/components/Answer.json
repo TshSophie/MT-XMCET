@@ -1,6 +1,6 @@
 {
-  "component": true,
   "usingComponents": {
     "single-choice-for-result-card": "/components/SingleChoiceForResultCard/SingleChoiceForResultCard"
-  }
+  },
+  "component": true
 }

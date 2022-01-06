@@ -70,11 +70,20 @@
 			<view class="readMore arrow" @click="handleReadMore">阅读更多</view>
 		</view>
 	</view>
+	<!-- <view class="authorize-box">
+		<view class="tips">登录后解锁更多功能 </view>
+		<button type="default" size="mini" @click="getUserInfo">立即登录</button>
+	</view> -->
+	<AuthorizeBar class="authorize-bar"/>
 </view>
 </template>
 
 <script>
+	import AuthorizeBar from '@/components/AuthorizeBar/AuthorizeBar'
 	export default {
+		components: {
+			AuthorizeBar
+		},
 		data() {
 			return {
 				indicatorDots: true,
@@ -315,6 +324,13 @@
 		    justify-content: flex-end;
 		}
 	}
+}
+.authorize-bar {
+	position: fixed;
+	bottom: var(--window-bottom);
+	left: 0;
+	width: 100%;
+	height: 40px;
 }
 
 </style>

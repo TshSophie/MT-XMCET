@@ -79,4 +79,11 @@
 .wrap .card .card-bottom .left.data-v-3d7dbb86 {
   border-right: 1rpx solid #cac7c7;
 }
+.wrap .authorize-bar.data-v-3d7dbb86 {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+}
 

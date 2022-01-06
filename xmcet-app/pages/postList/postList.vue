@@ -1,5 +1,6 @@
 <template>
 	<view class="container">
+		<AuthorizeBar class="authorize-bar"/>
 		<view class="header">
 			<h2>#我是标题</h2>
 			<button type="primary" size="mini">订阅</button>
@@ -149,6 +150,14 @@
 			}
 		  }
 		}
+	}
+	.authorize-bar {
+		position: fixed;
+		z-index: 9999;
+		bottom: var(--window-bottom);
+		left: 0;
+		width: 100%;
+		height: 40px;
 	}
 }
 </style>

@@ -1,5 +1,7 @@
 <template>
 	<view class="page">
+		<AuthorizeBar class="authorize-bar"/>
+
 		<TabsUd v-model="currentTab" @tab-click="handleClick" :tabs="tabs"></TabsUd>
 		<view class="book">
 			<image class="book-cover" src="/static/assets/function01.png">

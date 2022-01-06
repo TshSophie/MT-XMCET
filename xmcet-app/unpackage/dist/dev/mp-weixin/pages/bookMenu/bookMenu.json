@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "闯关",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "authorize-bar": "/components/AuthorizeBar/AuthorizeBar"
+  }
 }

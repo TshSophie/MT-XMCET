@@ -23,6 +23,8 @@
 				<span>听力</span>
 			</view>
 		</view>
+		<AuthorizeBar class="authorize-bar"/>
+
 	</view>
 </template>
 
@@ -151,6 +153,13 @@
 			}
 		}
 	}
-
+	.authorize-bar {
+		position: fixed;
+		top: var(--window-top);
+		// top: var(--window-bottom);
+		left: 0;
+		width: 100%;
+		height: 40px;
+	}
 }
 </style>

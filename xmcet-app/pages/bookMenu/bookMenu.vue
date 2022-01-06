@@ -26,6 +26,8 @@
 				</view>
 		    </swiper-item>
 		</swiper>
+		<AuthorizeBar class="authorize-bar"/>
+
 	</view>
 </template>
 
@@ -226,6 +228,13 @@
 				border-right: 1rpx solid rgb(202, 199, 199);
 			}
 		}
+	}
+	.authorize-bar {
+		position: fixed;
+		bottom: var(--window-bottom);
+		left: 0;
+		width: 100%;
+		height: 40px;
 	}
 }
 

@@ -1,14 +1,22 @@
 <script>
 	export default {
-		// onLaunch: function() {
-		// 	console.log('App Launch')
-		// },
-		// onShow: function() {
-		// 	console.log('App Show')
-		// },
-		// onHide: function() {
-		// 	console.log('App Hide')
-		// }
+		onLaunch: function() {
+			// console.log('App Launch')
+			console.log("尝试登录...")
+			uni.login({
+				provider: 'weixin',
+				success: function (loginRes) {
+					console.log(loginRes.code);
+				}
+			});
+		},
+		onShow: function() {
+			console.log('App Show')
+		},
+		
+		onHide: function() {
+			// console.log('App Hide')
+		}
 	}
 </script>
 
