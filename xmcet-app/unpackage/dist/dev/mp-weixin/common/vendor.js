@@ -17852,8 +17852,6 @@ var apiResquest = function apiResquest(params) {
             title: '温馨提示',
             content: '亲，授权微信登录后才能正常使用小程序功能',
             success: function success(res) {
-              console.log(0);
-              console.log(res);
               //如果用户点击了确定按钮
               if (res.confirm) {
                 uni.getUserProfile({
@@ -17901,15 +17899,12 @@ var apiResquest = function apiResquest(params) {
         }
         // 成功请求数据
         resolve(res.data);
-        console.log(res.data);
       },
       fail: function fail(err) {
         reject(err);
-        console.log(err);
         uni.hideLoading();
       },
       complete: function complete() {
-        console.log('请求完成');
         uni.hideLoading();
       } });
 

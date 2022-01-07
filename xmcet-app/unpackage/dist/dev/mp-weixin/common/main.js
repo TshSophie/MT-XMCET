@@ -91,14 +91,14 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 var _user = __webpack_require__(/*! @/api/user */ 311);var _default =
 {
-  onLaunch: function onLaunch() {
+  onLaunch: function onLaunch() {var _this = this;
     // console.log('App Launch')
 
     console.log("尝试登录...");
+    console.log(this);
     uni.login({
       provider: 'weixin',
-      success: function success(loginRes) {var _this = this;
-        console.log(loginRes.code);
+      success: function success(loginRes) {
         (0, _user.getToken)({ code: loginRes.code }).then(function (response) {
           console.log(response);
           // 缓存token,和授权标记
