@@ -33,4 +33,7 @@ Route::name('public.')->group(function (){
     Route::post('login', [SysUserController::class, 'login']);
     // 退出
     Route::post('logout', [SysUserController::class, 'logout']);
+    // 导出用户列表excel
+    Route::post('test/importExcel', [SysUserController::class, 'importExcel']);
+
 });

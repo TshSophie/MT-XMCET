@@ -2,8 +2,7 @@
 
 namespace App\Services\App;
 
-use App\Models\App\AppUser;
-use WxTokenService;
+use App\Services\Common\WxTokenService;
 
 class UserService
 {
@@ -12,7 +11,12 @@ class UserService
         //根据临时登录凭证code实例化用户token处理类
         $ut = new WxTokenService($code);
         //调用获取token的类
-        $token = $ut->get();
-        return $token;
+        $tokenInfo = $ut->get();
+        return $tokenInfo;
+    }
+
+    // 检测用户是否授权过信息
+    static public function checkUserAuthorizeStatus() {
+        
     }
 }

@@ -29,7 +29,10 @@ return [
     */
 
     'disks' => [
-
+        'uploads' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/'), // 这是上传的文件所储存的路径
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

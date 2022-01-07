@@ -8,10 +8,17 @@ use App\Services\System\SysUserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\ConstParam\ErrorConst;
+use App\Models\System\SysDept;
+use App\Models\System\SysUser;
+use App\Models\System\SysUserRole;
 use App\Services\System\SysLoginlogService;
 use App\Utils\CommonUtil;
 use Excel;
-
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Reader\Xls;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use Illuminate\Support\Facades\Storage;
 class SysUserController extends Controller
 {
     /**
@@ -108,6 +115,72 @@ class SysUserController extends Controller
       $data = SysUserService::getList($pageSize, $userName, $status, $deptId, $phonenumber, $beginTime, $endTime);
       $filename = "用户列表".date("Ymd",time())."_h".date("His",time()).'.xlsx';
       return Excel::download(new SysUserExport($data['rows']), $filename); // 输出直接流下载
+    }
+
+    // 导入excel
+    public function importExcel(Request $request) {
+        // 要求上传的文件类型必须是表格格式
+         $this->validate($request, [
+          'file'  => 'required|mimes:xls,xlsx'
+         ]);
+        $file = $request->file('file');
+        // 判断文件是否上传成功
+        if ($file->isValid()){
+            // 原文件名
+            $originalName = $file->getClientOriginalName();
+            // 临时绝对路径
+            $realPath = $file->getRealPath();
+
+            $reader = new Xlsx();
+            // $reader = new Xls();
+            $reader->setReadDataOnly(TRUE);
+            $spreadsheet = $reader->load($realPath);
+            $worksheet = $spreadsheet->getActiveSheet();  // 获取当前的工作表数据
+            // 获取单元格数据
+            $highestRow = $worksheet->getHighestRow();
+            // $highestColumn = $worksheet->getHighestColumn();
+            $recordData = [];
+            // 部门数据
+            $depts = SysDept::all()->toArray();            
+            for ($row=2; $row < $highestRow; $row++) {
+                if($worksheet->getCellByColumnAndRow(1 , $row)->getValue() == '') {
+                    break;
+                }
+                $deptName = $worksheet->getCellByColumnAndRow(2 , $row)->getValue();
+                // 部门值转换
+                $deptId = '';
+                foreach ($depts as $dept) {
+                    if($dept['dept_name'] == $deptName) {
+                        $deptId = $dept['dept_id'];
+                        break;
+                    }
+                }
+                $rowData = [
+                    'user_name' => $worksheet->getCellByColumnAndRow(1 , $row)->getValue(),
+                    'nick_name' => $worksheet->getCellByColumnAndRow(1 , $row)->getValue(),
+                    'dept_id' => $deptId,
+                    'phonenumber' => $worksheet->getCellByColumnAndRow(3 , $row)->getValue(),
+                    'email' => $worksheet->getCellByColumnAndRow(4 , $row)->getValue(),
+                    'office_phonenumber' => $worksheet->getCellByColumnAndRow(5 , $row)->getValue(),
+                    'post_or_title' => $worksheet->getCellByColumnAndRow(6 , $row)->getValue(),
+                    'sex' => $worksheet->getCellByColumnAndRow(7 , $row)->getValue() == '男' ? 0 : 1,
+                    'attributes' => '综合部对接人',
+                    'password' => '$2a$10$kYDKj4wgUQpLEKHkI8Tg4uYtpTogGdhib2BQw5q2sR/FrzjdruAl.'
+                ];
+                // 新增用户
+                $SysUser = SysUser::create($rowData);
+                // 新增角色
+                SysUserRole::insert([
+                    'user_id' => $SysUser->id,
+                    'role_id' => 2 // 普通角色
+                ]);
+                $recordData[] = $rowData;
+            }
+            return gfResponse()->json([
+                'recordData' => $recordData,
+                'length' => count($recordData),
+            ]);            
+        }
     }
 
     /**

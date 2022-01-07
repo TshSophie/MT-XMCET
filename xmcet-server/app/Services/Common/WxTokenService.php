@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services\Common;
+
 use App\ConstParam\ErrorConst;
 use App\Models\App\AppUser;
 use App\Utils\CommonUtil;
@@ -63,10 +65,9 @@ class WxTokenService {
         $salt = config('app.key');
         return md5($randChars . $timestamp . $salt);
     }
-
+    
     /**
      * 获取当前用户的uid
-     * @param $token
      * @return mixed
      */
     public static function getCurrentUid()
@@ -102,7 +103,7 @@ class WxTokenService {
         }
     }
 
-    static private function getTokenFromRequest() {
+    private static function getTokenFromRequest() {
         return request()->header('token') ?? request()->input('token');
     }
 
@@ -123,18 +124,29 @@ class WxTokenService {
         $openid = $wxResult['openid'];
         //获取openid对应用户信息
         $user = AppUser::getByOpenid($openid);
+        // 标记用户是否授权过信息
+        $flagUserAuthorized = false;
         //若存在该用户则取出uid
         if ($user) {
             $uid = $user->id;
+            if($user->avatar == '' || $user->nick_name == '') {
+                $flagUserAuthorized = false;
+            } else {
+                $flagUserAuthorized = true;
+            }
         } // 否则新增一个用户并将uid传过来,并抛出未授权的异常
         else {
+            $flagUserAuthorized = false;
             $uid = AppUser::newUserByOpenid($openid);
         }
         // 预处理缓存值
         $cachedValue = $this->prepareCachedValue($wxResult, $uid);
         // 将处理好的信息存入缓存并返回token
         $token = $this->saveToCache($cachedValue);
-        return $token;
+        return [
+            'token' => $token,
+            'authorized' => $flagUserAuthorized
+        ];
     }
 
     /**

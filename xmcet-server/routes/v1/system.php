@@ -32,6 +32,8 @@ Route::name('system.')->group(function (){
 
     // 导出用户列表excel
     Route::get('sysuser/exportExcel', [SysUserController::class, 'exportExcel']);
+    // 导出用户列表excel
+    Route::post('sysuser/importExcel', [SysUserController::class, 'importExcel']);
     
     // 系统用户信息
     Route::get('sysuser/getInfo', [SysUserController::class, 'getInfo']);

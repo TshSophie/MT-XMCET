@@ -4,7 +4,6 @@ namespace App\Services\Common;
 
 use App\ConstParam\ErrorConst;
 use App\Utils\CommonUtil;
-use Illuminate\Http\Request;
 
 class UEditorService {
     //保存配置信息
