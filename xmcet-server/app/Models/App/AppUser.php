@@ -65,6 +65,8 @@ class AppUser extends Model
 
     static public function newUserByOpenid($openid)
     {
-        # code...
+        return AppUser::create([
+            'openid' => $openid
+        ])->id;
     }
 }

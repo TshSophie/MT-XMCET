@@ -2,6 +2,7 @@
 
 namespace App\Services\App;
 
+use App\Models\App\AppUser;
 use App\Services\Common\WxTokenService;
 
 class UserService
@@ -15,8 +16,15 @@ class UserService
         return $tokenInfo;
     }
 
-    // 检测用户是否授权过信息
-    static public function checkUserAuthorizeStatus() {
-        
+    // 更新用户信息
+    static public function updateUser($data) {
+        $id = WxTokenService::getCurrentUid();
+        $user = AppUser::find($id);
+        array_key_exists('nickName', $data) ? $user->nick_name = $data['nickName'] : "";
+        array_key_exists('avatar', $data) ? $user->avatar = $data['avatar'] : "";
+        array_key_exists('location', $data) ? $user->location = $data['location'] : "";
+        array_key_exists('gender', $data) ? $user->gender = $data['gender'] : "";
+        $user->save();
+        return $user;
     }
 }
