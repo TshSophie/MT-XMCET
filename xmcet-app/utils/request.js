@@ -12,9 +12,9 @@ export const apiResquest = (params) => {
   }
   return new Promise((resolve, reject) => {
     uni.showLoading({
-			title: '加载中',
-			mask: true
-		})
+        title: '加载中',
+        mask: true
+    })
     return uni.request({
       url: url,
       data: params.data,

@@ -1,9 +1,17 @@
 import { apiResquest } from '@/utils/request.js'
 
-export const login = (query) => {
+export const getToken = (data) => {
 	return apiResquest({
-		url: '这里是API的地址',
-		method: 'POST',
-		query: {...query}
+		url: 'user/token',
+		method: 'GET',
+		data
+	})
+}
+
+export const authorizeUserInfo = (data) => {
+	return apiResquest({
+		url: 'user/authorizeUserInfo',
+		method: 'PUT',
+		data
 	})
 }
