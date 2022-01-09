@@ -4,8 +4,6 @@ export default {
 	onLaunch: function() {
 		// console.log('App Launch')
 		// #ifdef  MP-WEIXIN	
-			console.log("尝试登录...")
-			console.log(this)
 			uni.login({
 				provider: 'weixin',
 				success: (loginRes) => {
@@ -13,7 +11,7 @@ export default {
 						console.log(response)
 						// 缓存token,和授权标记
 						// wx.setStorageSync('authorized', response.data.authorized);
-						// wx.setStorageSync('token', response.data.token);
+						wx.setStorageSync('token', response.data.token);
 						this.$store.commit('SET_AUTHORIZED', response.data.authorized)
 						this.$store.commit('SET_TOKEN', response.data.token)
 					})
@@ -51,5 +49,15 @@ export default {
 	    border-right: 3rpx solid #ccc;
 	    display: block;
 	    transform: rotate(45deg);
+	}
+
+	/*功能封装5：水平垂直居中  */
+	.center{
+		display: flex;
+		display: -webkit-flex;     
+		justify-content: center;
+		-webkit-justify-content: center;
+		align-items:center;
+		-webkit-align-items: center;
 	}
 </style>

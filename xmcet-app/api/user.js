@@ -8,6 +8,13 @@ export const getToken = (data) => {
 	})
 }
 
+export const getUserInfo = () => {
+	return apiResquest({
+		url: 'user/getUserInfo',
+		method: 'GET',
+	})
+}
+
 export const authorizeUserInfo = (data) => {
 	return apiResquest({
 		url: 'user/authorizeUserInfo',

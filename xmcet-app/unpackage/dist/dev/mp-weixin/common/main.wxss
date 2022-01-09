@@ -40,3 +40,13 @@ page{
             transform: rotate(45deg);
 }
 
+/*功能封装5：水平垂直居中  */
+.center{
+	display: flex;
+	display: -webkit-flex;     
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items:center;
+	-webkit-align-items: center;
+}
+

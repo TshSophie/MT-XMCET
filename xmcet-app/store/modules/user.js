@@ -3,7 +3,8 @@
 const user = {
   state: {
     token: '',
-    authorized: false,
+    authorized: true,
+    userInfo: {},
   },
 
   mutations: {
@@ -12,6 +13,9 @@ const user = {
     },
     SET_AUTHORIZED: (state, authorized) => {
       state.authorized = authorized
+    },
+    SET_USER_INFO: (state, userInfo) => {
+      state.userInfo = userInfo
     },
   },
 

@@ -5,59 +5,19 @@
 	</view>
 </template>
 <script>
-import { authorizeUserInfo } from '@/api/user'
+import { popAuthorizedWindow } from '@/utils/authorize'
 import { mapState } from 'vuex'
 export default {
     computed: {
         ...mapState({
-        authorized: state => state.user.authorized,
+            authorized: state => state.user.authorized,
         }),
     },
     methods: {
         // 获取用户授权
         getUserInfo() {
-            uni.getUserProfile({
-                desc: '获取你的昵称、头像',
-                success: res => {
-                    console.log(res);
-                    console.log(1);
-                    // 更新授权信息
-                    authorizeUserInfo({
-                        avatar: res.userInfo.avatarUrl,
-                        location: [res.userInfo.country, res.userInfo.province, res.userInfo.city].toString(),
-                        gender: res.userInfo.gender,
-                        nickName: res.userInfo.nickName,
-                    }).then(response=>{
-                        console.log(response)
-                        if(response.code == 200) {
-                            // 更新状态
-                            this.$store.commit('SET_AUTHORIZED', true)
-                            uni.showToast({
-                                title: '授权成功',
-                                icon: 'success',
-                                duration: 2000
-                            });
-                        } else {
-                            uni.showToast({
-                                title: response.msg,
-                                icon: 'error',
-                                duration: 2000
-                            });
-                        }
-                    })
-                },
-                fail: res => {
-                    console.log(2);
-                    console.log(res)
-                    //拒绝授权
-                    uni.showToast({
-                        title: '登录失败',
-                        icon: 'error',
-                        duration: 2000
-                    });
-                    return;
-                }
-            });
+            // 触发授权弹窗
+            popAuthorizedWindow()
         },
     },
 }
