@@ -19359,6 +19359,34 @@ var popAuthorizedWindow = function popAuthorizedWindow(callback) {
 
 /***/ }),
 
+/***/ 324:
+/*!**************************************************************************!*\
+  !*** /Users/sophie/Documents/projects/MT-XMCET/xmcet-app/api/section.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getCourseListBySectionId = exports.getSectionList = void 0;var _request = __webpack_require__(/*! @/utils/request.js */ 10);
+
+var getSectionList = function getSectionList(data) {
+  return (0, _request.apiResquest)({
+    url: 'section/getSectionList',
+    method: 'GET',
+    data: data });
+
+};exports.getSectionList = getSectionList;
+
+var getCourseListBySectionId = function getCourseListBySectionId(data) {
+  return (0, _request.apiResquest)({
+    url: 'section/getCourseListBySectionId',
+    method: 'GET',
+    data: data });
+
+};exports.getCourseListBySectionId = getCourseListBySectionId;
+
+/***/ }),
+
 /***/ 4:
 /*!*************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-i18n/dist/uni-i18n.es.js ***!

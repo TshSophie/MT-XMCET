@@ -130,7 +130,19 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+var _section = __webpack_require__(/*! @/api/section */ 324); //
 //
 //
 //
@@ -141,17 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var _default =
-{
-  data: function data() {
-    return {
-      list: [
-      {
-        id: 1,
-        name: '语法课',
-        status: 1 },
-      {
-        id: 2,
+var _default = { data: function data() {return { sectionId: '', list: [{ id: 1, name: '语法课', status: 1 }, { id: 2,
         name: '作文课',
         status: 2 }],
 
@@ -159,10 +161,14 @@ var _default =
       title: '课程列表' };
 
   },
-  onLoad: function onLoad(option) {
-    this.subId = option.subId;
+  onLoad: function onLoad(option) {var _this = this;
+    this.sectionId = option.sectionId;
+    this.title = option.title;
     // 重新设置标题
     this.setNavBarTitle();
+    (0, _section.getCourseListBySectionId)({ sectionId: this.sectionId }).then(function (response) {
+      _this.list = response.data;
+    });
   },
   methods: {
     setNavBarTitle: function setNavBarTitle() {

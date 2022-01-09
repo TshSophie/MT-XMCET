@@ -153,73 +153,74 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      bookid: '',
-      cardlist: [
-      {
-        "weekNum": 1,
-        "weekName": "WEEK1",
-        "itemList": [
-        {
-          "id": 1,
-          "title": "第1关",
-          "subTitle": "Reading",
-          "week": 1,
-          "catid": 1,
-          "status": 1 },
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-        {
-          "id": 2,
-          "title": "第2关",
-          "subTitle": "Reading",
-          "week": 1,
-          "catid": 1,
-          "status": 1 },
-        {
-          "id": 3,
-          "title": "第1关",
-          "subTitle": "Reading",
-          "week": 1,
-          "catid": 1,
-          "status": 1 },
-        {
-          "id": 4,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _section = __webpack_require__(/*! @/api/section */ 324); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { bookid: '', cardlist: [{ "weekNum": 1, "weekName": "WEEK1", "itemList": [{ "id": 1, "title": "第1关", "subTitle": "Reading", "week": 1, "catid": 1, "status": 1 }, { "id": 2, "title": "第2关", "subTitle": "Reading", "week": 1, "catid": 1, "status": 1 }, { "id": 3, "title": "第1关", "subTitle": "Reading", "week": 1, "catid": 1, "status": 1 }, { "id": 4,
           "title": "第1关",
           "subTitle": "Reading",
           "week": 1,
@@ -265,11 +266,15 @@ var _default =
 
 
   },
-  onLoad: function onLoad(option) {
+  onLoad: function onLoad(option) {var _this = this;
     console.log(option.bookid); //打印出上个页面传递的参数。
     this.bookid = option.bookid;
     // 重新设置标题
     this.setNavBarTitle();
+    (0, _section.getSectionList)({ bookid: this.bookid }).then(function (response) {
+      _this.cardlist = response.data;
+      console.log(response);
+    });
   },
   methods: {
     setNavBarTitle: function setNavBarTitle() {
@@ -279,12 +284,10 @@ var _default =
     },
     // 跳转到课程列表页面
     gotoCourseList: function gotoCourseList(row) {
-      var subId = row.subId;
-      var name = row.name;
-      var title = '';
+      console.log(row);
       uni.navigateTo({
-        url: '/pages/courseList/courseList?subId=' + subId +
-        '&title=' + title });
+        url: '/pages/courseList/courseList?sectionId=' + row.id +
+        '&title=' + row.title + '-' + row.subTitle });
 
     },
     // 跳转到词汇页面

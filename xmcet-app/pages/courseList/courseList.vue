@@ -10,9 +10,11 @@
 </template>
 
 <script>
+	import { getCourseListBySectionId } from '@/api/section'
 	export default {
 		data() {
 			return {
+				sectionId: '',
 				list:[
 					{
 						id: 1,
@@ -28,9 +30,13 @@
 			}
 		},
 		onLoad(option) {
-			 this.subId = option.subId
+			 this.sectionId = option.sectionId
+			 this.title = option.title
 			 // 重新设置标题
 			 this.setNavBarTitle()
+			 getCourseListBySectionId({sectionId: this.sectionId}).then(response => {
+				this.list = response.data
+			 })
 		},
 		methods: {
 			setNavBarTitle() {

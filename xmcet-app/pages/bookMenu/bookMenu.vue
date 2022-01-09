@@ -1,22 +1,22 @@
 <template>
 	<view class='wrap'>
 		<swiper previous-margin="50rpx" next-margin="50rpx" easing-function="linear">
-		    <swiper-item v-for="card in cardlist" :key="card.weekNum" >
+		    <swiper-item v-for="card in cardlist" :key="card.weekName" >
 		        <view class='card'>
 		            <view class='card-title'>
 		                {{card.weekName}}
 		            </view>
 		            <view class='card-content'>
-		                <view class='item' v-for="item in card.itemList" :key="item.id" @click="gotoCourseList(item)">
-		                    <view class='left'>
-		                        <view class='level-num'>{{item.title}}</view>
-		                        <view class='level-name'>{{item.subTitle}}</view>
-		                    </view>
-		                    <view class='right'>                        
-								<image v-if="item.status==1" src='/static/assets/new.png'></image>
-								<image v-if="item.status==2" src='/static/assets/unlocked.png'></image>
-								<image v-if="item.status==0||!item.status" src='/static/assets/lock.png'></image>
-							</view>
+		                <view v-for="item in card.itemList" :key="item.id" class="item" @click="gotoCourseList(item)"> 
+								<view class='left'>
+									<view class='level-num'>{{item.title}}</view>
+									<view class='level-name'>{{item.subTitle}}</view>
+								</view>
+								<view class='right'>                        
+									<image v-if="item.status==1" src='@/static/assets/new.png'></image>
+									<image v-if="item.status==2" src='@/static/assets/unlocked.png'></image>
+									<image v-if="item.status==0||!item.status" src='@/static/assets/lock.png'></image>
+								</view>
 						</view>
 					</view>
 					<view class='card-bottom'>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+	import { getSectionList } from '@/api/section'
 	export default {
 		data() {
 			return {
@@ -115,6 +116,10 @@
 			 this.bookid = option.bookid
 			 // 重新设置标题
 			 this.setNavBarTitle()
+			 getSectionList({bookid: this.bookid}).then(response => {
+				this.cardlist = response.data
+				console.log(response)
+			 })
 		},
 		methods: {
 			setNavBarTitle() {
@@ -124,12 +129,10 @@
 			},
 			  // 跳转到课程列表页面
 			  gotoCourseList(row) {
-				var subId = row.subId
-				var name = row.name
-				var title = ''
+				console.log(row)
 				uni.navigateTo({
-				  url: '/pages/courseList/courseList?subId=' + subId 
-					  + '&title=' + title,
+				  url: '/pages/courseList/courseList?sectionId=' + row.id 
+					+ '&title=' + row.title + '-' + row.subTitle,
 				})
 			  },
 		    // 跳转到词汇页面
