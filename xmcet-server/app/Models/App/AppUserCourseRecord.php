@@ -4,14 +4,14 @@ namespace App\Models\App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AppSectionCourse extends Model
+class AppUserCourseRecord extends Model
 {
     /**
      * 与模型关联的表名
      *
      * @var string
      */
-    protected $table = 'app_section_course';
+    protected $table = 'app_user_course_record';
 
     /**
      * 与表关联的主键
@@ -33,9 +33,13 @@ class AppSectionCourse extends Model
      * @var array
      */
     protected $fillable = [
+        'uid',
+        'book_id',
         'section_id',
         'course_id',
-        'sort'
+        'answer',
+        'wrong',
+        'status'
     ];
 
     // 关联course表
@@ -48,5 +52,11 @@ class AppSectionCourse extends Model
     public function section()
     {
         return $this->hasOne(AppSection::class, 'id', 'section_id');
+    }
+
+    // 关联book表
+    public function book()
+    {
+        return $this->hasOne(AppBook::class, 'id', 'book_id');
     }
 }

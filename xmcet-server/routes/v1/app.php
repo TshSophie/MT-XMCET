@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\App\AppCourseController;
+use App\Http\Controllers\App\AppSectionController;
 use App\Http\Controllers\App\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::name('app.')->group(function (){
     Route::put('app/user/authorizeUserInfo', [UserController::class, 'authorizeUserInfo']);   
     Route::get('app/user/getUserInfo', [UserController::class, 'getUserInfo']);
+    Route::get('app/section/getSectionList', [AppSectionController::class, 'getSectionList']);
+    Route::get('app/section/getCourseListBySectionId', [AppSectionController::class, 'getCourseListBySectionId']);
+    Route::get('app/course/getDetail', [AppCourseController::class, 'getDetail']);
 });
