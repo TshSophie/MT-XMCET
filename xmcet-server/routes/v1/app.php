@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::name('app.')->group(function (){
-    Route::get('app/user/token', [UserController::class, 'getToken']);   
     Route::put('app/user/authorizeUserInfo', [UserController::class, 'authorizeUserInfo']);   
+    Route::get('app/user/getUserInfo', [UserController::class, 'getUserInfo']);
 });

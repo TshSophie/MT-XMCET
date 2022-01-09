@@ -52,6 +52,14 @@ class WxTokenService {
     }
 
     /**
+     * 校验token
+     */
+    public static function check()
+    {
+        return Redis::exists(self::getTokenFromRequest());
+    }
+
+    /**
      * 生成令牌
      * @return string 返回生成的令牌
      */
@@ -67,7 +75,7 @@ class WxTokenService {
     }
     
     /**
-     * 获取当前用户的uid
+     * 获取当前用户的id
      * @return mixed
      */
     public static function getCurrentUid()

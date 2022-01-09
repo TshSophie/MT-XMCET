@@ -31,7 +31,7 @@ class UserController extends Controller
             'avatar' => 'max:255',
             'location' => 'max:300',
             'gender' => 'integer',
-        ]);        
+        ]);
         // 校验失败处理
         if ($validator->fails()) {
             $errors = $validator->errors();
@@ -42,8 +42,9 @@ class UserController extends Controller
     }
 
     // 获取用户信息
-    public function getInfo()
+    public function getUserInfo()
     {
-        
+        $data = UserService::getUserInfo();
+        return gfResponse()->json($data);
     }
 }

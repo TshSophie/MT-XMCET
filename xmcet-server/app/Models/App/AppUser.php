@@ -57,6 +57,10 @@ class AppUser extends Model
         'create_time',
         'update_time',
     ];
+      
+    protected $hidden = [
+        'openid'
+    ];
 
     static public function getByOpenid($openId)
     {

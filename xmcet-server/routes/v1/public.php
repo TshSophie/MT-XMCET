@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\App\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\SysUserController;
@@ -16,7 +17,7 @@ use App\Http\Controllers\System\SysUserController;
 */
 
 Route::name('public.')->group(function (){
-    Route::middleware('authJwt')->get('/token', function (Request $request) {
+    Route::middleware('authWebToken')->get('/token', function (Request $request) {
         return ['msg' => 'token'];
     }, 'ddd');
 
@@ -35,5 +36,8 @@ Route::name('public.')->group(function (){
     Route::post('logout', [SysUserController::class, 'logout']);
     // 导出用户列表excel
     Route::post('test/importExcel', [SysUserController::class, 'importExcel']);
+
+    // app客户端登录
+    Route::get('app/user/token', [UserController::class, 'getToken']);   
 
 });

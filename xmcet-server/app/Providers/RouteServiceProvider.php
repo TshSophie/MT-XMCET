@@ -40,24 +40,25 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             // 加载system模块路由
             Route::prefix('api/v1')
-                ->middleware('authJwt')
+                ->middleware('authWebToken')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/v1/system.php'));
 
             // 加载admin模块路由
             Route::prefix('api/v1')
-                ->middleware('authJwt')
+                ->middleware('authWebToken')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/v1/admin.php'));
 
             // 加载common类型路由
             Route::prefix('api/v1')
-            ->middleware('authJwt')
+            ->middleware('authWebToken')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/v1/common.php'));
 
             // 加载app类型路由
             Route::prefix('api/v1')
+                ->middleware('authAppToken')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/v1/app.php'));
 
