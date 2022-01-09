@@ -15,7 +15,7 @@ import SingleChoiceCard from '@/components/SingleChoiceCard/SingleChoiceCard.vue
 export default {
     name: 'Practice',
     components: {
-        SingleChoiceCard
+        SingleChoiceCard,
     },
     data() {
         return {
@@ -70,7 +70,7 @@ export default {
                     answer: '1',
                     choice: '3'
                 },
-            ]
+            ],
         }
     },
     methods: {
@@ -83,6 +83,7 @@ export default {
 
 <style lang="less" scoped>
 .content {
+    position: relative;
     height: 100%;
     padding: 0 15rpx;
     .article {

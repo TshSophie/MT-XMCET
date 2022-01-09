@@ -45,9 +45,20 @@
 				});
 			},
 			gotoCourse(item) {
-				uni.navigateTo({
-				  url: '/pages/readingCourse/readingCourse?id=' + item.id,
-				})
+				// 课程类型(1:阅读，2：听力, 3:导读、作文)
+				if(item.type == 1) {
+					uni.navigateTo({
+						url: '/pages/readingCourse/readingCourse?courseId=' + item.id,
+					})
+				} else if(item.type == 2) {
+					uni.navigateTo({
+						url: '/pages/listeningCourse/listeningCourse?courseId=' + item.id,
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/writingCourse/writingCourse?courseId=' + item.id,
+					})
+				}
 			}
 		}
 	}

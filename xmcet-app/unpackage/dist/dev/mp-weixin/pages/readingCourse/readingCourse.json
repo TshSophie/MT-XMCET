@@ -3,7 +3,6 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "tabs": "/components/Tabs/Tabs",
-    "audio-player": "/components/AudioPlayer/AudioPlayer",
     "practice": "/pages/readingCourse/components/Practise",
     "answer": "/pages/readingCourse/components/Answer",
     "analysis": "/pages/readingCourse/components/Analysis",

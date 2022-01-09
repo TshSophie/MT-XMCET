@@ -96,7 +96,7 @@ var components
 try {
   components = {
     AuthorizeBar: function() {
-      return Promise.all(/*! import() | components/AuthorizeBar/AuthorizeBar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/AuthorizeBar/AuthorizeBar")]).then(__webpack_require__.bind(null, /*! @/components/AuthorizeBar/AuthorizeBar.vue */ 129))
+      return Promise.all(/*! import() | components/AuthorizeBar/AuthorizeBar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/AuthorizeBar/AuthorizeBar")]).then(__webpack_require__.bind(null, /*! @/components/AuthorizeBar/AuthorizeBar.vue */ 144))
     }
   }
 } catch (e) {
@@ -153,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var AuthorizeBar = function AuthorizeBar() {Promise.all(/*! require.ensure | components/AuthorizeBar/AuthorizeBar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/AuthorizeBar/AuthorizeBar")]).then((function () {return resolve(__webpack_require__(/*! @/components/AuthorizeBar/AuthorizeBar */ 129));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var AuthorizeBar = function AuthorizeBar() {Promise.all(/*! require.ensure | components/AuthorizeBar/AuthorizeBar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/AuthorizeBar/AuthorizeBar")]).then((function () {return resolve(__webpack_require__(/*! @/components/AuthorizeBar/AuthorizeBar */ 144));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 

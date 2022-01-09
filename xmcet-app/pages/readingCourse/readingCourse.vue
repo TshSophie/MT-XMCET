@@ -24,7 +24,6 @@
 				</scroll-view>
 			</swiper-item>
 		</swiper>
-        <AudioPlayer :src="audioSrc" class="audio"/>
 	</view>
 </template>
 
@@ -34,8 +33,7 @@
 	import Answer from './components/Answer.vue'
 	import Analysis from './components/Analysis.vue'
 	import Translate from './components/Translate.vue'
-	import AudioPlayer from "@/components/AudioPlayer/AudioPlayer.vue"
-
+	import { getDetail } from '@/api/course'
 	export default {
 		components: {
 			Tabs,
@@ -43,25 +41,26 @@
 			Answer,
 			Analysis,
 			Translate,
-        	AudioPlayer
 		},
 		data() {
 			return {
 				title: '阅读练习',
 				// 课程id
-				id: '',
+				courseId: '',
 				currentTab: 0,
 				tabs:["练习", "答案", "翻译", "解析"],
-            	audioSrc: "https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-hello-uniapp/2cc220e0-c27a-11ea-9dfb-6da8e309e0d8.mp3",
 				windowHeight: 0
 			}
 		},
 		onLoad(option) {
-			this.id = option.id
+			this.courseId = option.courseId
 			// 重新设置标题
 			this.setNavBarTitle()
 			const res = uni.getSystemInfoSync();
 			this.windowHeight = res.windowHeight
+			getDetail({courseId: this.courseId}).then(response => {
+				console.log(response)
+			})
 		},
 		methods: {
 			setNavBarTitle() {
@@ -100,12 +99,6 @@
 			height: 100%;
 		}
 	}
-    .audio {
-		width: 100%;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-    }
 }
 
 </style>

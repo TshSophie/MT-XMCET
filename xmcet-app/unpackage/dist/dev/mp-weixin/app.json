@@ -12,7 +12,9 @@
     "pages/postDetail/postDetail",
     "pages/postList/postList",
     "pages/wrongCollection/wrongCollection",
-    "pages/vocabularyCollection/vocabularyCollection"
+    "pages/vocabularyCollection/vocabularyCollection",
+    "pages/writingCourse/writingCourse",
+    "pages/listeningCourse/listeningCourse"
   ],
   "subPackages": [],
   "window": {
@@ -38,6 +40,5 @@
     ]
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }
