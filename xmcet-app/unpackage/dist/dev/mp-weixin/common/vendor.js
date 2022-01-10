@@ -2059,9 +2059,12 @@ uni$1;exports.default = _default;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.apiResquest = void 0;var _errorCode = _interopRequireDefault(__webpack_require__(/*! @/utils/errorCode */ 11));
-var _config = __webpack_require__(/*! @/config.js */ 12);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _config = __webpack_require__(/*! @/config.js */ 12);
 
 
+var _user = __webpack_require__(/*! @/api/user */ 9);
+var _xmcet = __webpack_require__(/*! @/utils/xmcet */ 379);
+var _store = _interopRequireDefault(__webpack_require__(/*! @/store */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 // 封装request请求函数
 var apiResquest = function apiResquest(params) {
@@ -2091,41 +2094,25 @@ var apiResquest = function apiResquest(params) {
         var message = _errorCode.default[code] || res.data.msg || _errorCode.default["default"];
         // token过期重新登录
         if (code === 401) {
-          uni.showModal({
-            title: '温馨提示',
-            content: '亲，授权微信登录后才能正常使用小程序功能',
-            success: function success(res) {
-              //如果用户点击了确定按钮
-              if (res.confirm) {
-                uni.getUserProfile({
-                  desc: '获取你的昵称、头像及性别',
-                  success: function success(res) {
-                    console.log(res);
-                    console.log(1);
-                  },
-                  fail: function fail(res) {
-                    console.log(2);
-                    console.log(res);
-                    //拒绝授权
-                    uni.showToast({
-                      title: '您拒绝了请求,不能正常使用小程序',
-                      icon: 'error',
-                      duration: 2000 });
+          // 重新登录
 
-                    return;
-                  } });
+          uni.login({
+            provider: 'weixin',
+            success: function success(loginRes) {
+              (0, _user.getToken)({ code: loginRes.code }).then(function (response) {
+                console.log(response);
+                // 缓存token,和授权标记
+                // wx.setStorageSync('authorized', response.data.authorized);
+                wx.setStorageSync('token', response.data.token);
+                _store.default.commit('SET_AUTHORIZED', response.data.authorized);
+                _store.default.commit('SET_TOKEN', response.data.token);
+                console.log(encodeURIComponent((0, _xmcet.getCurrentPagePath)()));
+                uni.redirectTo({
+                  url: '/pages/refresh/refresh?from=' + encodeURIComponent((0, _xmcet.getCurrentPagePath)()) });
 
-              } else if (res.cancel) {
-                //如果用户点击了取消按钮
-                console.log(3);
-                uni.showToast({
-                  title: '您拒绝了请求,不能正常使用小程序',
-                  icon: 'error',
-                  duration: 2000 });
-
-                return;
-              }
+              });
             } });
+
 
         } else if (code === 500) {
           wx.showToast({
@@ -19299,6 +19286,33 @@ var getDetail = function getDetail(data) {
     data: data });
 
 };exports.getDetail = getDetail;
+
+/***/ }),
+
+/***/ 379:
+/*!**************************************************************************!*\
+  !*** /Users/sophie/Documents/projects/MT-XMCET/xmcet-app/utils/xmcet.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getCurrentPagePath = void 0;var getCurrentPagePath = function getCurrentPagePath() {
+  var routes = getCurrentPages(); // 获取当前打开过的页面路由数组
+  var curRoute = routes[routes.length - 1].route; //获取当前页面路由
+  var curParam = routes[routes.length - 1].options; //获取路由参数
+  // 拼接参数
+  var param = '';
+  for (var key in curParam) {
+    param += '&' + key + '=' + curParam[key];
+  }
+  param = param.substring(1, param.length);
+  console.log(param);
+  // let data = {}
+  // data.curRoute = curRoute
+  // data.curParam = curParam
+  return curRoute + '?' + param;
+};exports.getCurrentPagePath = getCurrentPagePath;
 
 /***/ }),
 

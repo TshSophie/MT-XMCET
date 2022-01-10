@@ -98,7 +98,7 @@ var _user = __webpack_require__(/*! @/api/user */ 9);var _default =
       provider: 'weixin',
       success: function success(loginRes) {
         (0, _user.getToken)({ code: loginRes.code }).then(function (response) {
-          console.log(response);
+          // console.log(response)
           // 缓存token,和授权标记
           // wx.setStorageSync('authorized', response.data.authorized);
           wx.setStorageSync('token', response.data.token);
@@ -110,7 +110,7 @@ var _user = __webpack_require__(/*! @/api/user */ 9);var _default =
 
   },
   onShow: function onShow() {
-    console.log('App Show');
+    // console.log('App Show')
   },
 
   onHide: function onHide() {

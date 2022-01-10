@@ -14,7 +14,10 @@
     "pages/wrongCollection/wrongCollection",
     "pages/vocabularyCollection/vocabularyCollection",
     "pages/writingCourse/writingCourse",
-    "pages/listeningCourse/listeningCourse"
+    "pages/listeningCourse/listeningCourse",
+    "pages/refresh/refresh",
+    "pages/feedback/feedback",
+    "pages/updateLog/updateLog"
   ],
   "subPackages": [],
   "window": {

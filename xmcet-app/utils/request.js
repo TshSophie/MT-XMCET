@@ -2,6 +2,9 @@ import errorCode from "@/utils/errorCode";
 import {
 	config
 } from '@/config.js'
+import { getToken } from '@/api/user'
+import { getCurrentPagePath } from '@/utils/xmcet'
+import store from '@/store'
 
 // 封装request请求函数
 export const apiResquest = (params) => {
@@ -31,42 +34,26 @@ export const apiResquest = (params) => {
         const message = errorCode[code] || res.data.msg || errorCode["default"];
         // token过期重新登录
         if (code === 401) {
-          uni.showModal({
-              title: '温馨提示',
-              content: '亲，授权微信登录后才能正常使用小程序功能',
-              success(res) {
-                  //如果用户点击了确定按钮
-                  if (res.confirm) {
-                      uni.getUserProfile({
-                          desc: '获取你的昵称、头像及性别',
-                          success: res => {
-                              console.log(res);
-                              console.log(1);
-                          },
-                          fail: res => {
-                              console.log(2);
-                              console.log(res)
-                              //拒绝授权
-                              uni.showToast({
-                                  title: '您拒绝了请求,不能正常使用小程序',
-                                  icon: 'error',
-                                  duration: 2000
-                              });
-                              return;
-                          }
-                      });
-                  } else if (res.cancel) {
-                      //如果用户点击了取消按钮
-                      console.log(3);
-                      uni.showToast({
-                          title: '您拒绝了请求,不能正常使用小程序',
-                          icon: 'error',
-                          duration: 2000
-                      });
-                      return;
-                  }
+          // 重新登录
+          // #ifdef  MP-WEIXIN	
+            uni.login({
+              provider: 'weixin',
+              success: (loginRes) => {
+                getToken({code: loginRes.code}).then(response => {
+                  console.log(response)
+                  // 缓存token,和授权标记
+                  // wx.setStorageSync('authorized', response.data.authorized);
+                  wx.setStorageSync('token', response.data.token);
+                  store.commit('SET_AUTHORIZED', response.data.authorized)
+                  store.commit('SET_TOKEN', response.data.token)
+                  console.log(encodeURIComponent(getCurrentPagePath()))
+                  uni.redirectTo({
+                    url: '/pages/refresh/refresh?from=' + encodeURIComponent(getCurrentPagePath())
+                  })
+                })
               }
-          });        
+            });
+          // #endif
         } else if (code === 500) {
           wx.showToast({
               title: "矮油o(╥﹏╥)o，服务出问题了",
