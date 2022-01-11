@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 10/01/2022 17:50:29
+ Date: 11/01/2022 18:10:40
 */
 
 SET NAMES utf8mb4;
@@ -76,20 +76,6 @@ INSERT INTO `app_book` VALUES (1, 1, '四级', '2021-11-16 17:28:47', NULL);
 INSERT INTO `app_book` VALUES (2, 1, '六级', '2021-11-17 17:29:07', NULL);
 
 -- ----------------------------
--- Table structure for app_comment
--- ----------------------------
-DROP TABLE IF EXISTS `app_comment`;
-CREATE TABLE `app_comment`  (
-  `id` int(0) NOT NULL,
-  `topic_id` int(0) NOT NULL COMMENT '主题id',
-  `topic_type` tinyint(0) NOT NULL COMMENT '主题类型:1文章',
-  `content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '内容',
-  `from_uid` int(0) NOT NULL COMMENT '评论人id',
-  `to_uid` int(0) NULL DEFAULT NULL COMMENT '评论目标用户id',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
 -- Table structure for app_course
 -- ----------------------------
 DROP TABLE IF EXISTS `app_course`;
@@ -125,6 +111,28 @@ INSERT INTO `app_course` VALUES (21, '2016年12月四级真题阅读', '&lt;p&gt
 INSERT INTO `app_course` VALUES (24, '测试', '顶顶顶顶顶顶顶', NULL, '放大撒', '范德萨范德萨', '/storage/audio/I78Mqz3D9lhLYKgZqr2NleRgxCLXP3D24X3QEzgj.mp3', 2, NULL, 1, 0, '2021-11-16 13:35:48', '2021-11-17 10:15:33', 1);
 
 -- ----------------------------
+-- Table structure for app_course_exercises
+-- ----------------------------
+DROP TABLE IF EXISTS `app_course_exercises`;
+CREATE TABLE `app_course_exercises`  (
+  `id` int(0) NOT NULL,
+  `course_id` int(0) NULL DEFAULT NULL COMMENT '关联的课程id',
+  `question` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '问题',
+  `options` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '选项，多个选项逗号分隔',
+  `answer` tinyint(0) NULL DEFAULT NULL COMMENT '答案，选项序号',
+  `order` int(0) NULL DEFAULT NULL COMMENT '顺序',
+  `create_time` datetime(0) NULL DEFAULT NULL,
+  `update_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of app_course_exercises
+-- ----------------------------
+INSERT INTO `app_course_exercises` VALUES (1, 1, '49. Why can certain species of tilapia sometimes survive around Lake Natron?', '[\n			\"请选择\",\n			\"A) It is simply uninhabitable for most animals.\",\n			\"B) It remains little known to the outside world.\",\n			\"C) It is a breeding ground for a variety of birds.\",\n			\"D) It makes an ideal habitat for lots of predators.\"\n		]', 1, 1, '2022-01-11 14:32:40', '2022-01-11 14:32:43');
+INSERT INTO `app_course_exercises` VALUES (2, 1, '49. Why can certain species of tilapia sometimes survive around Lake Natron?', '[\n			\"请选择\",\n			\"A) It is simply uninhabitable for most animals.\",\n			\"B) It remains little known to the outside world.\",\n			\"C) It is a breeding ground for a variety of birds.\",\n			\"D) It makes an ideal habitat for lots of predators.\"\n		]', 3, 2, '2022-01-11 14:33:14', '2022-01-11 14:33:17');
+
+-- ----------------------------
 -- Table structure for app_essay_template
 -- ----------------------------
 DROP TABLE IF EXISTS `app_essay_template`;
@@ -158,6 +166,10 @@ CREATE TABLE `app_feedback`  (
   `content` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '内容',
   `link` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '联系方式：邮箱/手机号',
   `images` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '截图，0~4张，逗号分割',
+  `user_id` int(0) NOT NULL COMMENT '用户id',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `reply` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '回复内容',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
@@ -176,7 +188,7 @@ CREATE TABLE `app_grammar_article`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `delete_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for app_section
@@ -218,9 +230,9 @@ CREATE TABLE `app_section_course`  (
 -- ----------------------------
 -- Records of app_section_course
 -- ----------------------------
-INSERT INTO `app_section_course` VALUES (14, 2, 21, 1);
-INSERT INTO `app_section_course` VALUES (15, 2, 24, 2);
-INSERT INTO `app_section_course` VALUES (16, 24, 19, 1);
+INSERT INTO `app_section_course` VALUES (14, 2, 14, 1);
+INSERT INTO `app_section_course` VALUES (15, 2, 15, 2);
+INSERT INTO `app_section_course` VALUES (16, 24, 15, 1);
 
 -- ----------------------------
 -- Table structure for app_setting
@@ -230,7 +242,7 @@ CREATE TABLE `app_setting`  (
   `id` int(0) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `version_no` int(0) NOT NULL COMMENT '版本号',
   `version` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '版本名称',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` int(0) NULL DEFAULT NULL COMMENT '创建时间',
   `desc` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
   `about` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '关于',
   `logo` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图标',
@@ -240,7 +252,7 @@ CREATE TABLE `app_setting`  (
 -- ----------------------------
 -- Records of app_setting
 -- ----------------------------
-INSERT INTO `app_setting` VALUES (1, 1, 'v1.0', NULL, '小麦英语CET第一版', '&lt;h1 label=&quot;Title center&quot; name=&quot;tc&quot; style=&quot;border-bottom: 2px solid rgb(204, 204, 204); padding: 0px 4px 0px 0px; text-align: center; margin: 0px 0px 20px;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;小麦英语CET&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;欢迎使用小麦英语CET！&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;小麦英语CET将成为你大学英语四六级闯关路上的好帮手、好伙伴。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;&amp;nbsp; &amp;nbsp;笔者开发这款小程序时是一位即将毕业的大四', '20200507\\48f3b01d69eb2c60ca6ee91ccdea2005.png');
+INSERT INTO `app_setting` VALUES (1, 1, 'v1.0', 1588843116, '小麦英语CET第一版', '&lt;h1 label=&quot;Title center&quot; name=&quot;tc&quot; style=&quot;border-bottom: 2px solid rgb(204, 204, 204); padding: 0px 4px 0px 0px; text-align: center; margin: 0px 0px 20px;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;小麦英语CET&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;欢迎使用小麦英语CET！&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;小麦英语CET将成为你大学英语四六级闯关路上的好帮手、好伙伴。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;&amp;nbsp; &amp;nbsp;笔者开发这款小程序时是一位即将毕业的大四', '20200507\\48f3b01d69eb2c60ca6ee91ccdea2005.png');
 
 -- ----------------------------
 -- Table structure for app_user
@@ -249,8 +261,8 @@ DROP TABLE IF EXISTS `app_user`;
 CREATE TABLE `app_user`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `openid` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '微信openid',
-  `nick_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
+  `nick_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
+  `avatar` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
   `status` int(0) NOT NULL DEFAULT 0 COMMENT '状态，0启用，1禁用',
   `mobile` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
@@ -258,14 +270,29 @@ CREATE TABLE `app_user`  (
   `location` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
   `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-  `delete_time` int(0) NULL DEFAULT NULL COMMENT '删除时间',
+  `delete_time` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
-INSERT INTO `app_user` VALUES (1, 'oeBaM5Yq8S0M_SFGRxrYATu3Mwwc', '风子', 'https://thirdwx.qlogo.cn/mmopen/vi_32/WRnvRKBjQyibagwUKJwvXkZ4ryBg8icdfkaE1ECT8WSyLb18T5fviaCB2tZPggys0R7KHFeEibNSYIu92hqoRR6rgw/132', 0, NULL, NULL, 0, ',,', '2022-01-07 16:20:39', '2022-01-07 16:20:50', NULL);
+INSERT INTO `app_user` VALUES (1, 'oeBaM5Yq8S0M_SFGRxrYATu3Mwwc', '风子', 'https://thirdwx.qlogo.cn/mmopen/vi_32/WRnvRKBjQyibagwUKJwvXkZ4ryBg8icdfkaE1ECT8WSyLb18T5fviaCB2tZPggys0R7KHFeEibNSYIu92hqoRR6rgw/132', 0, NULL, NULL, 0, ',,', '2022-01-09 12:37:16', '2022-01-09 12:37:22', NULL);
+
+-- ----------------------------
+-- Table structure for app_user_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `app_user_comment`;
+CREATE TABLE `app_user_comment`  (
+  `id` int(0) NOT NULL,
+  `topic_id` int(0) NOT NULL COMMENT '主题id',
+  `topic_type` tinyint(0) NOT NULL COMMENT '主题类型:1文章',
+  `content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '内容',
+  `from_uid` int(0) NOT NULL COMMENT '评论人id',
+  `to_uid` int(0) NULL DEFAULT NULL COMMENT '评论目标用户id',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for app_user_course_record
@@ -273,22 +300,17 @@ INSERT INTO `app_user` VALUES (1, 'oeBaM5Yq8S0M_SFGRxrYATu3Mwwc', '风子', 'htt
 DROP TABLE IF EXISTS `app_user_course_record`;
 CREATE TABLE `app_user_course_record`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `uid` int(0) NOT NULL COMMENT '关联user表',
-  `subject_id` int(0) NOT NULL COMMENT '关联subject表',
+  `user_id` int(0) NOT NULL COMMENT '关联user表',
+  `book_id` int(0) NOT NULL COMMENT '关联book',
+  `section_id` int(0) NOT NULL COMMENT '关联section表',
   `course_id` int(0) NOT NULL COMMENT '关联course表',
-  `answer` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户提交的答案,json格式',
-  `wrong` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '做错的题目，josn格式',
-  `status` int(0) NOT NULL DEFAULT 1 COMMENT '闯关状态(1：正在闯关，2：闯关完成)',
+  `exercises_id` int(0) NULL DEFAULT NULL COMMENT '关联练习题id',
+  `user_answer` int(0) NOT NULL COMMENT '用户提交的答案',
+  `status` tinyint(0) NOT NULL DEFAULT 1 COMMENT '是否正确,1答对了，0答错了',
+  `create_time` datetime(0) NOT NULL COMMENT '提交时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of app_user_course_record
--- ----------------------------
-INSERT INTO `app_user_course_record` VALUES (5, 9, 10, 14, '[{\"a\":1,\"ua\":1},{\"a\":3,\"ua\":3},{\"a\":2,\"ua\":1},{\"a\":1,\"ua\":0},{\"a\":4,\"ua\":0}]', '[2,3,4]', 1);
-INSERT INTO `app_user_course_record` VALUES (6, 9, 11, 15, '[{\"a\":2,\"ua\":2},{\"a\":3,\"ua\":1},{\"a\":1,\"ua\":3},{\"a\":4,\"ua\":2},{\"a\":3,\"ua\":4}]', '[1,2,3,4]', 2);
-INSERT INTO `app_user_course_record` VALUES (7, 9, 14, 19, '[{\"a\":4,\"ua\":4},{\"a\":1,\"ua\":0},{\"a\":1,\"ua\":0},{\"a\":3,\"ua\":0}]', '[1,2,3]', 1);
-INSERT INTO `app_user_course_record` VALUES (8, 9, 16, 21, '[{\"a\":4,\"ua\":0},{\"a\":4,\"ua\":0},{\"a\":2,\"ua\":0},{\"a\":1,\"ua\":0},{\"a\":3,\"ua\":0}]', '[0,1,2,3,4]', 1);
 
 -- ----------------------------
 -- Table structure for app_user_like
@@ -296,12 +318,27 @@ INSERT INTO `app_user_course_record` VALUES (8, 9, 16, 21, '[{\"a\":4,\"ua\":0},
 DROP TABLE IF EXISTS `app_user_like`;
 CREATE TABLE `app_user_like`  (
   `id` int(0) NOT NULL,
-  `user_id` bigint(0) NOT NULL,
-  `target_id` int(0) NOT NULL COMMENT '关联id',
-  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `user_id` bigint(0) NOT NULL COMMENT '用户id',
+  `type_id` int(0) NOT NULL COMMENT '关联id',
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '点赞类型',
   `status` tinyint(0) NULL DEFAULT NULL COMMENT '点赞状态：0取消，1点赞',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for app_user_subscribe
+-- ----------------------------
+DROP TABLE IF EXISTS `app_user_subscribe`;
+CREATE TABLE `app_user_subscribe`  (
+  `id` int(0) NOT NULL,
+  `user_id` int(0) NULL DEFAULT NULL,
+  `channel_id` int(0) NULL DEFAULT NULL,
+  `channel_type` tinyint(0) NULL DEFAULT NULL,
+  `status` tinyint(0) NOT NULL COMMENT '订阅状态，1：订阅，0取消订阅',
+  `create_time` datetime(0) NULL DEFAULT NULL,
+  `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
@@ -371,6 +408,36 @@ INSERT INTO `app_vocabulary` VALUES (99, '自主创新能力', ' capability of i
 INSERT INTO `app_vocabulary` VALUES (100, '生态系统建设', ' ecosystem construction');
 
 -- ----------------------------
+-- Table structure for app_word_book
+-- ----------------------------
+DROP TABLE IF EXISTS `app_word_book`;
+CREATE TABLE `app_word_book`  (
+  `id` int(0) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `description` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '描述',
+  `cover_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '封面',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `user_id` int(0) NOT NULL COMMENT '所属用户',
+  `fork_from_id` int(0) NULL DEFAULT NULL COMMENT '克隆自,为空表示原创',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for app_word_book_content
+-- ----------------------------
+DROP TABLE IF EXISTS `app_word_book_content`;
+CREATE TABLE `app_word_book_content`  (
+  `id` int(0) NOT NULL,
+  `word` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `detail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `user_id` int(0) NOT NULL,
+  `word_book_id` int(0) NOT NULL COMMENT '所属词汇本',
+  `create_time` datetime(0) NOT NULL,
+  `update_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for app_word_root
 -- ----------------------------
 DROP TABLE IF EXISTS `app_word_root`;
@@ -422,7 +489,7 @@ INSERT INTO `app_word_root` VALUES (146, 'il ', '不，无', '[{\"translate\":\"
 DROP TABLE IF EXISTS `app_word_root_record`;
 CREATE TABLE `app_word_root_record`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `uid` int(0) NOT NULL COMMENT '关联user表',
+  `user_id` int(0) NOT NULL COMMENT '关联user表',
   `word_id` int(0) NOT NULL COMMENT '关联word_root表',
   `status` int(0) NOT NULL DEFAULT 1 COMMENT '掌握状态1表示已经掌握，0表示忘记了',
   PRIMARY KEY (`id`) USING BTREE
@@ -825,5 +892,7 @@ CREATE TABLE `sys_user_role`  (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1);
+INSERT INTO `sys_user_role` VALUES (105, 2);
+INSERT INTO `sys_user_role` VALUES (105, 102);
 
 SET FOREIGN_KEY_CHECKS = 1;

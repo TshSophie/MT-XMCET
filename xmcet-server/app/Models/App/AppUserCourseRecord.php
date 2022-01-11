@@ -33,12 +33,12 @@ class AppUserCourseRecord extends Model
      * @var array
      */
     protected $fillable = [
-        'uid',
+        'user_id',
         'book_id',
         'section_id',
         'course_id',
-        'answer',
-        'wrong',
+        'exercises_id',
+        'user_answer',
         'status'
     ];
 
@@ -58,5 +58,11 @@ class AppUserCourseRecord extends Model
     public function book()
     {
         return $this->hasOne(AppBook::class, 'id', 'book_id');
+    }
+
+    // 关联exercises表
+    public function exercises()
+    {
+        return $this->hasOne(AppCourseExercises::class, 'id', 'exercises_id');
     }
 }

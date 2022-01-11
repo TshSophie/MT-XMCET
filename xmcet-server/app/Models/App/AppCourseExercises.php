@@ -4,14 +4,14 @@ namespace App\Models\App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AppCourse extends Model
+class AppCourseExercises extends Model
 {
     /**
      * 与模型关联的表名
      *
      * @var string
      */
-    protected $table = 'app_course';
+    protected $table = 'app_course_exercise';
 
     /**
      * 与表关联的主键
@@ -33,17 +33,13 @@ class AppCourse extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'content',
-        'book_type',
-        'qa',
-        'solution',
-        'translate',
-        'audio',
-        'type',
-        'vocabulary',
-        'user_id',
-        'status', 
+        'course_id',
+        'question',
+        'options',
+        'answer',
+        'order',
+        'create_time',
+        'update_time',
     ];
 
     const CREATED_AT = 'create_time';
@@ -57,19 +53,5 @@ class AppCourse extends Model
     public function getUpdateTimeAttribute($value)
     {
         return Date('Y-m-d h:i:s', strtotime($value));
-    }
-
-    public function getAudioAttribute($value)
-    {
-        if(!$value) {
-            return '';
-        }
-        return $value;
-    }
-
-    // 关联user表
-    public function user()
-    {
-        return $this->hasOne(AppUser::class, 'id', 'user_id');
     }
 }

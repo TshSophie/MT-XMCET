@@ -4,14 +4,14 @@ namespace App\Models\App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AppCourse extends Model
+class AppFeedback extends Model
 {
     /**
      * 与模型关联的表名
      *
      * @var string
      */
-    protected $table = 'app_course';
+    protected $table = 'app_feedback';
 
     /**
      * 与表关联的主键
@@ -27,25 +27,6 @@ class AppCourse extends Model
      */
     public $timestamps = true;
 
-    /**
-     * 可批量赋值属性
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'content',
-        'book_type',
-        'qa',
-        'solution',
-        'translate',
-        'audio',
-        'type',
-        'vocabulary',
-        'user_id',
-        'status', 
-    ];
-
     const CREATED_AT = 'create_time';
     const UPDATED_AT = 'update_time';
 
@@ -59,17 +40,27 @@ class AppCourse extends Model
         return Date('Y-m-d h:i:s', strtotime($value));
     }
 
-    public function getAudioAttribute($value)
+    public function getImagesAttribute($value)
     {
-        if(!$value) {
-            return '';
-        }
-        return $value;
+        return explode(',', $value);
     }
 
-    // 关联user表
-    public function user()
-    {
-        return $this->hasOne(AppUser::class, 'id', 'user_id');
-    }
+    /**
+     * 可批量赋值属性
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'type',
+        'content',
+        'link',
+        'images',
+        'user_id',
+        'reply',
+        'create_time',
+        'update_time',
+    ];
+
+    protected $hidden = [
+    ];
 }
