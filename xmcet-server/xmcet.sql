@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 09/01/2022 23:07:45
+ Date: 11/01/2022 00:35:44
 */
 
 SET NAMES utf8mb4;
@@ -80,6 +80,26 @@ INSERT INTO `app_book` VALUES (2, 1, '六级', '2021-11-17 17:29:07', NULL);
 COMMIT;
 
 -- ----------------------------
+-- Table structure for app_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `app_comment`;
+CREATE TABLE `app_comment` (
+  `id` int NOT NULL,
+  `topic_id` int NOT NULL COMMENT '主题id',
+  `topic_type` tinyint NOT NULL COMMENT '主题类型:1文章',
+  `content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '内容',
+  `from_uid` int NOT NULL COMMENT '评论人id',
+  `to_uid` int DEFAULT NULL COMMENT '评论目标用户id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of app_comment
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for app_course
 -- ----------------------------
 DROP TABLE IF EXISTS `app_course`;
@@ -140,6 +160,25 @@ BEGIN;
 INSERT INTO `app_essay_template` VALUES (1, 'cescesces', 1, '1', 'fdasfdafd', 1, '2021-11-19 16:19:27', '2021-11-19 16:25:58', NULL);
 INSERT INTO `app_essay_template` VALUES (2, 'dfsa', 1, '1', '<p style=\"margin-top: 0px; margin-bottom: 20px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0); border: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 14px; line-height: 2; font-family: Verdana, 宋体; color: rgb(51, 51, 51); white-space: normal;\"><strong style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"><img src=\"http://img.baidu.com/hi/jx2/j_0025.gif\"/>过去将来完成进行时</strong><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/>过去将来完成进行时表示从过去某时间开始一直延续到过去未来某一时间的动作，常与由介词by等引导的表示到过去未来的某时的时间副词连用。<br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/><strong style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\">形式</strong><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/>由should/would have been + v-ing构成；<br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/><strong style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\">否定形式</strong><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/>should/would+not have been + v-ing；<br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/><strong style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\">疑问形式</strong><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/>将should/would提前。<br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/><strong style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\">用法</strong><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/>过去将来完成进行时表示动作从过去某一时间开始一直延续到过去将来某一时间。动作是否继续下去，视上下文而定。如：<br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/>He said that by the end of the spring term he would have been studying English for three years.他说到春季（即下）学期末，他将学了三年英语了。<br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/><br style=\"margin: 0px; padding: 0px; -webkit-tap-highlight-color: rgba(255, 0, 0, 0);\"/>He told me that by the end of the year. he would have been living there for thirty years.他告诉我，到年底他在那里住了有30年了。</p><p><br style=\"white-space: normal;\"/></p><p><br/></p>', 0, '2021-11-19 17:42:33', '2021-11-19 17:44:03', NULL);
 INSERT INTO `app_essay_template` VALUES (3, 'dddddddddddddd', 1, 'ddddddddddddddddd', '<p><br/></p><h1 label=\"Title center\" name=\"tc\" style=\"border-bottom-color:#cccccc;border-bottom-width:2px;border-bottom-style:solid;padding:0px 4px 0px 0px;text-align:center;margin:0px 0px 20px;\" class=\"ue_t\">[此处键入文章标题]</h1><p><img src=\"http://img.baidu.com/hi/youa/y_0034.gif\" width=\"300\" height=\"200\" border=\"0\" hspace=\"0\" vspace=\"0\" style=\"width:300px;height:200px;float:left;\"/>图文混排方法</p><p>1. 图片居左，文字围绕图片排版</p><p>方法：在文字前面插入图片，设置居左对齐，然后即可在右边输入多行文本</p><p><br/></p><p>2. 图片居右，文字围绕图片排版</p><p>方法：在文字前面插入图片，设置居右对齐，然后即可在左边输入多行文本</p><p><br/></p><p>3. 图片居中环绕排版</p><p>方法：亲，这个真心没有办法。。。</p><p><br/></p><p><br/></p><p><img src=\"http://img.baidu.com/hi/youa/y_0040.gif\" width=\"300\" height=\"300\" border=\"0\" hspace=\"0\" vspace=\"0\" style=\"width:300px;height:300px;float:right;\"/></p><p>还有没有什么其他的环绕方式呢？这里是居右环绕</p><p><br/></p><p>欢迎大家多多尝试，为UEditor提供更多高质量模板！</p><p><br/></p><p>占位</p><p><br/></p><p>占位</p><p><br/></p><p>占位</p><p><br/></p><p>占位</p><p><br/></p><p>占位</p><p><br/></p><p><br/></p><p><br/></p>', 0, '2021-11-19 17:47:56', '2021-11-19 17:47:56', NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for app_feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `app_feedback`;
+CREATE TABLE `app_feedback` (
+  `id` int NOT NULL,
+  `type` tinyint NOT NULL COMMENT '反馈类型：1功能异常，2产品建议',
+  `content` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '内容',
+  `link` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '联系方式：邮箱/手机号',
+  `images` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '截图，0~4张，逗号分割',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of app_feedback
+-- ----------------------------
+BEGIN;
 COMMIT;
 
 -- ----------------------------
@@ -221,7 +260,7 @@ CREATE TABLE `app_setting` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `version_no` int NOT NULL COMMENT '版本号',
   `version` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '版本名称',
-  `create_time` int DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `desc` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '描述',
   `about` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '关于',
   `logo` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '图标',
@@ -232,7 +271,7 @@ CREATE TABLE `app_setting` (
 -- Records of app_setting
 -- ----------------------------
 BEGIN;
-INSERT INTO `app_setting` VALUES (1, 1, 'v1.0', 1588843116, '小麦英语CET第一版', '&lt;h1 label=&quot;Title center&quot; name=&quot;tc&quot; style=&quot;border-bottom: 2px solid rgb(204, 204, 204); padding: 0px 4px 0px 0px; text-align: center; margin: 0px 0px 20px;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;小麦英语CET&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;欢迎使用小麦英语CET！&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;小麦英语CET将成为你大学英语四六级闯关路上的好帮手、好伙伴。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;&amp;nbsp; &amp;nbsp;笔者开发这款小程序时是一位即将毕业的大四', '20200507\\48f3b01d69eb2c60ca6ee91ccdea2005.png');
+INSERT INTO `app_setting` VALUES (1, 1, 'v1.0', '2022-01-11 00:31:50', '小麦英语CET第一版', '&lt;h1 label=&quot;Title center&quot; name=&quot;tc&quot; style=&quot;border-bottom: 2px solid rgb(204, 204, 204); padding: 0px 4px 0px 0px; text-align: center; margin: 0px 0px 20px;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;小麦英语CET&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;欢迎使用小麦英语CET！&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;小麦英语CET将成为你大学英语四六级闯关路上的好帮手、好伙伴。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: 楷体, 楷体_GB2312, SimKai;&quot;&gt;&amp;nbsp; &amp;nbsp;笔者开发这款小程序时是一位即将毕业的大四', '20200507\\48f3b01d69eb2c60ca6ee91ccdea2005.png');
 COMMIT;
 
 -- ----------------------------
@@ -286,6 +325,27 @@ INSERT INTO `app_user_course_record` VALUES (5, 1, 1, 2, 14, '[{\"a\":1,\"ua\":1
 INSERT INTO `app_user_course_record` VALUES (6, 1, 1, 2, 15, '[{\"a\":2,\"ua\":2},{\"a\":3,\"ua\":1},{\"a\":1,\"ua\":3},{\"a\":4,\"ua\":2},{\"a\":3,\"ua\":4}]', '[1,2,3,4]', 2);
 INSERT INTO `app_user_course_record` VALUES (7, 9, 1, 14, 19, '[{\"a\":4,\"ua\":4},{\"a\":1,\"ua\":0},{\"a\":1,\"ua\":0},{\"a\":3,\"ua\":0}]', '[1,2,3]', 1);
 INSERT INTO `app_user_course_record` VALUES (8, 9, 1, 16, 21, '[{\"a\":4,\"ua\":0},{\"a\":4,\"ua\":0},{\"a\":2,\"ua\":0},{\"a\":1,\"ua\":0},{\"a\":3,\"ua\":0}]', '[0,1,2,3,4]', 1);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for app_user_like
+-- ----------------------------
+DROP TABLE IF EXISTS `app_user_like`;
+CREATE TABLE `app_user_like` (
+  `id` int NOT NULL,
+  `user_id` bigint NOT NULL,
+  `target_id` int NOT NULL COMMENT '关联id',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '点赞类型',
+  `status` tinyint DEFAULT NULL COMMENT '点赞状态：0取消，1点赞',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of app_user_like
+-- ----------------------------
+BEGIN;
 COMMIT;
 
 -- ----------------------------

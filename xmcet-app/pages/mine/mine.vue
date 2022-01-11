@@ -22,11 +22,11 @@
 				</view>
 			</view>
 			<view class="row"> 
-				<view class="menu-item"> 
+				<view class="menu-item" @click="navigateTo('/pages/updateLog/updateLog')"> 
 					<image src='@/static/assets/menu/日志.png' mod="aspectFit" class='icon'></image>
 					<text>更新日志</text>
 				</view>
-				<view class="menu-item"> 
+				<view class="menu-item" @click="navigateTo('/pages/feedback/feedback')"> 
 					<image src='@/static/assets/menu/用户反馈.png' mod="aspectFit" class='icon'></image>
 					<text>建议反馈</text>
 				</view>
@@ -109,6 +109,11 @@
 						console.log(this.$store.state)
 					}
 				})
+			},
+			navigateTo(target) {
+				uni.navigateTo({
+				    url: target
+				});
 			}
 		}
 	}

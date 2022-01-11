@@ -8,7 +8,7 @@ export default {
 				provider: 'weixin',
 				success: (loginRes) => {
 					getToken({code: loginRes.code}).then(response => {
-						console.log(response)
+						// console.log(response)
 						// 缓存token,和授权标记
 						// wx.setStorageSync('authorized', response.data.authorized);
 						wx.setStorageSync('token', response.data.token);
@@ -20,7 +20,7 @@ export default {
 		// #endif
 	},
 	onShow: function() {
-		console.log('App Show')
+		// console.log('App Show')
 	},
 	
 	onHide: function() {
