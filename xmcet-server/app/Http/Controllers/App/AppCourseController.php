@@ -5,10 +5,8 @@ namespace App\Http\Controllers\App;
 use App\ConstParam\ErrorConst;
 use App\Http\Controllers\Controller;
 use App\Models\App\AppCourse;
-use App\Services\Admin\CourseService;
 use App\Utils\CommonUtil;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class AppCourseController extends Controller 
 {

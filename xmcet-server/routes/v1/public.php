@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\App\AppSettingController;
 use App\Http\Controllers\App\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,5 +40,8 @@ Route::name('public.')->group(function (){
 
     // app客户端登录
     Route::get('app/user/token', [UserController::class, 'getToken']);   
+
+    // 更新日志
+    Route::get('app/appSetting/getUpdateLogs', [AppSettingController::class, 'getUpdateLogs']);   
 
 });
