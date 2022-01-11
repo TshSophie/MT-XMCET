@@ -14,7 +14,7 @@
 				<view class="s_l">
 					<view class="info_item" @tap="topage(index)">
 						<view class="tag">
-							<uni-tag text="v1.0" size="small" type="success"></uni-tag>
+							<uni-tag :text="i.version" size="small" type="success"></uni-tag>
 							<uni-tag :text="i.date"  size="small" mark type="default"></uni-tag>
 						</view>
 						<view :style="{WebkitLineClamp:lineNum!=0?lineNum:''}">{{ i.info }}</view>
@@ -101,11 +101,9 @@
 			}
 
 			.s_l {
-				width: 100%;
 				display: flex;
 				flex-direction: column;
 				padding: 20rpx 0;
-
 				.info_item {
 					background-color: #FFFFFF;
 					margin-right: 30upx;
@@ -135,7 +133,7 @@
 						flex-direction: column;
 
 						&.tag {
-							
+							padding: 10px;
 						}
 					}
 				}

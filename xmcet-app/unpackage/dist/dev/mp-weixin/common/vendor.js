@@ -19857,6 +19857,26 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACt
 
 /***/ }),
 
+/***/ 411:
+/*!**************************************************************************!*\
+  !*** /Users/sophie/Documents/projects/MT-XMCET/xmcet-app/api/setting.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getUpdateLogs = void 0;var _request = __webpack_require__(/*! @/utils/request.js */ 10);
+
+var getUpdateLogs = function getUpdateLogs(data) {
+  return (0, _request.apiResquest)({
+    url: 'appSetting/getUpdateLogs',
+    method: 'GET',
+    data: data });
+
+};exports.getUpdateLogs = getUpdateLogs;
+
+/***/ }),
+
 /***/ 49:
 /*!**************************************************************************!*\
   !*** /Users/sophie/Documents/projects/MT-XMCET/xmcet-app/api/section.js ***!
