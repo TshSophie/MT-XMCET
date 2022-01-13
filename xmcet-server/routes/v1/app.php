@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\App\AppArticleControlller;
 use App\Http\Controllers\App\AppCourseController;
 use App\Http\Controllers\App\AppFeedbackController;
 use App\Http\Controllers\App\AppSectionController;
@@ -32,4 +33,7 @@ Route::name('app.')->group(function (){
     // 反馈
     Route::get('app/feedback/getListByUser', [AppFeedbackController::class, 'getListByUser']);
     Route::get('app/feedback/postByUser', [AppFeedbackController::class, 'postByUser']);
+
+    Route::get('app/article/getListForIndexPage', [AppArticleControlller::class, 'getListForIndexPage']);
+    Route::get('app/article/getDetail', [AppArticleControlller::class, 'getDetail']);
 });
