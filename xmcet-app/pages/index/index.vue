@@ -60,25 +60,22 @@
 		<view class='card article'>
 			<view class='card-title'>推荐阅读</view>
 			<view class='item-col-list'>
-				<view class='item-row' v-for="item in article" :key="item.id"> 
+				<view class='item-row' v-for="item in article" :key="item.id" @click="navigateToPostDetail(item.id)"> 
 					<view class="item-title">
 						{{item.title}}            
 					</view>
-					<image :src='item.cover_img' class="item-image"></image>
+					<image :src='item.coverImg' class="item-image"></image>
 				</view>
 			</view>
 			<view class="readMore arrow" @click="handleReadMore">阅读更多</view>
 		</view>
 	</view>
-	<!-- <view class="authorize-box">
-		<view class="tips">登录后解锁更多功能 </view>
-		<button type="default" size="mini" @click="getUserInfo">立即登录</button>
-	</view> -->
 	<AuthorizeBar class="authorize-bar"/>
 </view>
 </template>
 
 <script>
+import {getListForIndexPage} from '@/api/article'
 	import AuthorizeBar from '@/components/AuthorizeBar/AuthorizeBar'
 	export default {
 		components: {
@@ -145,25 +142,33 @@
 					{
 						id: 1,
 						title: "xxxxxx1",
-						cover_img: require("static/assets/function03.png")
+						coverImg: require("static/assets/function03.png")
 					},
 					{
 						id: 2,
 						title: "xxxxxx1",
-						cover_img: require("static/assets/function03.png")
+						coverImg: require("static/assets/function03.png")
 					},
 					{
 						id: 3,
 						title: "xxxxxx1",
-						cover_img: require("static/assets/function03.png")
+						coverImg: require("static/assets/function03.png")
 					},
 				]
 			}
 		},
-		onLoad() {
-
+		created() {
+			getListForIndexPage().then(response => {
+				console.log(response)
+				this.article = response.data
+			})
 		},
 		methods: {
+			navigateToPostDetail(id) {
+				uni.navigateTo({
+				    url: '/pages/postDetail/postDetail?id=' + id
+				});
+			},
 			navigateToBookMenu(id) {
 				uni.navigateTo({
 				    url: '/pages/bookMenu/bookMenu?bookid=' + id

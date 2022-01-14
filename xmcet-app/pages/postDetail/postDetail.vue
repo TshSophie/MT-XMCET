@@ -6,7 +6,7 @@
 			</view>
 			<view class='header-bottom'>
 				<view class='author'>
-					{{article.authorName}}
+					{{article.author}}
 				</view>
 				<view class='date'>
 					{{article.createTime}}
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+	import {getArticleDetail} from '@/api/article'
 	export default {
 		data() {
 			return {
@@ -65,6 +66,12 @@
 			})
 			// #endif
 			
+		},
+		onLoad(options) {
+			console.log(options)
+			getArticleDetail({id: options.id}).then(response => {
+				this.article = response.data
+			})
 		},
 		methods: {
 			// 分享
@@ -121,6 +128,7 @@
 	}
 	
 	.content{
+		padding: 10px;
 		font-size:35rpx;
 	}
 	.option {
