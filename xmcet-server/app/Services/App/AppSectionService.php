@@ -21,7 +21,7 @@ class AppSectionService
         // 从user_course_record表查询出用户闯关记录
         $uid = WxTokenService::getCurrentUid();
         $records = AppUserCourseRecord::where([
-            'uid' => $uid,
+            'user_id' => $uid,
             'book_id' => $bookid,
             'section_id' => $sectionIds
         ])->get()->toArray();
@@ -66,7 +66,7 @@ class AppSectionService
             // 从user_course_record表查询出用户闯关记录
             $uid = WxTokenService::getCurrentUid();
             $records = AppUserCourseRecord::where([
-                'uid' => $uid,
+                'user_id' => $uid,
                 'section_id' => $sectionId,
                 'course_id' => $courseIds
             ])->get()->toArray();

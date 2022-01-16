@@ -15,3 +15,21 @@ export const getListForIndexPage = (data) => {
 		data
 	})
 }
+
+// 点赞文章
+export const likeArticle = (data) => {
+	return apiResquest({
+		url: 'userLike/article',
+		method: 'POST',
+		data
+	})
+}
+
+// 收藏文章
+export const collectArticle = (data) => {
+	return apiResquest({
+		url: 'userCollect/article',
+		method: 'POST',
+		data
+	})
+}

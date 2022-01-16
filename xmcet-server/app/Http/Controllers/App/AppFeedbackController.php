@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\App\AppFeedback;
 use App\Services\App\AppFeedbackService;
 use App\Utils\CommonUtil;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class AppFeedbackController extends Controller
