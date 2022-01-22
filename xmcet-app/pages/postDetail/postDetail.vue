@@ -48,12 +48,14 @@
 			return {
 				id: '',
 				article: {
-					// id: 28,
-					// copyfrom: "",
-					// createTime: "2020-05-07 23:18:44",
-					// authorName: "小麦CET",
-					// title: "四级翻译高频词之文化类",
-					// content: ''
+					id: '',
+					copyfrom: "",
+					createTime: "xxx",
+					authorName: "xxx",
+					title: "xxx",
+					content: '',
+					likeCount: 0,
+					read: 0,
 				},
 				likeStatus: false,
 				collectStatus: false

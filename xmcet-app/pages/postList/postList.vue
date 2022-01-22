@@ -3,7 +3,7 @@
 		<AuthorizeBar class="authorize-bar"/>
 		<view class="header">
 			<h2>#{{category.name}}</h2>
-			<button :type="!subscribeStatus?'primary':'default'" :plain="true" size="mini" @click="handleSubscribe" >{{subscribeStatus?'取消订阅':'订阅'}}</button>
+			<button :type="!subscribeStatus?'primary':'default'" :plain="true" size="mini" @click="handleSubscribe" >{{subscribeStatus?'已订阅':'订阅'}}</button>
 		</view>
 		<view class="content">
 			<view class="operation">
