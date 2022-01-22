@@ -37,11 +37,4 @@ Route::name('public.')->group(function (){
     Route::post('logout', [SysUserController::class, 'logout']);
     // 导出用户列表excel
     Route::post('test/importExcel', [SysUserController::class, 'importExcel']);
-
-    // app客户端登录
-    Route::get('app/user/token', [UserController::class, 'getToken']);   
-
-    // 更新日志
-    Route::get('app/appSetting/getUpdateLogs', [AppSettingController::class, 'getUpdateLogs']);   
-
 });

@@ -3,7 +3,9 @@
 use App\Response\GfResponse;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
-// 判断函数是否已经存在
+/**
+ * 自定义http响应数据格式
+ */
 if (!function_exists('gfResponse')) {
 
     // 自定义响应函数
@@ -14,9 +16,8 @@ if (!function_exists('gfResponse')) {
         if (func_num_args() === 0) {
             return new GfResponse();
         }
-        return $factory->make($content, $status, $headers);
+        return $factory->make($content,[ $status, $headers]);
     }
-   
 }
 
 /**
@@ -60,5 +61,32 @@ if (!function_exists('diffBetweenTwoDays')) {
             $second1 = $tmp;
         }
         return ($second1 - $second2) / 86400;
+    }
+}
+
+/**
+ * 数组转树型数据
+ */
+if(!function_exists('arrayToTree')) {
+    // 无限极分类排序
+    function arrayToTree($array, $pid = 0)
+    {
+        if(count($array) == 1) {
+            return $array;
+        }
+        $temp = [];
+        foreach ($array as $val)
+        {
+            if ($pid == $val['pid'])
+            {
+                $newItem = $val;
+                $children = arrayToTree($array, $val['id']);
+                if(count($children)){
+                    $newItem['children'] = $children;
+                }
+                $temp[] = $newItem;
+            }
+        }
+        return $temp;
     }
 }

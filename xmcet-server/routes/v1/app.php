@@ -6,6 +6,7 @@ use App\Http\Controllers\App\AppFeedbackController;
 use App\Http\Controllers\App\AppSectionController;
 use App\Http\Controllers\App\AppUserCollectController;
 use App\Http\Controllers\App\AppUserLikeController;
+use App\Http\Controllers\App\AppUserSubscribeController;
 use App\Http\Controllers\App\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,4 +43,6 @@ Route::name('app.')->group(function (){
     Route::post('app/userLike/article', [AppUserLikeController::class, 'userSetLikeArticle']);
     // 用户收藏文章
     Route::post('app/userCollect/article', [AppUserCollectController::class, 'userSetCollectArticle']);
+    // 用户订阅文章专栏
+    Route::post('app/userSubscribe/articleCategory', [AppUserSubscribeController::class, 'userSubscribeArticle']);
 });

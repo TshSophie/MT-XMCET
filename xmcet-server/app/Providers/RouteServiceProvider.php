@@ -67,6 +67,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/v1/public.php'));
 
+            // 加载app-public类型路由
+            Route::prefix('api/v1')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/v1/app-public.php'));
+
             // Route::middleware('web')
             //     ->namespace($this->namespace)
             //     ->group(base_path('routes/web.php'));

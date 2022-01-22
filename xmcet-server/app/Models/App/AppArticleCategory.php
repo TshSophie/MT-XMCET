@@ -34,6 +34,7 @@ class AppArticleCategory extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'pid',
         'user_id',

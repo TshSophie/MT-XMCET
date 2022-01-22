@@ -8,5 +8,6 @@ class Constants
 
     const LIKE_TYPE_ARTICLE = 1;
     const COLLECT_TYPE_ARTICLE = 1;
+    const SUBSCRIBE_TYPE_ARTICLE = 1;
 
 }
