@@ -21,21 +21,22 @@ class AppArticleService
         $data->read += 1;
         $data->save();
         $uid = WxTokenService::getCurrentUid();
-        // 获取该文章用户收藏、点赞状态
-        $likeStatus = AppUserLike::where([
+        $likeCount = AppUserLike::where([
             'type_id' => $id,
             'type' => Constants::LIKE_TYPE_ARTICLE,
             'status' => 1,
             'user_id' => $uid
-        ])->count() > 0;
+        ])->count();
+        // 获取该文章用户收藏、点赞状态
         $collectStatus = AppUserCollect::where([
             'type_id' => $id,
             'type' => Constants::COLLECT_TYPE_ARTICLE,
             'status' => 1,
             'user_id' => $uid
         ])->count() > 0;
-        $data->likeStatus = $likeStatus;
+        $data->likeStatus = $likeCount > 0;
         $data->collectStatus = $collectStatus;
+        $data->likeCount = $likeCount;
         return $data;
     }
 }

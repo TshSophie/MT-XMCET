@@ -19,18 +19,29 @@ class AppUserLikeService
             'user_id' => $uid
         ];
         // 记录用户点赞数
-        $data = AppArticle::where(
-            [
-              'status' => 1,
-              'id' => $id
-            ]
-        )->first();
-        if($status) {
-            $data->praise += 1;
-        } else {
-            $data->praise -= 1;
+        // $data = AppArticle::where(
+        //     [
+        //       'status' => 1,
+        //       'id' => $id
+        //     ]
+        // )->first();
+        // if($status) {
+        //     $data->praise += 1;
+        // } else {
+        //     $data->praise -= 1;
+        // }
+        // $data->save();
+        // 查询用户是否已点过赞
+        $likeData = AppUserLike::where([
+            'type' => Constants::LIKE_TYPE_ARTICLE,
+            'type_id' => $id,
+            'user_id' => $uid
+        ])->first();
+        if($likeData) {
+            $likeData->status = $likeData->status ? 0 : 1;
+            $likeData->save();
+            return $likeData;
         }
-        $data->save();
         return AppUserLike::create($insert);
     }
 }
