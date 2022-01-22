@@ -4,6 +4,8 @@ use App\Http\Controllers\App\AppArticleControlller;
 use App\Http\Controllers\App\AppCourseController;
 use App\Http\Controllers\App\AppFeedbackController;
 use App\Http\Controllers\App\AppSectionController;
+use App\Http\Controllers\App\AppUserCollectController;
+use App\Http\Controllers\App\AppUserLikeController;
 use App\Http\Controllers\App\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +35,11 @@ Route::name('app.')->group(function (){
     // 反馈
     Route::get('app/feedback/getListByUser', [AppFeedbackController::class, 'getListByUser']);
     Route::get('app/feedback/postByUser', [AppFeedbackController::class, 'postByUser']);
-
+    // 首页文章列表
     Route::get('app/article/getListForIndexPage', [AppArticleControlller::class, 'getListForIndexPage']);
     Route::get('app/article/getDetail', [AppArticleControlller::class, 'getDetail']);
+    // 用户点赞文章
+    Route::post('app/userLike/article', [AppUserLikeController::class, 'userSetLikeArticle']);
+    // 用户收藏文章
+    Route::post('app/userCollect/article', [AppUserCollectController::class, 'userSetCollectArticle']);
 });
