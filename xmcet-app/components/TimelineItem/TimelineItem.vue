@@ -41,9 +41,9 @@
 
 <script>
   export default {
-    name: 'ElTimelineItem',
+    name: 'TimelineItem',
 
-    inject: ['timeline'],
+    // inject: ['timeline'],
 
     props: {
       timestamp: String,

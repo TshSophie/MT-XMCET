@@ -9,13 +9,13 @@
       }
     },
 
-    provide() {
-      return {
-        timeline: this
-      };
-    },
+    // provide() {
+    //   return {
+    //     timeline: this
+    //   };
+    // },
 
-    render() {
+    render(h) {
       const reverse = this.reverse;
       const classes = {
         'xm-timeline': true,
@@ -25,9 +25,12 @@
       if (reverse) {
         slots = slots.reverse();
       }
-      return (<ul class={ classes }>
-        { slots }
-      </ul>);
+      // return (<ul class={ classes }>
+      //   { slots }
+      // </ul>);
+      return h('ul', {
+        class: classes
+      }, slots)
     }
   };
 </script>

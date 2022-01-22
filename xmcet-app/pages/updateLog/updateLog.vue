@@ -1,7 +1,7 @@
 <template>
-    <view style="background-color: #f2f2f2;padding-top: 100rpx;">
+    <view class="container">
          <timeline>
-            <timeline-item v-for="item in list" placement="top" color="green">
+            <timeline-item v-for="item in list" :key="item.info" placement="top" color="green">
                 <view class="info_item">
                     <view class="tag">
                         <uni-tag :text="item.version" size="small" type="success"></uni-tag>
@@ -14,8 +14,8 @@
     </view>
 </template>
 <script>
-    import Timeline from '../../components/Timeline/Timeline.vue'
-    import TimelineItem from '../../components/TimelineItem/TimelineItem.vue'
+    import Timeline from '@/components/Timeline/Timeline.vue'
+    import TimelineItem from '@/components/TimelineItem/TimelineItem.vue'
     import { getUpdateLogs } from '@/api/setting'
     export default {
         components: {
@@ -45,15 +45,21 @@
 </script>
 
 <style lang="less" scoped>
-.info_item {
-    background-color: #FFFFFF;
-    margin-right: 30upx;
-    border-radius: 10upx;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 30upx;
-    box-shadow: 0 10rpx 30rpx #ddd;
+.container {
+    padding: 10px;
+
+    ul {
+        padding: 0;
+    }
+    .info_item {
+        background-color: #FFFFFF;
+        margin-right: 30upx;
+        border-radius: 10upx;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 30upx;
+        box-shadow: 0 10rpx 30rpx #ddd;
 
     text {
         font-size: 18px;
@@ -78,4 +84,6 @@
         }
     }
 }
+}
+
 </style>
