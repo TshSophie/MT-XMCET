@@ -1,50 +1,42 @@
 <template>
 	<view class="container">
+		<!-- S 文章列表 -->
 		<view class="list">
-			<view v-for="(item, index) in list" :key="item.id" class="card" @click="navigateToPostDetail(item)">
+			<view v-for="item in list" :key="item.id" class="card" @click="navigateToPostDetail(item)">
 				<text class='card-title'>{{item.title}}</text>
-				<text class='card-date'>{{item.createTime}}</text>
+				<text class='card-date'>{{formatTime(item.createTime)}}</text>
 				<image :src='item.coverImg' mode='aspectFill' class='card-img'></image>
 				<text class='card-desc'>{{item.desc?item.desc:''}}</text>
 				<text class='card-read arrow' @click="navigateToPostDetail(item)">查看详情 </text>                   
 			</view>
 		</view>
+		<!-- E 文章列表 -->
+
+		<!-- S 分类栏 -->
 		<view class="menu">
-			<view class="menu-item" @click="navigateToPostList(1)">
-				<span>语法</span>
-			</view>
-			<view class="menu-item" @click="navigateToPostList(2)">
-				<span>作文</span>
-			</view>
-			<view class="menu-item" @click="navigateToPostList(3)">
-				<span>词汇</span>
-			</view>
-			<view class="menu-item last" @click="navigateToPostList(4)">
-				<span>听力</span>
+			<view class="menu-item" v-for="item in categoryList" :key="item.id" @click="navigateToPostList(item.id)">
+				<span>{{item.name}}</span>
 			</view>
 		</view>
-		<AuthorizeBar class="authorize-bar"/>
+		<!-- E 分类栏 -->
 
+		<!-- 授权条 -->
+		<AuthorizeBar class="authorize-bar"/>
 	</view>
 </template>
 
 <script>
+	import { getArticleCategory, getArticleList } from '@/api/article'
 	export default {
 		data() {
 			return {
 				list: [
-					{
-						coverImg: "https://xmcet.oss-cn-shenzhen.aliyuncs.com/cover/20200508/ed401b9bf2e2fa52853b75b5cc0353c85c1b7e92.jpg",
-						createTime: "2020-05-08 11:36:59",
-						id: 30,
-						title: "长对话核心情景词"
-					},
-					{
-						coverImg: "https://xmcet.oss-cn-shenzhen.aliyuncs.com/cover/20200507/ff628f26174f9339f08d37bc51d625d263cc4025.jpg",
-						createTime: "2020-05-07 23:23:52",
-						id: 29,
-						title: "四级翻译高频词之教育类"
-					}
+					// {
+					// 	coverImg: "https://xmcet.oss-cn-shenzhen.aliyuncs.com/cover/20200508/ed401b9bf2e2fa52853b75b5cc0353c85c1b7e92.jpg",
+					// 	createTime: "2020-05-08 11:36:59",
+					// 	id: 30,
+					// 	title: "长对话核心情景词"
+					// },
 				],
 				// 分页页面
 				dataPage: 0,
@@ -52,9 +44,57 @@
 				dataSize: 3,
 				//推荐数据      
 				hasMore: true,
+				// 分类列表
+				categoryList: []
 			};
 		},
-		methods: {
+		onLoad() {			
+        	uni.startPullDownRefresh();
+			getArticleCategory().then(response => {
+				this.categoryList = response.data
+			})
+		},
+		onPullDownRefresh() {
+			console.log('refresh');
+			if(this.hasMore) {
+				this.getList();
+			} else {
+				uni.showToast({
+					title: '没有更多了',
+					icon: 'none',
+					duration: 2000
+				});
+				uni.stopPullDownRefresh();
+			}
+		},
+		methods: {  
+			getList() {
+				console.log(this.hasMore)
+				// 页码加1
+				++this.dataPage;
+				// 加载推荐数据
+				var param = {
+					pageNum: this.dataPage,
+					pageSize: this.dataSize
+				}
+				//判断是否还有更多数据
+				if (this.hasMore){
+					// 请求列表数据
+					getArticleList(param).then((res) => { 
+						console.log(res)
+						// 将数据逆序排列
+						let resData = res.data.rows.reverse()      
+						//拼接达到数据的累加
+						const recommends = resData.concat(this.list)
+						//console.log(res.header)  //在响应头中X-Total-Count代表数据总数
+						//判断是否还有数据
+						const hasMore = this.dataPage * this.dataSize < (res.data.total - 0)
+						this.list = recommends
+						this.hasMore = hasMore
+						uni.stopPullDownRefresh();
+					})
+				}
+			},
 			navigateToPostDetail(item) {
 				uni.navigateTo({
 				    url: '/pages/postDetail/postDetail?id=' + item.id
@@ -65,13 +105,6 @@
 				    url: '/pages/postList/postList?menuId=' + menuType
 				});
 			},
-			// 下拉刷新
-			onPullDownRefresh() {
-				console.log('refresh');
-				setTimeout(function () {
-					uni.stopPullDownRefresh();
-				}, 1000);
-			}
 		},
 	}
 </script>

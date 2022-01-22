@@ -33,3 +33,39 @@ export const collectArticle = (data) => {
 		data
 	})
 }
+
+// 订阅文章专栏
+export const subscribeArticleCategory = (data) => {
+	return apiResquest({
+		url: 'userSubscribe/articleCategory',
+		method: 'POST',
+		data
+	})
+}
+
+// 文章分类树
+export const getArticleCategory = (data) => {
+	return apiResquest({
+		url: 'article/category',
+		method: 'GET',
+		data
+	})
+}
+
+// 文章列表
+export const getArticleList = (data) => {
+	return apiResquest({
+		url: 'article/list',
+		method: 'GET',
+		data
+	})
+}
+
+// 文章列表按分类
+export const getArticleListByCategory = (data) => {
+	return apiResquest({
+		url: 'article/listByCategory',
+		method: 'GET',
+		data
+	})
+}

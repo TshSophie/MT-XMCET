@@ -3,8 +3,11 @@ import store from './store'
 // #ifndef VUE3
 import Vue from 'vue'
 import {share} from './mixins/index.js'
+import { formatTime } from '@/utils/xmcet'
 Vue.config.productionTip = false
+
 App.mpType = 'app'
+Vue.prototype.formatTime  = formatTime 
 
 //引入分享
 Vue.mixin(share)

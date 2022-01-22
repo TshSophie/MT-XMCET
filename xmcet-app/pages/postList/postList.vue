@@ -2,26 +2,30 @@
 	<view class="container">
 		<AuthorizeBar class="authorize-bar"/>
 		<view class="header">
-			<h2>#我是标题</h2>
-			<button type="primary" size="mini">订阅</button>
+			<h2>#{{category.name}}</h2>
+			<button :type="!subscribeStatus?'primary':'default'" :plain="true" size="mini" @click="handleSubscribe" >{{subscribeStatus?'取消订阅':'订阅'}}</button>
 		</view>
 		<view class="content">
 			<view class="operation">
-				<text> 360个内容 </text>
-				<view>
+				<text> {{total}}个内容 </text>
+				<view v-if="order==0" @click="handleChangeOrder(1)">
 					<uni-icons custom-prefix="iconfont" type="icon-zhengxu" size="20"></uni-icons>
 					<text>正序</text>
 				</view>
+				<view v-else @click="handleChangeOrder(0)">
+					<uni-icons custom-prefix="iconfont" type="icon-daoxu" size="20"></uni-icons>
+					<text>倒序</text>
+				</view>
 			</view>
 			<view class="list">
-				<view class='item-row' v-for="item in article" :key="item.id">
+				<view class='item-row' v-for="item in list" :key="item.id" @click="navigateToPostDetail(item)">
 					<view class="item-content">
 						<view class="item-title">
 							{{item.title}}
 						</view>
-						<span class="item-info">今天</span>
+						<span class="item-info">{{formatTime(item.createTime)}}</span>
 					</view>
-					<image :src='item.cover_img' class="item-image"></image>
+					<image :src='item.coverImg' class="item-image"></image>
 				</view>
 			</view>
 		</view>
@@ -29,43 +33,109 @@
 </template>
 
 <script>
+	import { getArticleListByCategory, subscribeArticleCategory } from '@/api/article'
 	export default {
 		data() {
 			return {
-				article: [
-					{
-						id: 1,
-						title: "xxxxxx1",
-						cover_img: require("static/assets/function03.png")
-					},
-					{
-						id: 2,
-						title: "xxxxxx1",
-						cover_img: require("static/assets/function03.png")
-					},
-					{
-						id: 3,
-						title: "xxxxxx1",
-						cover_img: require("static/assets/function03.png")
-					},
-					{
-						id: 4,
-						title: "xxxxxx1",
-						cover_img: require("static/assets/function03.png")
-					},
-					{
-						id: 5,
-						title: "xxxxxx1",
-						cover_img: require("static/assets/function03.png")
-					},
-					{
-						id: 6,
-						title: "xxxxxx1",
-						cover_img: require("static/assets/function03.png")
-					},
-				]
+				list: [
+					// {
+					// 	id: 1,
+					// 	title: "xxxxxx1",
+					// 	coverImg: require("static/assets/function03.png")
+					// },					
+				],
+				category: {
+					name: ''
+				},
+				menuId: '',
+				// 分页页面
+				dataPage: 0,
+				// 每页数据条数
+				dataSize: 10,
+				//推荐数据      
+				hasMore: true,
+				total: 0,
+				// 正序
+				order: 0,
+				// 订阅状态
+				subscribeStatus: false
 			};
-		}
+		},
+		onLoad(options) {
+        	uni.startPullDownRefresh(options);
+			this.menuId = options.menuId
+			this.getList()
+		},
+		// 触底
+		onReachBottom() {
+			if(this.hasMore) {
+				this.getList();
+			} else {
+				uni.showToast({
+					title: '没有更多了',
+					icon: 'none',
+					duration: 1000
+				});
+				uni.stopPullDownRefresh();
+			}
+		},
+		methods: {
+			getList() {
+				// 页码加1
+				++this.dataPage;
+				// 加载推荐数据
+				var param = {
+					pageNum: this.dataPage,
+					pageSize: this.dataSize,
+					id: this.menuId,
+					order: this.order
+				}
+				// 请求列表数据
+				getArticleListByCategory(param).then((res) => {
+					this.category = res.data.category
+					this.subscribeStatus = res.data.category.subscribeStatus
+					// 将数据逆序排列
+					let resData = res.data.rows.reverse()      
+					//拼接达到数据的累加
+					const data = resData.concat(this.list)
+					//console.log(res.header)  //在响应头中X-Total-Count代表数据总数
+					//判断是否还有数据
+					const hasMore = this.dataPage * this.dataSize < (res.data.total - 0)
+					this.list = data
+					this.hasMore = hasMore
+					this.total = res.data.total
+					uni.stopPullDownRefresh()
+				})
+			},
+			// 正序、倒序切换事件
+			handleChangeOrder(order) {
+				this.order = order
+				this.dataPage = 0
+				this.list = []
+				this.getList()
+			},
+			// 订阅
+			handleSubscribe() {
+				this.subscribeStatus = !this.subscribeStatus
+				subscribeArticleCategory({
+					id: this.menuId,
+					status: this.subscribeStatus + 0
+				}).then(response => {
+					console.log(response)
+					if(this.subscribeStatus) {
+						this.article.likeCount += 1;
+					} else {
+						this.article.likeCount -= 1;						
+					}
+				})
+			},
+			// 跳转文章详情页
+			navigateToPostDetail(item) {
+				uni.navigateTo({
+				    url: '/pages/postDetail/postDetail?id=' + item.id
+				});
+			},
+		},
 	}
 </script>
 
@@ -149,6 +219,10 @@
 				margin: 4px 0 4px 12px;
 			}
 		  }
+		}
+		.load-more {
+			width: 100%;
+			height: 30px;
 		}
 	}
 	.authorize-bar {
