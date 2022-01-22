@@ -2,8 +2,13 @@ import App from './App'
 import store from './store'
 // #ifndef VUE3
 import Vue from 'vue'
+import {share} from './mixins/index.js'
 Vue.config.productionTip = false
 App.mpType = 'app'
+
+//引入分享
+Vue.mixin(share)
+
 const app = new Vue({
   ...App,    
   store,

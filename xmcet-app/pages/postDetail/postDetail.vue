@@ -23,6 +23,7 @@
 			<span @click="handleShare">
 				<uni-icons type="paperplane" size="20" color="#576b95"></uni-icons>
 				分享
+				<button open-type="share" class="shareBtn"/>
 			</span>
 			<span @click="handleCollect">
 				<uni-icons :type="collectStatus?'heart-filled':'heart'" size="20" color="#576b95"></uni-icons>
@@ -30,7 +31,7 @@
 			</span>
 			<span @click="handleThumbsUp">
 				<uni-icons :type="likeStatus?'hand-up-filled':'hand-up'" size="20" color="#576b95"></uni-icons>
-				赞 {{article.praise}}
+				赞 {{article.likeCount}}
 			</span>
 			<span class="read-count">
 				阅读 {{article.read}}
@@ -87,7 +88,7 @@
 				this.collectStatus = !this.collectStatus
 				collectArticle({
 					id: this.id,
-					status: this.collectStatus
+					status: this.collectStatus + 0
 				}).then(response => {
 					console.log(response)
 				})
@@ -97,9 +98,14 @@
 				this.likeStatus = !this.likeStatus
 				likeArticle({
 					id: this.id,
-					status: this.likeStatus
+					status: this.likeStatus + 0
 				}).then(response => {
 					console.log(response)
+					if(this.likeStatus) {
+						this.article.likeCount += 1;
+					} else {
+						this.article.likeCount -= 1;						
+					}
 				})
 			},
 			handleBack() {
@@ -160,6 +166,10 @@
 			justify-content: center;
 			align-items: center;
 			margin-right: 5px;
+
+			.shareBtn {
+				position: absolute;
+			}
 
 			&.read-count {
 				color: #7e7676;
