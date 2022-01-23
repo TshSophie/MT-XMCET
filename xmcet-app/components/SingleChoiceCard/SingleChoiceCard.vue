@@ -5,7 +5,7 @@
             <radio-group @change="radioChange($event, card.id)">
                 <label class="card-label" v-for="item in card.options" :key="item.value">
                     <view>
-                        <radio :value="item.value" />
+                        <radio :value="item.value" :checked="card.choice" />
                         {{item.label}}
                     </view>
                 </label>

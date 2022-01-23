@@ -15,6 +15,7 @@
 		data() {
 			return {
 				sectionId: '',
+				bookId: '',
 				list:[
 					{
 						id: 1,
@@ -30,6 +31,7 @@
 			}
 		},
 		onLoad(option) {
+			 this.bookId = option.bookId
 			 this.sectionId = option.sectionId
 			 this.title = option.title
 			 // 重新设置标题
@@ -48,15 +50,21 @@
 				// 课程类型(1:阅读，2：听力, 3:导读、作文)
 				if(item.type == 1) {
 					uni.navigateTo({
-						url: '/pages/readingCourse/readingCourse?courseId=' + item.id,
+						url: '/pages/readingCourse/readingCourse?courseId=' + item.id 
+						+ '&bookId=' + this.bookId
+						+ '&sectionId=' + this.sectionId,
 					})
 				} else if(item.type == 2) {
 					uni.navigateTo({
-						url: '/pages/listeningCourse/listeningCourse?courseId=' + item.id,
+						url: '/pages/listeningCourse/listeningCourse?courseId=' + item.id
+						+ '&bookId=' + this.bookId
+						+ '&sectionId=' + this.sectionId,
 					})
 				} else {
 					uni.navigateTo({
-						url: '/pages/writingCourse/writingCourse?courseId=' + item.id,
+						url: '/pages/writingCourse/writingCourse?courseId=' + item.id
+						+ '&bookId=' + this.bookId
+						+ '&sectionId=' + this.sectionId,
 					})
 				}
 			}

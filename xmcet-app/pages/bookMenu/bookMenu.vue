@@ -132,7 +132,8 @@
 				console.log(row)
 				uni.navigateTo({
 				  url: '/pages/courseList/courseList?sectionId=' + row.id 
-					+ '&title=' + row.title + '-' + row.subTitle,
+					+ '&title=' + row.title + '-' + row.subTitle
+					+ '&bookId=' + this.bookid,
 				})
 			  },
 		    // 跳转到词汇页面

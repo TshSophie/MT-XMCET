@@ -7,3 +7,11 @@ export const getDetail = (data) => {
 		data
 	})
 }
+
+export const postAnswer = (data) => {
+	return apiResquest({
+		url: 'course/answer',
+		method: 'POST',
+		data
+	})
+}

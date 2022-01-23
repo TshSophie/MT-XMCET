@@ -65,6 +65,9 @@ export default {
             }
         },
         renderAnswer(value) {
+            if(!value) {
+                return '未选择'
+            }
             let arr = ['A','B','C','D','E','F','G','H','I','J','K','L',
             'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
             return arr[parseInt(value) - 1]

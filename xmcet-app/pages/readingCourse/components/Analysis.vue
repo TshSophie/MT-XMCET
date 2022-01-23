@@ -4,7 +4,7 @@
             <view class="title">
                 {{title}}
             </view>
-            <rich-text :nodes="strings" class="richText"></rich-text>
+            <rich-text :nodes="content" class="richText"></rich-text>
         </view>
     </view>
 </template>
@@ -12,12 +12,16 @@
 <script>
 export default {
     name: 'Analysis',
-    components: {
-    },
+	props:{
+		content: {
+			required:true,
+			type:String
+		}
+	},
     data() {
         return {
             title: '解析',
-            strings: '<p>At the base of a mountain in TanzaniaAt the base ofAt the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of  a mountainAt the base of a mountainAt the base of a mountainAt the base of a mountainAt the base of a mountain</p><div style="text-align:center;"><img src="https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-uni-app-doc/d8590190-4f28-11eb-b680-7980c8a877b8.png"/></div>',
+            // content: '<p>At the base of a mountain in TanzaniaAt the base ofAt the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of At the base of a mountain in TanzaniaAt the base of  a mountainAt the base of a mountainAt the base of a mountainAt the base of a mountainAt the base of a mountain</p><div style="text-align:center;"><img src="https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-uni-app-doc/d8590190-4f28-11eb-b680-7980c8a877b8.png"/></div>',
           
         }
     },
@@ -40,7 +44,7 @@ export default {
         }
         .richText {
             margin-top: 10rpx;
-            font-size: 32rpx;
+            font-size: 28rpx;
         }
     }
 }
