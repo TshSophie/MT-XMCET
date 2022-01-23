@@ -2,7 +2,7 @@
 	<view class="page">
 		<Tabs v-model="currentTab" @tab-click="handleClick" :tabs="tabs"></Tabs>
 		<!--内容合子  -->
-		<swiper class="tab-content" :current="currentTab" duration="300" @change="switchTab" :style="{height: (windowHeight - 110) + 'px'}">        
+		<swiper class="tab-content" :current="currentTab" duration="300" @change="switchTab" :style="{height: (windowHeight - 50) + 'px'}">        
 			<swiper-item>
 				<scroll-view scroll-y="true" class="scoll-h" >
 				   <Practice :title="courseInfo.title" :content="courseInfo.content" :exercises="exercises" @submit="submitAnswer"/>
