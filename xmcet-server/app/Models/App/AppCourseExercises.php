@@ -11,7 +11,7 @@ class AppCourseExercises extends Model
      *
      * @var string
      */
-    protected $table = 'app_course_exercise';
+    protected $table = 'app_course_exercises';
 
     /**
      * 与表关联的主键

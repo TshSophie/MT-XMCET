@@ -32,6 +32,8 @@ Route::name('app.')->group(function (){
 
     // 课程详情
     Route::get('app/course/getDetail', [AppCourseController::class, 'getDetail']);
+    // 课程习题提交
+    Route::post('app/course/answer', [AppCourseController::class, 'postAnswer']);
     
     // 反馈
     Route::get('app/feedback/getListByUser', [AppFeedbackController::class, 'getListByUser']);
