@@ -27,4 +27,10 @@ class AppUserCollectController extends Controller
         $data = AppUserCollectService::userSetCollectArticle($params['id'], $params['status']);
         return gfResponse()->json($data);
     }
+
+    // 用户文章收藏列表
+    public function getUserCollectArticleList(Request $request) {        
+        $data = AppUserCollectService::getUserCollectArticleList();
+        return gfResponse()->json($data);
+    }
 }

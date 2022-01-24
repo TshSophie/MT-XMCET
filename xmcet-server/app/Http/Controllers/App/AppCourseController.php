@@ -4,7 +4,6 @@ namespace App\Http\Controllers\App;
 
 use App\ConstParam\ErrorConst;
 use App\Http\Controllers\Controller;
-use App\Models\App\AppCourse;
 use App\Services\App\AppCourseService;
 use App\Utils\CommonUtil;
 use Illuminate\Http\Request;

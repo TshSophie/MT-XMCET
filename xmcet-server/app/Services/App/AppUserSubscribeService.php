@@ -8,7 +8,7 @@ use App\Services\Common\WxTokenService;
 
 class AppUserSubscribeService
 {
-    // 用户点赞文章
+    // 用户订阅文章
     public static function userSubscribeArticle($id, $status) {
         $uid = WxTokenService::getCurrentUid();
         $insert = [
@@ -29,5 +29,17 @@ class AppUserSubscribeService
             return $data;
         }
         return AppUserSubscribe::create($insert);
+    }
+
+    // 获取用户订阅文章栏目
+    public static function getUserSubscribeArticleCategoryList() {
+        $uid = WxTokenService::getCurrentUid();
+        $data = AppUserSubscribe::with('articleCategory')
+        ->where([
+            'channel_type' => Constants::SUBSCRIBE_TYPE_ARTICLE,
+            'user_id' => $uid,
+            'status' => 1
+        ])->get();
+        return $data;
     }
 }

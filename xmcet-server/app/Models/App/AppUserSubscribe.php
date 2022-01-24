@@ -52,5 +52,11 @@ class AppUserSubscribe extends Model
     public function getUpdateTimeAttribute($value)
     {
         return Date('Y-m-d h:i:s', strtotime($value));
+    }   
+
+    // 关联文章栏目
+    public function articleCategory()
+    {
+        return $this->hasOne(AppArticleCategory::class, 'id', 'channel_id');
     }
 }

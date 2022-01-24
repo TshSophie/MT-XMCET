@@ -29,4 +29,16 @@ class AppUserCollectService
         }
         return AppUserCollect::create($insert);
     }
+
+    // 获取用户收藏文章列表
+    public static function getUserCollectArticleList() {
+        $uid = WxTokenService::getCurrentUid();
+        $collectDatas = AppUserCollect::with('article')
+        ->where([
+            'type' => Constants::COLLECT_TYPE_ARTICLE,
+            'user_id' => $uid,
+            'status' => 1
+        ])->get();
+        return $collectDatas;
+    }
 }

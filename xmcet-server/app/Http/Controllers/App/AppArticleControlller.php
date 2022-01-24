@@ -6,7 +6,6 @@ use App\ConstParam\ErrorConst;
 use App\Http\Controllers\Controller;
 use App\Models\App\AppArticle;
 use App\Models\App\AppArticleCategory;
-use App\Models\App\AppUserSubscribe;
 use App\Services\App\AppArticleService;
 use App\Utils\CommonUtil;
 use Illuminate\Http\Request;

@@ -44,4 +44,16 @@ class AppUserLikeService
         }
         return AppUserLike::create($insert);
     }
+    
+    // 获取用户点赞文章列表
+    public static function getUserLikeArticleList() {
+        $uid = WxTokenService::getCurrentUid();
+        $data = AppUserLike::with('article')
+        ->where([
+            'type' => Constants::LIKE_TYPE_ARTICLE,
+            'user_id' => $uid,
+            'status' => 1
+        ])->get();
+        return $data;
+    }
 }

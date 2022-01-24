@@ -51,4 +51,10 @@ class AppUserLike extends Model
     {
         return Date('Y-m-d h:i:s', strtotime($value));
     }
+    
+    // 关联文章表
+    public function article()
+    {
+        return $this->hasOne(AppArticle::class, 'id', 'type_id');
+    }
 }
