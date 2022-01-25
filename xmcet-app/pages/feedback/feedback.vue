@@ -8,7 +8,7 @@
 		</view>
 		<view class="form-item">
 			<text class="title">截图(0/4)</text>
-			<Uploader />
+			<Uploader class="uploader" :limit="4"/>
 		</view>
 		<view class="form-item">
 		 <text class="title">联系方式</text>	
@@ -26,7 +26,6 @@
 			}
 		},
 		methods: {
-			
 		}
 	}
 </script>
@@ -39,13 +38,17 @@ page {
 	padding: 10px;
 	.form-item {
 		border-bottom: 1px solid #4c424233;
-		margin: 10px;
+		padding: 5px;
 		.title {
 			font-weight: bolder;
 		}
 
 		input {
 			margin-top: 10px;
+		}
+		
+		.uploader {
+			margin: 5px;
 		}
 	}
 }
