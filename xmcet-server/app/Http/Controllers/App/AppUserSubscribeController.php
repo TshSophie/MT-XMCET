@@ -27,4 +27,13 @@ class AppUserSubscribeController extends Controller
         $data = AppUserSubscribeService::userSubscribeArticle($params['id'], $params['status']);
         return gfResponse()->json($data);
     }
+
+    public function getUserSubscribeArticleCategoryList(Request $request) {
+        // 每页数据条数
+        $pageSize = $request->input('pageSize', 10);
+        // 排序默认正序：按时间递减
+        $order = $request->input('order', 0);
+        $data = AppUserSubscribeService::getUserSubscribeArticleCategoryList($pageSize, $order);
+        return gfResponse()->json($data);
+    }
 }

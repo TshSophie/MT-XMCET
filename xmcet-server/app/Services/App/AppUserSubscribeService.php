@@ -32,14 +32,32 @@ class AppUserSubscribeService
     }
 
     // 获取用户订阅文章栏目
-    public static function getUserSubscribeArticleCategoryList() {
+    public static function getUserSubscribeArticleCategoryList($pageSize, $order) {
         $uid = WxTokenService::getCurrentUid();
-        $data = AppUserSubscribe::with('articleCategory')
+        $paginator = AppUserSubscribe::with('articleCategory')
         ->where([
             'channel_type' => Constants::SUBSCRIBE_TYPE_ARTICLE,
             'user_id' => $uid,
             'status' => 1
-        ])->get();
+        ])
+        ->orderBy('create_time', $order ? 'desc' : 'asc')
+        ->paginate($pageSize, '*', 'pageNum');
+        $data = $paginator->items();
+        $dealData = [];
+        foreach ($data as $item) {
+           $dealData[] = [
+             'id' => $item['id'],
+             'categoryId' => $item['articleCategory']['id'],
+             'title' => $item['articleCategory']['name'],
+             'desc' => $item['articleCategory']['desc'],
+             'createTime' => $item['update_time'],
+             'coverImg' => $item['articleCategory']['cover_img'],
+           ];
+        }
+        $data = [
+          'total' => $paginator->total(),
+          'rows' => $dealData,
+        ];
         return $data;
     }
 }

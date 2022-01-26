@@ -47,7 +47,7 @@ class AppArticleService
         // 获取分类信息
         $category = AppArticleCategory::where([
             'id' => $id
-        ])->first(['id', 'name']);
+        ])->first(['id', 'name', 'desc', 'cover_img']);
          // 该分类订阅情况
         $subscribeStatus = AppUserSubscribe::where([
             'user_id' => $uid,

@@ -31,14 +31,31 @@ class AppUserCollectService
     }
 
     // 获取用户收藏文章列表
-    public static function getUserCollectArticleList() {
+    public static function getUserCollectArticleList($pageSize, $order) {
         $uid = WxTokenService::getCurrentUid();
-        $collectDatas = AppUserCollect::with('article')
+        $paginator = AppUserCollect::with('article')
         ->where([
             'type' => Constants::COLLECT_TYPE_ARTICLE,
             'user_id' => $uid,
             'status' => 1
-        ])->get();
-        return $collectDatas;
+        ])
+        ->orderBy('create_time', $order ? 'desc' : 'asc')
+        ->paginate($pageSize, '*', 'pageNum');
+        $data = $paginator->items();
+        $dealData = [];
+        foreach ($data as $item) {
+           $dealData[] = [
+             'id' => $item['id'],
+             'articleId' => $item['article']['id'],
+             'title' => $item['article']['title'],
+             'createTime' => $item['update_time'],
+             'coverImg' => $item['article']['cover_img'],
+           ];
+        }
+        $data = [
+          'total' => $paginator->total(),
+          'rows' => $dealData,
+        ];
+        return $data;
     }
 }

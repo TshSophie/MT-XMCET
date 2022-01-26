@@ -43,8 +43,14 @@ Route::name('app.')->group(function (){
     Route::get('app/article/getDetail', [AppArticleControlller::class, 'getDetail']);
     // 用户点赞文章
     Route::post('app/userLike/article', [AppUserLikeController::class, 'userSetLikeArticle']);
+    // 用户点赞文章列表
+    Route::get('app/userLike/articleList', [AppUserLikeController::class, 'getUserLikeArticleList']);
     // 用户收藏文章
     Route::post('app/userCollect/article', [AppUserCollectController::class, 'userSetCollectArticle']);
+    // 用户收藏文章列表
+    Route::get('app/userCollect/articleList', [AppUserCollectController::class, 'getUserCollectArticleList']);
     // 用户订阅文章专栏
     Route::post('app/userSubscribe/articleCategory', [AppUserSubscribeController::class, 'userSubscribeArticle']);
+    // 用户订阅文章专栏列表
+    Route::get('app/userSubscribe/articleCategoryList', [AppUserSubscribeController::class, 'getUserSubscribeArticleCategoryList']);
 });

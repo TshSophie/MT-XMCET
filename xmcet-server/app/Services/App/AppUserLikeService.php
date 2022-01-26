@@ -46,14 +46,31 @@ class AppUserLikeService
     }
     
     // 获取用户点赞文章列表
-    public static function getUserLikeArticleList() {
+    public static function getUserLikeArticleList($pageSize, $order) {
         $uid = WxTokenService::getCurrentUid();
-        $data = AppUserLike::with('article')
+        $paginator = AppUserLike::with('article')
         ->where([
             'type' => Constants::LIKE_TYPE_ARTICLE,
             'user_id' => $uid,
             'status' => 1
-        ])->get();
+        ])
+        ->orderBy('create_time', $order ? 'desc' : 'asc')
+        ->paginate($pageSize, '*', 'pageNum');
+        $data = $paginator->items();
+        $dealData = [];
+        foreach ($data as $item) {
+           $dealData[] = [
+             'id' => $item['id'],
+             'articleId' => $item['article']['id'],
+             'title' => $item['article']['title'],
+             'createTime' => $item['update_time'],
+             'coverImg' => $item['article']['cover_img'],
+           ];
+        }
+        $data = [
+          'total' => $paginator->total(),
+          'rows' => $dealData,
+        ];
         return $data;
     }
 }

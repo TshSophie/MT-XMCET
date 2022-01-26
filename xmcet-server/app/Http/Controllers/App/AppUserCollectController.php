@@ -29,8 +29,12 @@ class AppUserCollectController extends Controller
     }
 
     // 用户文章收藏列表
-    public function getUserCollectArticleList(Request $request) {        
-        $data = AppUserCollectService::getUserCollectArticleList();
+    public function getUserCollectArticleList(Request $request) { 
+        // 每页数据条数
+        $pageSize = $request->input('pageSize', 10);
+        // 排序默认正序：按时间递减
+        $order = $request->input('order', 0);
+        $data = AppUserCollectService::getUserCollectArticleList($pageSize, $order);
         return gfResponse()->json($data);
     }
 }
