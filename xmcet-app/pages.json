@@ -175,6 +175,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/subscribe/subscribe",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar":{
 		"selectedColor":"#86d461",

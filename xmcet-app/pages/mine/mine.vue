@@ -6,22 +6,23 @@
 			<text class='nickName' v-if="authorized">{{userInfo.nickName}}</text>   
 			<text class='nickName' v-else>请先登录</text>   
 		</view>
-		<view class="menu"> 
-			<view class="row"> 
-				<view class="menu-item"> 
+		<view class="menu">
+			<view class="row">
+				<view class="menu-item" @click="navigateTo('/pages/collection/collection')">
 					<image src='@/static/assets/menu/收藏.png' mod="aspectFit" class='icon'></image>
 					<text>我的收藏</text>
 				</view>
-				<view class="menu-item"> 
+				<view class="menu-item" @click="navigateTo('/pages/userLike/userLike')">
 					<image src='@/static/assets/menu/点赞.png' mod="aspectFit" class='icon'></image>
 					<text>我的点赞</text>
 				</view>
-				<view class="menu-item"> 
+				<view class="menu-item" @click="navigateTo('/pages/subscribe/subscribe')">
 					<image src='@/static/assets/menu/订阅.png' mod="aspectFit" class='icon'></image>
 					<text>我的订阅</text>
 				</view>
 			</view>
-			<view class="row"> 
+
+			<view class="col"> 
 				<view class="menu-item" @click="navigateTo('/pages/updateLog/updateLog')"> 
 					<image src='@/static/assets/menu/日志.png' mod="aspectFit" class='icon'></image>
 					<text>更新日志</text>
@@ -36,31 +37,7 @@
 				</view>
 			</view>
 		</view>
-		<!-- <view class='divider'></view> -->
-<!-- 
-		<view class='cell'>
-			<navigator class='cell-item arrow' open-type="redirect" url='/pages/courselist/courselist?cateId=1'>
-				<image src='@/static/assets/process4.png' mod="aspectFit" class='functionPartIcon'></image>
-				<text>四级闯关进度：{{cet4Process}}% </text>
-			</navigator>
-			<navigator class='cell-item arrow' open-type="redirect" url="/pages/courselist/courselist?cateId=2">
-				<image src='@/static/assets/process6.png' mod="aspectFit" class='functionPartIcon'></image>
-				<text>六级闯关进度：{{cet6Process}}%</text>
-			</navigator>    
-			<navigator class='cell-item arrow' open-type="redirect" url="/pages/wordlist/wordlist">
-				<image src='@/static/assets/cigen.png' mod="aspectFit" class='functionPartIcon'></image>
-				<text>词根词缀掌握个数： {{wordMasteredCount}}</text>
-			</navigator>     
-			<navigator class='cell-item arrow' open-type="redirect" url='/pages/articleList/articleList'>
-				<image src='@/static/assets/reading.png' mod="aspectFit" class='functionPartIcon'></image>
-				<text>阅读文章，压压惊</text>
-			</navigator>
-			<navigator class='cell-item arrow' url='/pages/about/about'>
-				<image src='@/static/assets/about.png' mod="aspectFit" class='functionPartIcon'></image>
-				<text>关于小麦英语CET</text>
-			</navigator>
-		</view>  
--->
+		<view class="copy-right">@小麦CET</view>
 	</view>
 </template>
 
@@ -122,7 +99,44 @@
 <style lang="less">
 .container {
 	background: #fff;
+	
+	.avatar{
+		height: 400rpx;   
+		width: 100%;    
+		position: relative;   
+		background: #86d461;
+		border-bottom-left-radius: 35%;    
+	}
 
+	.avatar .avatarImg{
+		background: #fff;
+		position: absolute;  
+		border: 8rpx solid #fff;  
+		width: 175rpx;
+		height: 175rpx;    
+		border-radius: 50%;    
+	}
+
+	.avatar-btn{
+		position: relative;
+		margin: 0;
+		padding: 0;      
+		width: 190rpx;
+		height: 190rpx;    
+		display: flex;
+		display: -webkit-flex; 
+		justify-content: center;
+		-webkit-justify-content: center;
+		align-items:center;
+		-webkit-align-items: center;
+	}
+
+	.nickName{
+		position: absolute;
+		height: 30rpx;
+		bottom: 60rpx; 
+		font-size: 30rpx;
+	}
 	.menu {
 		display: flex;
 		flex-direction: column;
@@ -142,61 +156,60 @@
 				.icon {
 					width: 40px;
 					height: 40px;
-
 				}
 				text {
+					margin-top: 3px;
 					font-size: 13px;
 				}
 			}
 		}
+		.col {
+			margin-top: 15px;
+			display: flex;
+			flex-direction: column;
+			.menu-item {
+				width: 100%;
+				margin: 10px 0;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: flex-start;
+
+				.icon {
+					margin-left: 10px;
+					width: 35px;
+					height: 35px;
+				}
+				text {
+					flex: 1;
+					margin-left: 15px;
+					font-size: 14px;
+				}
+
+				&::after{
+					content: "";
+					width: 15rpx;
+					height: 15rpx;    
+					border-top: 3rpx solid #ccc;
+					border-right: 3rpx solid #ccc;
+					display: block;
+					transform: rotate(45deg);
+				}
+			}
+		}
+	}
+
+	.copy-right {
+		position: fixed;
+		bottom: var(--window-bottom);
+		left: 0;
+		width: 100%;
+		margin-bottom: 5px;
+		text-align: center;
+		font-size: 13px;
 	}
 }
-.avatar{
-    height: 400rpx;   
-    width: 100%;    
-    position: relative;   
-    background: #86d461;
-    border-bottom-left-radius: 35%;    
-}
 
-.avatar .avatarImg{
-	background: #fff;
-    position: absolute;  
-    border: 8rpx solid #fff;  
-    width: 175rpx;
-    height: 175rpx;    
-    border-radius: 50%;    
-}
 
-.avatar-btn{
-    position: relative;
-    margin: 0;
-    padding: 0;      
-    width: 190rpx;
-    height: 190rpx;    
-    display: flex;
-    display: -webkit-flex; 
-    justify-content: center;
-    -webkit-justify-content: center;
-    align-items:center;
-    -webkit-align-items: center;
-}
-
-.nickName{
-    position: absolute;
-    height: 30rpx;
-    bottom: 60rpx; 
-    font-size: 30rpx;
-}
-
-.cell-item{
-    position: relative;
-    border-bottom: 1rpx solid #ddd;
-    padding: 20rpx 30rpx;
-    height: 60rpx;    
-}
-.cell-item text{
-    margin-left: 120rpx;
-}
 
 </style>

@@ -2,7 +2,7 @@
 	<view class="container">
 		<AuthorizeBar class="authorize-bar"/>
 		<view class="header">
-			<h2>#我的收藏</h2>
+			<h2>#我的订阅</h2>
 		</view>
 		<view class="content">
 			<view class="operation">
@@ -22,12 +22,14 @@
 					v-for="item in list" 
 					:key="item.id" 
 					:right-options="options" 
-					@click="onClick(item)"
-					@change="swipeChange(item)">
-						<view class='item-row' @click="navigateToPostDetail(item)">
+					@click="onClick(item)">
+						<view class='item-row' @click="navigateToDetail(item)">
 							<view class="item-content">
 								<view class="item-title">
 									{{item.title}}
+								</view>
+								<view class="item-desc">
+									{{item.desc}}
 								</view>
 								<span class="item-info">{{formatTime(item.createTime)}}</span>
 							</view>
@@ -41,7 +43,7 @@
 </template>
 
 <script>
-	import { getCollectArticleList, collectArticle } from '@/api/article'
+	import { getSubscribeArticleCategoryList, subscribeArticleCategory } from '@/api/article'
 	export default {
 		data() {
 			return {
@@ -104,7 +106,7 @@
 					order: this.order
 				}
 				// 请求列表数据
-				getCollectArticleList(param).then((res) => {
+				getSubscribeArticleCategoryList(param).then((res) => {
 					// 将数据逆序排列
 					let resData = res.data.rows.reverse()      
 					// 拼接达到数据的累加
@@ -124,25 +126,22 @@
 				this.list = []
 				this.getList()
 			},
-			// 跳转文章详情页
-			navigateToPostDetail(item) {
+			// 跳转详情页
+			navigateToDetail(item) {
 				uni.navigateTo({
-				    url: '/pages/postDetail/postDetail?id=' + item.articleId
+				    url: '/pages/postList/postList?menuId=' + item.categoryId
 				});
 			},
 			onClick(item){
-				// 取消收藏
-				collectArticle({
-					id: item.articleId,
+				// 取消
+				subscribeArticleCategory({
+					id: item.categoryId,
 					status: 0
 				}).then(response => {
 					console.log(response)
 					this.getList(true)
 				})
 			},
-			swipeChange(val){
-				// console.log(val)
-			}
 		},
 	}
 </script>
@@ -209,8 +208,11 @@
 						font-size: 32rpx;
 						font-weight: bold;
 						line-height: 1.4;
-						height: calc(2 * 1.4em);
 						overflow: hidden;
+					}
+					.item-desc {
+						font-size: 14px;
+						margin: 5px 0;
 					}
 					.item-info {
 						font-size: 14px;

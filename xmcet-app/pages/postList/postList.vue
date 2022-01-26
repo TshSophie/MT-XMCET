@@ -2,8 +2,14 @@
 	<view class="container">
 		<AuthorizeBar class="authorize-bar"/>
 		<view class="header">
-			<h2>#{{category.name}}</h2>
-			<button :type="!subscribeStatus?'primary':'default'" :plain="true" size="mini" @click="handleSubscribe" >{{subscribeStatus?'已订阅':'订 阅'}}</button>
+			<view class="top"> 
+				<image :src="category.coverImg" class="cover"></image>
+				<h2 class="title">#{{category.name}}</h2>
+				<button :type="!subscribeStatus?'primary':'default'" :plain="true" size="mini" @click="handleSubscribe" >{{subscribeStatus?'已订阅':'订 阅'}}</button>
+			</view>
+			<view class="desc">
+				{{category.desc}}
+			</view>
 		</view>
 		<view class="content">
 			<view class="operation">
@@ -143,8 +149,22 @@
 .container {
 	.header {
 		padding: 30px 20px;
-		display: flex;
-		justify-content: space-around;
+		.top {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			.cover {
+				width: 50px;
+				height: 60px;
+			}
+			.title {
+				margin-left: 5px;
+			}
+		}
+		.desc {
+			margin-top: 15px;
+			font-size: 13px;
+		}
 	}
 	.content {
 		background: #fff;

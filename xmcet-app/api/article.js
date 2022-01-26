@@ -25,6 +25,15 @@ export const likeArticle = (data) => {
 	})
 }
 
+// 点赞文章列表
+export const getLikeArticleList = (data) => {
+	return apiResquest({
+		url: 'userLike/articleList',
+		method: 'GET',
+		data
+	})
+}
+
 // 收藏文章
 export const collectArticle = (data) => {
 	return apiResquest({
@@ -34,11 +43,29 @@ export const collectArticle = (data) => {
 	})
 }
 
+// 收藏文章列表
+export const getCollectArticleList = (data) => {
+	return apiResquest({
+		url: 'userCollect/articleList',
+		method: 'GET',
+		data
+	})
+}
+
 // 订阅文章专栏
 export const subscribeArticleCategory = (data) => {
 	return apiResquest({
 		url: 'userSubscribe/articleCategory',
 		method: 'POST',
+		data
+	})
+}
+
+// 订阅文章专栏列表
+export const getSubscribeArticleCategoryList = (data) => {
+	return apiResquest({
+		url: 'userSubscribe/articleCategoryList',
+		method: 'GET',
 		data
 	})
 }
