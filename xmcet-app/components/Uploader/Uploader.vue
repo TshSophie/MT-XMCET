@@ -12,15 +12,20 @@
 <script>
 
 	export default {
-		props:{
+		emits:['handleChoose', 'handleDelFile'],
+		props: {
 			limit: {
-				type:Number,
+				type: Number,
 				default:1
+			},
+			value: {
+				type: Array,
 			}
 		},
 		data() {
 			return {
-				imageList: []
+				imageList: [],
+				fileList: []
 			}
 		},
 		methods: {
@@ -35,28 +40,28 @@
 						this.$nextTick(() => {
 							this.imageList = [...this.imageList, ...res.tempFilePaths]
 						})
-						console.log(this.imageList)
+						this.fileList = [...this.fileList, ...res.tempFiles]
+
+						this.$emit('handleChoose', this.fileList)
+						this.$emit('input', this.fileList)
 				    }
 				});
 			},
 			previewImage(path) {
 				console.log(path)
+				let index = this.imageList.indexOf(path)
 				// 预览图片
 				uni.previewImage({
-				    urls: [path],
-				    longPressActions: {
-				        itemList: ['发送给朋友', '保存图片', '收藏'],
-				        success: function(data) {
-				            console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
-				        },
-				        fail: function(err) {
-				            console.log(err.errMsg);
-				        }
-				    }
+				    urls: this.imageList,
+				    current: index,
+					indicator: "number",
+					loop: true
 				});
 			},
             close(item) {
                 this.imageList.splice(this.imageList.indexOf(item), 1)
+                this.fileList.splice(this.fileList.findIndex(file => {return file.path == item}), 1)
+				this.$emit('handleDelFile', this.fileList)
             }
 		}
 	}

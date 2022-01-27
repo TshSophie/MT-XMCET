@@ -1,12 +1,12 @@
 <template>
 	<view class="container">
 		<view class="title">
-			xxxx - 词汇
+			WEEk{{week}} - 词汇
 		</view>
 		<view class="list-box">
 			<view class="word-course" v-for="item in list" :key="item.id">
 				<view class="sub-title">
-					{{item.name}} 
+					{{item.title}} 
 				</view>
 				<view class="word-list" v-for="vocabulary in item.vocabulary" :key="vocabulary.word">
 					<view class="word-item">
@@ -20,66 +20,41 @@
 </template>
 
 <script>
+    import { getVocabularyListByWeek } from '@/api/section'
 	export default {
 		data() {
 			return {
+				week: '',
 				list: [
-					{
-					  "id": 1,
-					  "name": "技巧学习",
-					  "vocabulary": [
-					    {
-					      "word": "analysis ",
-					      "translate": " 分析，分解；梗概，要略；[数]解析；验定；"
-					    },
-					    {
-					      "word": "analogy",
-					      "translate": "类似，相似；比拟，类比；类推；"
-					    },
-					    {
-					      "word": "analogous",
-					      "translate": "相似的，可比拟的；<生>同功的；模拟式；"
-					    }
-					  ]
-					},
-					{
-					  "id": 2,
-					  "name": "技巧学习",
-					  "vocabulary": [
-					    {
-					      "word": "analysis ",
-					      "translate": " 分析，分解；梗概，要略；[数]解析；验定；"
-					    },
-					    {
-					      "word": "analogy",
-					      "translate": "类似，相似；比拟，类比；类推；"
-					    },
-					    {
-					      "word": "analogous",
-					      "translate": "相似的，可比拟的；<生>同功的；模拟式；"
-					    }
-					  ]
-					},
-					{
-					  "id": 3,
-					  "name": "技巧学习",
-					  "vocabulary": [
-					    {
-					      "word": "analysis ",
-					      "translate": " 分析，分解；梗概，要略；[数]解析；验定；"
-					    },
-					    {
-					      "word": "analogy",
-					      "translate": "类似，相似；类似，相似；类似，相似；比拟，类比；类推；"
-					    },
-					    {
-					      "word": "analogous",
-					      "translate": "相似的，可比拟的；<生>同功的；模拟式；"
-					    }
-					  ]
-					},
+					// {
+					//   "id": 1,
+					//   "title": "技巧学习",
+					//   "vocabulary": [
+					//     {
+					//       "word": "analysis ",
+					//       "translate": " 分析，分解；梗概，要略；[数]解析；验定；"
+					//     },
+					//     {
+					//       "word": "analogy",
+					//       "translate": "类似，相似；比拟，类比；类推；"
+					//     },
+					//     {
+					//       "word": "analogous",
+					//       "translate": "相似的，可比拟的；<生>同功的；模拟式；"
+					//     }
+					//   ]
+					// },
 				]
 			};
+		},
+		onLoad(options) {
+			this.week = options.week
+			getVocabularyListByWeek({
+				bookId: options.bookId,
+				week: options.week
+			}).then(response => {
+				this.list = response.data
+			})
 		}
 	}
 </script>
@@ -110,10 +85,12 @@
 			margin-bottom: 20rpx;
 			border-radius: 10rpx;
 			.sub-title {
-				height: 80rpx;
+				// height: 80rpx;
 				line-height: 80rpx;
 				font-size: 30rpx;
 				font-weight: bold;
+				// white-space: normal;
+				// word-wrap: break-word;
 				text-align: center;
 			}
 			.word-list {

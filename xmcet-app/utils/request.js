@@ -81,3 +81,24 @@ export const apiResquest = (params) => {
   })
   
 }
+
+
+export const uploadFile = async (url, file, params) => {
+  return new Promise((resolve, reject) => {
+    uni.uploadFile({
+      url: config.base_url + url, 
+      filePath: file,
+      name: 'file',
+      header: {
+        token: wx.getStorageSync("token")
+      },
+      formData: params || {},
+      success: (uploadFileRes) => {
+        resolve(JSON.parse(uploadFileRes.data))
+      },
+      fail: (e) => {
+        reject(e)
+      }
+    });
+  })
+}

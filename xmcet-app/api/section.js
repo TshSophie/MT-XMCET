@@ -15,3 +15,11 @@ export const getCourseListBySectionId = (data) => {
 		data
 	})
 }
+
+export const getVocabularyListByWeek = (data) => {
+	return apiResquest({
+		url: 'section/getVocabularyListByWeek',
+		method: 'GET',
+		data
+	})
+}

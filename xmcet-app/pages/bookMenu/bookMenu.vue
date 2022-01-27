@@ -127,19 +127,20 @@
 				    title: '六级闯关'
 				});
 			},
-			  // 跳转到课程列表页面
-			  gotoCourseList(row) {
+			// 跳转到课程列表页面
+			gotoCourseList(row) {
 				console.log(row)
 				uni.navigateTo({
-				  url: '/pages/courseList/courseList?sectionId=' + row.id 
+					url: '/pages/courseList/courseList?sectionId=' + row.id 
 					+ '&title=' + row.title + '-' + row.subTitle
 					+ '&bookId=' + this.bookid,
 				})
-			  },
+			},
 		    // 跳转到词汇页面
 		    gotoVocabularyCollection(card){
+				console.log(card)
 				uni.navigateTo({
-				  url: '/pages/vocabularyCollection/vocabularyCollection?week=' + card.week + '&catId=' + card.catId
+				  url: '/pages/vocabularyCollection/vocabularyCollection?week=' + card.week + '&bookId=' + this.bookid
 				})
 			},
 			// 跳转到错题集页面
