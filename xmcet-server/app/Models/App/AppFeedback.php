@@ -51,6 +51,7 @@ class AppFeedback extends Model
      * @var array
      */
     protected $fillable = [
+        'title',
         'type',
         'content',
         'link',

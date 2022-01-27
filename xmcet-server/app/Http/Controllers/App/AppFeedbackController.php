@@ -23,6 +23,7 @@ class AppFeedbackController extends Controller
         $params = $request->all();
         // 输入校验
         $validator = Validator::make($params, [
+            'title' => 'required|max:50',
             'type' => 'required|integer',
             'content' => 'required|max:200',
             'link' => 'required|max:50',

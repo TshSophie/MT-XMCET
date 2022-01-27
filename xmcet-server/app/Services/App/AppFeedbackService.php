@@ -22,6 +22,7 @@ class AppFeedbackService
         $id = WxTokenService::getCurrentUid();
         $insert = [
             'type' => $data['type'],
+            'title' => $data['title'],
             'content' => $data['content'],
             'link' => $data['link'],
             'images' => $data['images'],

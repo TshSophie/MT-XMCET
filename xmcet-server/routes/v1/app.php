@@ -8,6 +8,7 @@ use App\Http\Controllers\App\AppUserCollectController;
 use App\Http\Controllers\App\AppUserLikeController;
 use App\Http\Controllers\App\AppUserSubscribeController;
 use App\Http\Controllers\App\UserController;
+use App\Http\Controllers\Common\UploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::name('app.')->group(function (){
     // 闯关列表
     Route::get('app/section/getSectionList', [AppSectionController::class, 'getSectionList']);
     Route::get('app/section/getCourseListBySectionId', [AppSectionController::class, 'getCourseListBySectionId']);
+    Route::get('app/section/getVocabularyListByWeek', [AppSectionController::class, 'getVocabularyListByWeek']);
 
     // 课程详情
     Route::get('app/course/getDetail', [AppCourseController::class, 'getDetail']);
@@ -37,7 +39,9 @@ Route::name('app.')->group(function (){
     
     // 反馈
     Route::get('app/feedback/getListByUser', [AppFeedbackController::class, 'getListByUser']);
-    Route::get('app/feedback/postByUser', [AppFeedbackController::class, 'postByUser']);
+    Route::post('app/feedback/postByUser', [AppFeedbackController::class, 'postByUser']);
+    Route::any('app/upload/feedbackImage', [UploadController::class, 'feedbackImage']);   
+
     // 首页文章列表
     Route::get('app/article/getListForIndexPage', [AppArticleControlller::class, 'getListForIndexPage']);
     Route::get('app/article/getDetail', [AppArticleControlller::class, 'getDetail']);

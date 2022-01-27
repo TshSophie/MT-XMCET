@@ -29,6 +29,25 @@ class UploadController extends Controller
         }
     }
 
+    // 反馈图片
+    public function feedbackImage(Request $request)
+    {
+        $fileField = 'file';
+        $file = $request->file($fileField);
+        //判断是否有文件上传成功
+        if ($request->hasFile($fileField) && $file->isValid())
+        {
+            $filename = $file->store('feedback', 'public');
+            return gfResponse()->json([
+                'imgUrl' => '/storage/' . $filename
+            ], '上传文件成功');
+        }
+        else
+        {
+            CommonUtil::throwException(ErrorConst::UPLOAD_FAILED_CODE, ErrorConst::UPLOAD_FAILED_CODE_MSG);
+        }
+    }
+
     // 编辑器图片
     public function editorUpload1(Request $request)
     {

@@ -41,7 +41,8 @@ class AppSectionService
                 $weeks[] = $data['week'];
                 $dataByWeek[] = [
                     'itemList' => [$data],
-                    'weekName' => 'WEEK' . $data['week']
+                    'weekName' => 'WEEK' . $data['week'],
+                    'week' => $data['week']
                 ];
             } else {
                 $index = array_search($data['week'], $weeks);
@@ -71,7 +72,7 @@ class AppSectionService
                 'course_id' => $courseIds
             ])->get()->toArray();
             $resultList = [];
-            for ($i=0; $i < count($sectionCourseList); $i++) { 
+            for ($i=0; $i < count($sectionCourseList); $i++) {
                 $sectionCourse = $sectionCourseList[$i];
                 if(count($records) > 0) {
                     // 用户闯关状态
@@ -90,6 +91,29 @@ class AppSectionService
         } else {
             return [];
         }
+    }
+
+    public static function getVocabularyListByWeek($bookid, $week) {
+        // $uid = WxTokenService::getCurrentUid();
+        $sections = AppSection::where([
+            'bookid' => $bookid,
+            'week' => $week
+        ])->get()->toArray();
+        $sectionIds = array_column($sections, 'id');
+        $sectionCourseData = AppSectionCourse::with(['course', 'section'])
+        ->where([
+            'section_id' => $sectionIds
+        ])->get()->toArray();
+
+        $course = [];
+        foreach ($sectionCourseData as $item) {
+            $course[] = [
+                'id' => $item['course']['id'],
+                'title' => $item['section']['sub_title'] . '-' . $item['course']['name'],
+                'vocabulary' => json_decode($item['course']['vocabulary'])
+            ];
+        }
+        return $course;
     }
 
 }
