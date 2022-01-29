@@ -14,7 +14,7 @@ class AppFeedbackController extends Controller
 {
     // 获取当前用户反馈列表
     public function getListByUser() {
-        $data = AppFeedback::getListByUser();
+        $data = AppFeedbackService::getListByUser();
         return gfResponse()->json($data);
     }
 
@@ -27,7 +27,7 @@ class AppFeedbackController extends Controller
             'type' => 'required|integer',
             'content' => 'required|max:200',
             'link' => 'required|max:50',
-            'images' => 'required|max:500',
+            'images' => 'max:500',
         ]);
         // 校验失败处理
         if ($validator->fails()) {

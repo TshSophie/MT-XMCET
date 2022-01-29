@@ -42,7 +42,11 @@ class AppFeedback extends Model
 
     public function getImagesAttribute($value)
     {
-        return explode(',', $value);
+        if($value) {
+            return explode(',', $value);
+        } else {
+            return [];
+        }
     }
 
     /**
