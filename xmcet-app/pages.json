@@ -184,6 +184,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/feedbackList/feedbackList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar":{
 		"selectedColor":"#86d461",

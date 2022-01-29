@@ -235,7 +235,6 @@
 		bottom: var(--window-bottom);
 		left: 0;
 		width: 100%;
-		height: 40px;
 	}
 }
 </style>
