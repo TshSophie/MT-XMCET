@@ -146,7 +146,7 @@
 			// 跳转到错题集页面
 			gotoWrongCollection(card){
 				uni.navigateTo({
-				  url: '/pages/wrongCollection/wrongCollection?week=' + card.week + '&catId=' + card.catId
+				  url: '/pages/wrongCollection/wrongCollection?week=' + card.week + '&bookId=' + this.bookid
 				})
 			}
 		}

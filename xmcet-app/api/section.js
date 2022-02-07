@@ -23,3 +23,11 @@ export const getVocabularyListByWeek = (data) => {
 		data
 	})
 }
+
+export const getWrongCollectionByWeek = (data) => {
+	return apiResquest({
+		url: 'section/getWrongCollectionByWeek',
+		method: 'GET',
+		data
+	})
+}

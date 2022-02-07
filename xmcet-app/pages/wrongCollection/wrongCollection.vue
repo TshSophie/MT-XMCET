@@ -1,17 +1,17 @@
 <template>
 	<view class="container">
 		<view class="title">
-			xxx - 错题集
+			WEEk{{week}} - 错题集
 		</view>
 		<view class="list-box">
-			<view class="wrong-course" v-for="(item, index) in list" :key="item.id">
+			<view class="wrong-course" v-for="item in list" :key="item.id">
 				<view class="sub-title">
-					{{item.subject.title}}{{item.subject.subTitle}} - {{item.course.name}}
+					{{item.title}}
 				</view>
 				<view class="wrong-list">
-					<SingleChoiceForResultCard :cards="item.wrongs" @submit="submitAnswer" class="question"/>
+					<SingleChoiceForResultCard :cards="item.exercises"/>
 				</view>
-				<view class="goto arrow" @click="gotoCourse">进入该课程</view>
+				<view class="goto arrow" @click="gotoCourse(item)">进入该课程</view>
 			</view>
 		</view>
 	</view>
@@ -19,6 +19,7 @@
 
 <script>
 	import SingleChoiceForResultCard from '@/components/SingleChoiceForResultCard/SingleChoiceForResultCard.vue'
+    import { getWrongCollectionByWeek } from '@/api/section'
 
 	export default {
 		name: 'Practice',
@@ -27,12 +28,12 @@
 		},
 		data() {
 			return {
+				week: '',
 				list: [
 					{
 					  "id": 2,
-					  "subjectId": 2,
-					  "courseId": 2,
-					  "wrongs": [
+					  "title": "xxx",
+					  "exercises": [
 						{
 							id: 1,
 							question: "49. Why can certain species of tilapia sometimes survive around Lake Natron?",
@@ -81,88 +82,46 @@
 							answer: '1',
 							choice: '1'
 						},
-					  ],				
-					  "status": 1,
-					  "course": {
-					    "id": 2,
-					    "name": "长篇阅读",
-					    "type": 0
-					  },
-					  "subject": {
-					    "id": 2,
-					    "title": "第2关",
-					    "subTitle": "Reading"
-					  }
-					},
-					{
-					  "id": 3,
-					  "subjectId": 2,
-					  "courseId": 2,
-					  "wrongs": [
-						{
-							id: 1,
-							question: "49. Why can certain species of tilapia sometimes survive around Lake Natron?",
-							options: [
-								{
-									value: '1',
-									label: "A) They can take refuge in the less salty waters."
-								},
-								{
-									value: '2',
-									label: "B) They can flee quick enough from predators."
-								},
-								{
-									value: '3',
-									label: "C) They can take refuge in the less salty waters."
-								},
-								{
-									value: '4',
-									label: "D) They can flee quick enough from predators."
-								},
-							],
-							answer: '1',
-							choice: '1'
-						},
-						{
-							id: 2,
-							question: "49. Why can certain species of tilapia sometimes survive around Lake Natron?",
-							options: [
-								{
-									value: '1',
-									label: "A) They can take refuge in the less salty waters."
-								},
-								{
-									value: '2',
-									label: "B) They can flee quick enough from predators."
-								},
-								{
-									value: '3',
-									label: "C) They can take refuge in the less salty waters."
-								},
-								{
-									value: '4',
-									label: "D) They can flee quick enough from predators."
-								},
-							],
-							answer: '1',
-							choice: '1'
-						},
-					  ],				
-					  "status": 1,
-					  "course": {
-					    "id": 2,
-					    "name": "长篇阅读",
-					    "type": 0
-					  },
-					  "subject": {
-					    "id": 2,
-					    "title": "第2关",
-					    "subTitle": "Reading"
-					  }
+					  ],
+					  
 					},
 				]
 			};
+		},
+		onLoad(options) {
+			this.week = options.week
+			getWrongCollectionByWeek({
+				bookId: options.bookId,
+				week: options.week
+			}).then(response => {
+				this.list = response.data
+			})
+		},
+		methods: {
+			gotoCourse(item) {
+				// 课程类型(1:阅读，2：听力, 3:导读、作文)
+				if(item.type == 1) {
+					uni.navigateTo({
+						url: '/pages/readingCourse/readingCourse?courseId=' + item.id 
+						+ '&bookId=' + item.bookId
+						+ '&sectionId=' + item.sectionId,
+					})
+				} else if(item.type == 2) {
+					uni.navigateTo({
+						url: '/pages/listeningCourse/listeningCourse?courseId=' + item.id
+						+ '&bookId=' + item.bookId
+						+ '&sectionId=' + item.sectionId,
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/writingCourse/writingCourse?courseId=' + item.id
+						+ '&bookId=' + item.bookId
+						+ '&sectionId=' + item.sectionId,
+					})
+				}
+			}
 		}
+
 	}
 </script>
 
