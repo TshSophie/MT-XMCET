@@ -9,6 +9,7 @@ use App\Services\Common\WxTokenService;
 
 class AppSectionService
 {
+    // 获取章节列表
     public static function getSectionList($bookid) {
         $allData = AppSection::where([
             'bookid' => $bookid
@@ -52,6 +53,7 @@ class AppSectionService
         return $dataByWeek;
     }
 
+    // 获取课程列表
     public static function getCourseListBySectionId($sectionId) {
         $sectionCourseList = AppSectionCourse::with('course')
         ->where([
@@ -93,6 +95,7 @@ class AppSectionService
         }
     }
 
+    // 获取课程词汇列表按week
     public static function getVocabularyListByWeek($bookid, $week) {
         // $uid = WxTokenService::getCurrentUid();
         $sections = AppSection::where([
@@ -114,6 +117,64 @@ class AppSectionService
             ];
         }
         return $course;
+    }
+
+    // 获取错题集按week
+    public static function getWrongCollectionByWeek($bookid, $week) {
+        $uid = WxTokenService::getCurrentUid();
+        $sections = AppSection::where([
+            'bookid' => $bookid,
+            'week' => $week
+        ])->get()->toArray();
+        $sectionIds = array_column($sections, 'id');
+        // 课程答题记录
+        $records = AppUserCourseRecord::with(['exercises', 'course', 'section'])
+        ->where([
+            'section_id' => $sectionIds,
+            'user_id' => $uid,
+            'status' => 0
+        ])
+        ->get()
+        ->toArray();
+
+        $courseIds = array_unique(array_column($records, 'course_id'));
+        $data = [];
+        foreach($courseIds as $cid) {
+            $exercisesList = [];
+            $courseTemp = [];
+            foreach ($records as $record) {
+                if($cid == $record['course_id']) {
+                    $exercises = $record['exercises'];
+                    $result = [
+                        'id' => $exercises['id'],
+                        'question' => $exercises['question'],
+                        'answer' => $exercises['answer'],
+                        'choice' => $record['user_answer'],
+                        'options' => json_decode($exercises['options']),
+                    ];
+                    // 构造数据
+                    $exercisesList[] = $result;
+                    // 缓存课程信息
+                    $courseTemp = [
+                        'id' => $record['course']['id'],
+                        'type' => $record['course']['type'],
+                        'bookId' => $record['book_id'],
+                        'sectionId' => $record['section_id'],
+                        'title' => $record['section']['sub_title'] . '-' . $record['course']['name'],
+                    ];
+                }
+            }
+            $data[] = [
+                'id' => $courseTemp['id'],
+                'title' => $courseTemp['title'],
+                'type' => $courseTemp['type'],
+                'bookId' => $courseTemp['bookId'],
+                'sectionId' => $courseTemp['sectionId'],
+                'exercises' => $exercisesList
+            ];
+        }
+
+        return $data;
     }
 
 }

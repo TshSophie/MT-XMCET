@@ -40,4 +40,15 @@ class AppSectionController extends Controller
         $data = AppSectionService::getVocabularyListByWeek($bookId, $week);
         return gfResponse()->json($data);
     }
+
+    public function getWrongCollectionByWeek(Request $request)
+    {
+        $bookId = $request->input('bookId');
+        $week = $request->input('week');
+        if (!$bookId || !$week) {
+            CommonUtil::throwException(ErrorConst::PARAM_ERROR_CODE_MSG, ErrorConst::PARAM_ERROR_CODE);
+        }
+        $data = AppSectionService::getWrongCollectionByWeek($bookId, $week);
+        return gfResponse()->json($data);
+    }
 }

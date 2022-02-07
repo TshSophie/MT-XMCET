@@ -31,6 +31,7 @@ Route::name('app.')->group(function (){
     Route::get('app/section/getSectionList', [AppSectionController::class, 'getSectionList']);
     Route::get('app/section/getCourseListBySectionId', [AppSectionController::class, 'getCourseListBySectionId']);
     Route::get('app/section/getVocabularyListByWeek', [AppSectionController::class, 'getVocabularyListByWeek']);
+    Route::get('app/section/getWrongCollectionByWeek', [AppSectionController::class, 'getWrongCollectionByWeek']);
 
     // 课程详情
     Route::get('app/course/getDetail', [AppCourseController::class, 'getDetail']);
