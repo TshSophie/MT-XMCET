@@ -10,7 +10,7 @@ use App\Utils\CommonUtil;
 use Closure;
 use Illuminate\Http\Request;
 
-class WebToken
+class AuthWebToken
 {
     /**
      * Handle an incoming request.
