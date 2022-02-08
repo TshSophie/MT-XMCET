@@ -189,36 +189,43 @@
           </audio>
         </el-form-item>
         <el-form-item label="课程内容" prop="content">
-          <el-input
+          <!-- <el-input
             v-model="form.content"
             type="textarea"
             :rows="13"
             placeholder="请输入课程内容"
-          />
+          /> -->
+          <ueditor v-model="form.content" />
         </el-form-item>
         <el-form-item label="解析" prop="solution">
-          <el-input
+          <!-- <el-input
             v-model="form.solution"
             type="textarea"
             :rows="13"
             placeholder="请输入解析"
-          />
+          /> -->
+          <ueditor v-model="form.solution" />
         </el-form-item>
         <el-form-item label="翻译" prop="translate">
-          <el-input
+          <!-- <el-input
             v-model="form.translate"
             type="textarea"
             :rows="13"
             placeholder="请输入翻译"
-          />
+          /> -->
+          <ueditor v-model="form.translate" />
         </el-form-item>
         <el-form-item label="问题与答案" prop="qa">
-          <el-input
+          <!-- <el-input
             v-model="form.qa"
             type="textarea"
             :rows="13"
             :placeholder="qaPlaceholder"
-          />
+          /> -->
+          <div v-for="(item, index) in qaList" :key="index" >
+            <SingleChoiceCard v-model="qaList[index]" @handleInput="handleInput"/>
+          </div>
+          <el-button type="primary" icon="el-icon-plus" @click="handleAddQuestion">添加问题</el-button>
         </el-form-item>
         <el-form-item label="课程词汇" prop="vocabulary">
           <el-input
@@ -272,8 +279,15 @@ import {
   updateCourse
 } from '@/api/admin/course'
 import { books } from '@/api/admin/book'
+import ueditor from '@/components/Ueditor'
+import SingleChoiceCard from '@/components/SingleChoiceCard'
+
 export default {
   name: 'Course',
+  components: {
+    ueditor,
+    SingleChoiceCard
+  },
   data() {
     const validateJsonFormart = (rule, value, callback) => {
       if (value !== '' && !this.isJSON(value)) {
@@ -322,6 +336,7 @@ export default {
       },
       // 表单参数
       form: {},
+      qaList: [],
       // 表单校验
       rules: {
         name: [{ required: true, message: '请输入课程名称', trigger: 'blur' }],
@@ -392,6 +407,19 @@ export default {
       })
   },
   methods: {
+    handleAddQuestion() {
+      this.qaList.push({
+        question: '',
+        answer: '',
+        options: [
+          {label: '', value: ''},
+          {label: '', value: ''},
+        ]
+      })
+    },
+    handleInput(val) {
+      console.log(val)
+    },
     getAudioUrl(src) {
       return process.env.VUE_APP_BASE_API + src
     },
@@ -477,6 +505,7 @@ export default {
     },
     /** 提交按钮 */
     submitForm: function() {
+      console.log(this.qaList)
       this.$refs['form'].validate(valid => {
         if (valid) {
           // 构造表单数据

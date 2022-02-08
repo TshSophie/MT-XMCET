@@ -57,6 +57,21 @@ class AppCourse extends Model
     public function getUpdateTimeAttribute($value)
     {
         return Date('Y-m-d h:i:s', strtotime($value));
+    } 
+
+    public function getContentAttribute($value)
+    {
+        return htmlspecialchars_decode($value);
+    }
+
+    public function getSolutionAttribute($value)
+    {
+        return htmlspecialchars_decode($value);
+    }
+
+    public function getTranslateAttribute($value)
+    {
+        return htmlspecialchars_decode($value);
     }
 
     public function getAudioAttribute($value)

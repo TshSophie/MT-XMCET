@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CourseController;
-use App\Http\Controllers\Admin\EssayTemplateController;
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WordRootController;
@@ -73,17 +73,17 @@ Route::name('admin.')->group(function (){
     Route::put('admin/wordRoot', [WordRootController::class, 'updateOne']);
     // 删除wordRoot
     Route::delete('admin/wordRoot/{id}', [WordRootController::class, 'del']);
-    /********************** EssayTemplate **************************************************************** */
+    /********************** Article **************************************************************** */
     // wordRoot列表
-    Route::get('admin/essayTemplate/list', [EssayTemplateController::class, 'list']);
+    Route::get('admin/article/list', [ArticleController::class, 'list']);
     // 回显wordRoot信息
-    Route::get('admin/essayTemplate/{id}', [EssayTemplateController::class, 'getOne'])->where(['id' => '[0-9]+']);
+    Route::get('admin/article/{id}', [ArticleController::class, 'getOne'])->where(['id' => '[0-9]+']);
     // 新增wordRoot
-    Route::post('admin/essayTemplate', [EssayTemplateController::class, 'addOne']);
+    Route::post('admin/article', [ArticleController::class, 'addOne']);
     // 修改wordRoot
-    Route::put('admin/essayTemplate', [EssayTemplateController::class, 'updateOne']);
+    Route::put('admin/article', [ArticleController::class, 'updateOne']);
     // 删除wordRoot
-    Route::delete('admin/essayTemplate/{id}', [EssayTemplateController::class, 'del']);
+    Route::delete('admin/article/{id}', [ArticleController::class, 'del']);
     /********************** user **************************************************************** */
     // user列表
     Route::get('admin/user/list', [UserController::class, 'list']);

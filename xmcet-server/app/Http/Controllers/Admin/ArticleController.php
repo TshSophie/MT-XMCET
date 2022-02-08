@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\ConstParam\ErrorConst;
 use App\Http\Controllers\Controller;
-use App\Models\App\AppEssayTemplate;
-use App\Services\Admin\EssayTemplateService;
+use App\Models\App\AppArticle;
+use App\Services\Admin\ArticleService;
 use App\Utils\CommonUtil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class EssayTemplateController extends Controller
+class ArticleController extends Controller
 {
     /**
      * 列表
@@ -28,7 +28,7 @@ class EssayTemplateController extends Controller
         // 日期范围
         $beginTime = $request->input('beginTime');
         $endTime = $request->input('endTime');
-        $data = EssayTemplateService::getList($pageSize, $title, $status, $beginTime, $endTime);
+        $data = ArticleService::getList($pageSize, $title, $status, $beginTime, $endTime);
         return gfResponse()->json($data);
     }
 
@@ -37,7 +37,7 @@ class EssayTemplateController extends Controller
         $id = $request->route('id');
         $data = [];
         if ($id) {
-            $data = AppEssayTemplate::find($id);
+            $data = AppArticle::find($id);
         }
         return gfResponse()->json($data);
     }
@@ -57,7 +57,7 @@ class EssayTemplateController extends Controller
             $errors = $validator->errors();
             CommonUtil::throwException(ErrorConst::PARAM_ERROR_CODE, $errors);
         }
-        $data = EssayTemplateService::addOne($params);
+        $data = ArticleService::addOne($params);
         return gfResponse()->json($data, '新增成功');
     }
 
@@ -76,7 +76,7 @@ class EssayTemplateController extends Controller
             $errors = $validator->errors();
             CommonUtil::throwException(ErrorConst::PARAM_ERROR_CODE, $errors);
         }
-        $data = EssayTemplateService::updateOne($params);
+        $data = ArticleService::updateOne($params);
         return gfResponse()->json($data, '修改成功');
     }
 
@@ -96,7 +96,7 @@ class EssayTemplateController extends Controller
             CommonUtil::throwException(ErrorConst::PARAM_ERROR_CODE, $errors);
         }
 
-        EssayTemplateService::del($request->route('id'));
+        ArticleService::del($request->route('id'));
         return gfResponse()->json([], '删除成功');
     }
 }

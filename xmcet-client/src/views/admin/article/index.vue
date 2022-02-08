@@ -131,12 +131,6 @@
           <el-input v-model="form.author" placeholder="请输入作者" />
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <!-- <el-input
-            v-model="form.content"
-            type="textarea"
-            :rows="13"
-            placeholder="请输入内容"
-          /> -->
           <ueditor v-model="form.content" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
@@ -159,15 +153,15 @@
 
 <script>
 import {
-  listEssayTemplate,
-  getEssayTemplate,
-  delEssayTemplate,
-  addEssayTemplate,
-  updateEssayTemplate
-} from '@/api/admin/essayTemplate'
+  listArticle,
+  getArticle,
+  delArticle,
+  addArticle,
+  updateArticle
+} from '@/api/admin/article'
 import ueditor from '@/components/Ueditor'
 export default {
-  name: 'EssayTemplate',
+  name: 'Article',
   components: {
     ueditor
   },
@@ -222,7 +216,7 @@ export default {
     /** 查询作文模板列表 */
     getList() {
       this.loading = true
-      listEssayTemplate(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+      listArticle(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
         this.list = response.data.rows
         this.total = response.data.total
         this.loading = false
@@ -270,7 +264,7 @@ export default {
     handleUpdate(row) {
       this.reset()
       const id = row.id || this.ids
-      getEssayTemplate(id).then(response => {
+      getArticle(id).then(response => {
         this.form = response.data
         this.form.status += ''
         this.open = true
@@ -282,7 +276,7 @@ export default {
       this.$refs['form'].validate(valid => {
         if (valid) {
           if (this.form.id !== undefined) {
-            updateEssayTemplate(this.form).then(response => {
+            updateArticle(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess('修改成功')
                 this.open = false
@@ -290,7 +284,7 @@ export default {
               }
             })
           } else {
-            addEssayTemplate(this.form).then(response => {
+            addArticle(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess('新增成功')
                 this.open = false
@@ -314,7 +308,7 @@ export default {
         }
       )
         .then(function() {
-          return delEssayTemplate(ids)
+          return delArticle(ids)
         })
         .then(() => {
           this.getList()

@@ -2,13 +2,13 @@
 
 namespace App\Services\Admin;
 
-use App\Models\App\AppEssayTemplate;
+use App\Models\App\AppArticle;
 
-class EssayTemplateService
+class ArticleService
 {
     static public function getList($pageSize, $title, $status, $beginTime, $endTime)
     {
-        $searchCondition = AppEssayTemplate::orderBy('id', 'asc');
+        $searchCondition = AppArticle::orderBy('id', 'asc');
         if ($title) {
             $searchCondition = $searchCondition->where('title', 'like', '%' . $title . '%');
         }
@@ -37,13 +37,13 @@ class EssayTemplateService
             'user_id' => app('jwtAuth')->userInfo()->id,
             'author' => $data['author'],
         ];
-        $data = AppEssayTemplate::create($insert);
+        $data = AppArticle::create($insert);
         return $data;
     }
 
     static public function updateOne($data)
     {
-        $AppCourse = AppEssayTemplate::where('id', '=', $data['id'])->first();
+        $AppCourse = AppArticle::where('id', '=', $data['id'])->first();
         array_key_exists('title', $data) ? $AppCourse->title = $data['title'] : "";
         array_key_exists('content', $data) ? $AppCourse->content = $data['content'] : "";
         array_key_exists('author', $data) ? $AppCourse->author = $data['author'] : "";
@@ -56,6 +56,6 @@ class EssayTemplateService
     static public function del($id)
     {
         $idArr = explode(',', $id);
-        AppEssayTemplate::whereIn('id', $idArr)->delete();
+        AppArticle::whereIn('id', $idArr)->delete();
     }
 }
