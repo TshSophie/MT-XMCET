@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/less" lang="less" scoped>
   .icon-body {
     width: 100%;
     padding: 10px;
