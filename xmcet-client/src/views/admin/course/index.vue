@@ -413,7 +413,6 @@ export default {
         answer: '',
         options: [
           {label: '', value: ''},
-          {label: '', value: ''},
         ]
       })
     },
@@ -467,6 +466,7 @@ export default {
         status: '',
         remark: undefined
       }
+      this.qaList = []
       this.resetForm('form')
     },
     /** 搜索按钮操作 */
@@ -498,6 +498,7 @@ export default {
       const id = row.id || this.ids
       getCourse(id).then(response => {
         this.form = response.data
+        this.qaList = response.data.exercises
         this.form.status += ''
         this.open = true
         this.title = '修改课程'
@@ -508,6 +509,7 @@ export default {
       console.log(this.qaList)
       this.$refs['form'].validate(valid => {
         if (valid) {
+          this.form.qaList = JSON.stringify(this.qaList)
           // 构造表单数据
           const formData = new FormData()
           for (const key in this.form) {

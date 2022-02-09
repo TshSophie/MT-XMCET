@@ -1,7 +1,7 @@
 <template>
     <el-form class="form" ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="题目" prop="question">
-          <el-input v-model="form.question" placeholder="请输入题目" @input="handleInput"/>
+          <el-input type="textarea" v-model="form.question" placeholder="请输入题目" @input="handleInput"/>
         </el-form-item>
         <el-form-item label="答案" prop="answer" style="margin: 5px 0">
           <el-input v-model="form.answer" placeholder="请输入题目" @input="handleInput" />
@@ -19,16 +19,17 @@
                         </el-table-column>
                     <el-table-column
                         prop="label"
-                        label="内容"
-                        width="180">
+                        width="350"
+                        label="内容">
                         <template slot-scope="scope">
                             <el-input v-model="scope.row.label" placeholder="请输入内容" @input="handleInput"/>
                         </template>
                     </el-table-column>
                     <el-table-column
                         prop="value"
+                        align="center"
                         label="值"
-                        width="180">
+                        width="80">
                         <template slot-scope="scope">
                             <el-input v-model="scope.row.value" placeholder="请输入值" @input="handleInput"/>
                         </template>
@@ -88,7 +89,8 @@ export default {
         handleAddOption() {
             this.options.push({
                 content: "",
-                value: ""
+                value: "",
+                order: this.options.length + 1
             })
             this.form.options = this.options
             this.$emit('input', this.form)
