@@ -132,7 +132,8 @@ class AppSectionService
         ->where([
             'section_id' => $sectionIds,
             'user_id' => $uid,
-            'status' => 0
+            'status' => 0,
+            'delete' => 0
         ])
         ->get()
         ->toArray();
@@ -150,7 +151,7 @@ class AppSectionService
                         'question' => $exercises['question'],
                         'answer' => $exercises['answer'],
                         'choice' => $record['user_answer'],
-                        'options' => json_decode($exercises['options']),
+                        'options' => $exercises['options'],
                     ];
                     // 构造数据
                     $exercisesList[] = $result;

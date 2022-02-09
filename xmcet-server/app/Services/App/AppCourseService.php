@@ -22,7 +22,8 @@ class AppCourseService
         $uid = WxTokenService::getCurrentUid();
         $records = AppUserCourseRecord::where([
             'course_id' => $courseId,
-            'user_id' => $uid
+            'user_id' => $uid,
+            'delete' => 0
         ])->get();
 
         // 用户选项 exercises_id => answer
@@ -32,12 +33,17 @@ class AppCourseService
         }
         $result = [];
         foreach ($exercises as $exercise) {
+            // 判断题号是否存在，后台数据可能有改动
+            $choice = '';
+            if(count($userChoices) > 0 && array_key_exists($exercise['id'], $userChoices)) {   
+                $choice = $userChoices[$exercise['id']];
+            }
             $result[] = [
                 'id' => $exercise['id'],
                 'question' => $exercise['question'],
                 'answer' => $exercise['answer'],
-                'choice' => count($userChoices) > 0 ? $userChoices[$exercise['id']] : '',
-                'options' => json_decode($exercise['options']),
+                'choice' => $choice,
+                'options' => $exercise['options'],
             ];
         }
         return [

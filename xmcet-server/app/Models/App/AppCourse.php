@@ -87,4 +87,10 @@ class AppCourse extends Model
     {
         return $this->hasOne(AppUser::class, 'id', 'user_id');
     }
+
+    // 关联exercises表
+    public function exercises()
+    {
+        return $this->hasMany(AppCourseExercises::class, 'course_id', 'id');
+    }
 }

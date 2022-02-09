@@ -49,7 +49,7 @@ class CourseController extends Controller
       $id = $request->route('id');
       $data = [];
       if($id) {
-        $data = AppCourse::find($id);
+        $data = CourseService::getOne($id);
       }
       return gfResponse()->json($data);
     }

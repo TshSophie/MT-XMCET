@@ -39,19 +39,17 @@ class AppCourseExercises extends Model
         'answer',
         'order',
         'create_time',
-        'update_time',
     ];
 
     const CREATED_AT = 'create_time';
-    const UPDATED_AT = 'update_time';
 
     public function getCreateTimeAttribute($value)
     {
         return Date('Y-m-d h:i:s', strtotime($value));
     }
 
-    public function getUpdateTimeAttribute($value)
+    public function getOptionsAttribute($value)
     {
-        return Date('Y-m-d h:i:s', strtotime($value));
+        return json_decode($value);
     }
 }
