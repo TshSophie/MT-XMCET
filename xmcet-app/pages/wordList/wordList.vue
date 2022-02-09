@@ -39,6 +39,7 @@
 </template>
 
 <script>
+    import { getList } from '@/api/wordRoot'
 	import TabsUd from '@/components/TabsUd'
 	export default {
 		components: {
@@ -211,8 +212,25 @@
 			this.setNavBarTitle()
 			const res = uni.getSystemInfoSync();
 			this.windowHeight = res.windowHeight
+            // 获取列表数据
+            this.getList()
 		},
 		methods: {
+            getList() {
+                // const types = ['全部', '记忆中', '陌生词', '已掌握']
+                getList({
+                    order: this.orderMode + 0,
+                    type: this.currentTab
+                }).then(response => {
+                    this.wordDataList = response.data.rows
+                    this.tabs = [
+                        {u: "全部", d: response.data.tabs[0]},
+                        {u: "记忆中", d: response.data.tabs[1]},
+                        {u: "陌生词", d: response.data.tabs[2]},
+                        {u: "已掌握", d: response.data.tabs[3]},
+                    ]
+                })
+            },
 			setNavBarTitle() {
 				uni.setNavigationBarTitle({
 					title: this.title
@@ -220,6 +238,7 @@
 			},
 			handleClick(item) {
 				this.currentTab = item
+                this.getList()
 			},
             gotoWordRootDetail() {
 
