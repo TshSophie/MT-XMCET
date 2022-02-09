@@ -7,6 +7,7 @@ use App\Http\Controllers\App\AppSectionController;
 use App\Http\Controllers\App\AppUserCollectController;
 use App\Http\Controllers\App\AppUserLikeController;
 use App\Http\Controllers\App\AppUserSubscribeController;
+use App\Http\Controllers\App\AppWordrootController;
 use App\Http\Controllers\App\UserController;
 use App\Http\Controllers\Common\UploadController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,9 @@ Route::name('app.')->group(function (){
     Route::get('app/section/getCourseListBySectionId', [AppSectionController::class, 'getCourseListBySectionId']);
     Route::get('app/section/getVocabularyListByWeek', [AppSectionController::class, 'getVocabularyListByWeek']);
     Route::get('app/section/getWrongCollectionByWeek', [AppSectionController::class, 'getWrongCollectionByWeek']);
+
+    // 词根
+    Route::get('app/wordRoot/getList', [AppWordrootController::class, 'getList']);
 
     // 课程详情
     Route::get('app/course/getDetail', [AppCourseController::class, 'getDetail']);

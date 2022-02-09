@@ -4,7 +4,7 @@ namespace App\Models\App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AppWordRoot extends Model
+class AppWordRootRecord extends Model
 {
     /**
      * 与模型关联的表名
