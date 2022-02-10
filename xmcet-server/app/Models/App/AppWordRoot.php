@@ -37,4 +37,9 @@ class AppWordRoot extends Model
         'mean',
         'detail',
     ];
+
+    public function getDetailAttribute($value)
+    {
+        return json_decode($value);
+    }
 }

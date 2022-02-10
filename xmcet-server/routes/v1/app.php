@@ -36,6 +36,8 @@ Route::name('app.')->group(function (){
 
     // 词根
     Route::get('app/wordRoot/getList', [AppWordrootController::class, 'getList']);
+    Route::get('app/wordRoot/getBasicInfo', [AppWordrootController::class, 'getBasicInfo']);
+    Route::post('app/wordRoot/setPlan', [AppWordrootController::class, 'setPlan']);
 
     // 课程详情
     Route::get('app/course/getDetail', [AppCourseController::class, 'getDetail']);

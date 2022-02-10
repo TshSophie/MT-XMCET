@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 
 class AppWordrootController extends Controller 
 {
+    public function getBasicInfo()
+    {
+        $data = AppWordrootService::getBasicInfo();
+        return gfResponse()->json($data);
+    }
+
+    public function setPlan(Request $request)
+    {
+        $dailyCount = $request->input('dailyCount', 10);
+        $total = $request->input('total', 10);
+        $data = AppWordrootService::setPlan($dailyCount, $total);
+        return gfResponse()->json($data);
+    }
+
     public function getList(Request $request) {
         // 每页数据条数
         $pageSize = $request->input('pageSize', 10);
