@@ -7,3 +7,19 @@ export const getList = (data) => {
 		data
 	})
 }
+
+export const getBasicInfo = (data) => {
+	return apiResquest({
+		url: 'wordRoot/getBasicInfo',
+		method: 'GET',
+		data
+	})
+}
+
+export const setPlan = (data) => {
+	return apiResquest({
+		url: 'wordRoot/setPlan',
+		method: 'POST',
+		data
+	})
+}

@@ -68,12 +68,13 @@
 			};
 		},
 		onLoad(options) {
-        	uni.startPullDownRefresh(options);
+        	uni.startPullDownRefresh();
 			this.menuId = options.menuId
 			this.getList()
 		},
 		// 触底
 		onReachBottom() {
+			console.log("fjdsihfosih")
 			if(this.hasMore) {
 				this.getList();
 			} else {

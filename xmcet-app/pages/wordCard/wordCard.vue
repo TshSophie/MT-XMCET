@@ -137,7 +137,7 @@
 		justify-content: space-around;
 		padding-bottom: 40px;
 		.btn {
-			@btnSize: 80px;
+			@btnSize: 70px;
 			border-radius: 10px;	
 			width: @btnSize;
 			height: @btnSize;

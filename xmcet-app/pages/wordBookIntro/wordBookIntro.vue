@@ -10,12 +10,11 @@
 					<text class="title">词根词缀</text>
 					<text class="btn" @click="open">调整计划</text>
 				</view>
-				<view class="line2">每日20词，剩余20天</view>
-				<view class='progress-box line3'>                        
-					<progress percent="20" show-info stroke-width="4" activeColor="#86d461"/>
+				<view class="line2">每日{{dailyCount}}词，剩余{{remain}}天</view>
+				<view class='progress-box line3'>
+					<progress :percent="Math.ceil((this.planInfo.process / this.dailyCount) * 100)" show-info stroke-width="4" activeColor="#86d461"/>
 					<view> 
-						<text>已学词汇</text>
-						<text>20/209</text>
+						<text>已学词汇</text><text>{{planInfo.process}}/{{planInfo.total}}</text>
 					</view>
 				</view>
 			</view>
@@ -27,10 +26,7 @@
 					type="arcbar"
 					:chartData="chartData"
 					:canvas2d="true"
-					background="none"
-					:opts="{
-					title:{name:'0%',color:'#2fc25b',fontSize:35},
-					subtitle:{name:'进度',color:'#666666',fontSize:25}}" 
+					:opts="chartOpts"
 				/>
 			</view>
 			<button type="primary" class="btn" @click="handleStart" style="margin-top: 20px">开始闯关</button>
@@ -48,15 +44,15 @@
 					<span class="close" @click="close">x</span>
 					<view class="item">
 						<text class="title">当前任务量</text>
-						<text class="value">1797词</text>
+						<text class="value">{{planInfo.total}}词</text>
 					</view>
 					<view class="item">
 						<text class="title">预计完成周期</text>
-						<text class="value">173天</text>
+						<text class="value">{{totalDays}}天</text>
 					</view>
 					<view class="item">
 						<text class="title">已坚持</text>
-						<text class="value">3天</text>
+						<text class="value">{{planInfo.day}}天</text>
 					</view>
 				</view>
 				<button type="primary" @click="submitPlan">确认</button>
@@ -67,6 +63,7 @@
 
 <script>
 	import TabsUd from '@/components/TabsUd'
+    import { getBasicInfo, setPlan } from '@/api/wordRoot'
 	export default {
 		components: {
 			TabsUd
@@ -74,6 +71,7 @@
 		data() {
 			return {
 				bookInfo: {},
+				planInfo: {},
 				currentTab: -1,
 				tabs:[
                     {u: "全部", d: "120"},
@@ -81,19 +79,58 @@
                     {u: "陌生词", d: "128"},
                     {u: "已掌握", d: "0"},
                 ],
-				chartData:{
-					series:[
-						{
-							"name": "正确率",
-							"data": 0.0,
-							"color": "#2fc25b"
-						},
-					],
-				},
-				dailyCount: 10
+				chartData:{},
+				// 每日数量
+				dailyCount: 10,
 			}
 		},
+		computed: {
+			remain() {
+				return Math.ceil((this.tabs[0].d - this.tabs[3].d) / this.dailyCount)
+			},
+			totalDays() {
+				return Math.ceil(this.tabs[0].d / this.dailyCount)
+			},
+			chartOpts() {
+				return {
+					title:{name: (Math.ceil((this.planInfo.process / this.dailyCount) * 100)) + '%',color:'#2fc25b',fontSize:35},
+					subtitle:{name:'进度' + this.planInfo.process + '/' + this.dailyCount,color:'#666666',fontSize:25}
+				}
+			}
+		},
+		created() {
+			this.getBasicInfo()
+		},
 		methods: {
+			getBasicInfo() {
+				getBasicInfo().then(res => {
+					this.tabs = [
+                        {u: "全部", d: res.data.tabs[0]},
+                        {u: "记忆中", d: res.data.tabs[1]},
+                        {u: "陌生词", d: res.data.tabs[2]},
+                        {u: "已掌握", d: res.data.tabs[3]},
+                    ];
+					if(res.data.plan) {
+						this.dailyCount = res.data.plan.dailyTarget
+						this.planInfo = res.data.plan
+					} else {
+						this.planInfo = {
+							total: res.data.tabs[0],
+							process: 0,
+							day: 0
+						}
+					}
+					this.chartData = {
+						series: [
+							{
+								"name": "进度",
+								"data": Math.ceil((this.planInfo.process / 10) * 100),
+								"color": "#2fc25b"
+							},
+						]
+					}
+				})
+			},
 			handleClick(item) {
 				this.currentTab = item
 				// 跳转到词汇列表页面
@@ -109,6 +146,20 @@
 			},
 			submitPlan() {
 				console.log(this.dailyCount)
+				setPlan({
+					dailyCount: this.dailyCount,
+					total: this.tabs[0].d
+				}).then(response => {
+					this.getBasicInfo()
+					uni.showToast({
+						title: 'ok',
+						icon: 'success',
+						duration: 1000,
+						complete: () => {
+							this.$refs.popup.close()
+						}
+					});
+				})
 			},
 			open() {
 				// 通过组件定义的ref调用uni-popup方法 ,如果传入参数 ，type 属性将失效 ，仅支持 ['top','left','bottom','right','center']

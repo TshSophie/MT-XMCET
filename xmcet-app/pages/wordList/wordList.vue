@@ -1,14 +1,19 @@
 <template>
 	<view class="page">
-		<TabsUd v-model="currentTab" @tab-click="handleClick" :tabs="tabs"></TabsUd>
-        <view class="tab-content" v-if="listMode">
-            <view class="wordList-item" v-for="item in wordDataList" :key="item.id" @click="gotoWordRootDetail(item)">
+		<TabsUd v-model="currentTab" @tab-click="handleChangeTab" :tabs="tabs"></TabsUd>
+        <scroll-view class="tab-content" scroll-y="true" @scrolltolower="lower" v-if="listMode">
+            <view class="wordList-item" v-for="item in list" :key="item.id">
                 <view class="word"> {{item.word}}</view>
                 <view class="translate">{{item.mean}}</view>
             </view>
-        </view>
-        <swiper class="tab-card" v-if="!listMode" previous-margin="50rpx" next-margin="50rpx" easing-function="linear">
-            <swiper-item v-for="item in wordDataList" :key="item.id" >
+        </scroll-view>
+        <swiper class="tab-card" 
+        @change="handleChangeCard"
+        v-if="!listMode" 
+        previous-margin="50rpx" 
+        next-margin="50rpx" 
+        easing-function="linear">
+            <swiper-item v-for="item in list" :key="item.id" >
                 <view class='card'>
                     <view class='card-content'>
                         <view class="word">   
@@ -24,16 +29,14 @@
                             </view>     
                         </view>
                     </view>
-                    <!-- <view class='card-bottom'>
-                    </view> -->
                 </view>
             </swiper-item>
         </swiper>
         <view class="tab-bottom"> 
 			<image class="logo-left" src="../../static/assets/list.png" v-if="listMode" @click="switchListMode(false)"></image>
-			<image class="logo-left" src="../../static/assets/card.png" v-if="!listMode" @click="switchListMode(true)"></image>
+			<image class="logo-left" src="../../static/assets/card.png" v-else @click="switchListMode(true)"></image>
 			<image class="logo-right" src="../../static/assets/shunxu.png" v-if="orderMode" @click="switchOrderMode(false)"></image>
-			<image class="logo-right" src="../../static/assets/suiji.png" v-if="!orderMode" @click="switchOrderMode(true)"></image>
+			<image class="logo-right" src="../../static/assets/suiji.png" v-else @click="switchOrderMode(true)"></image>
         </view>
 	</view>
 </template>
@@ -52,157 +55,28 @@
 				id: '',
 				currentTab: 0,
 				tabs:[
-                    {u: "全部", d: "120"},
-                    {u: "记忆中", d: "2"},
-                    {u: "陌生词", d: "128"},
-                    {u: "已掌握", d: "0"},
+                    {u: "全部", d: ""},
+                    {u: "记忆中", d: ""},
+                    {u: "陌生词", d: ""},
+                    {u: "已掌握", d: ""},
                 ],
 				windowHeight: 0,
-                wordDataList: [
-                    {
-                      "id": 1,
-                      "word":"1amphi",
-                      "mean":"两个，两种"
-                    },
-                    {"id": 2,"word":"2amphi","mean":"两个，两种两个，两种两个，两种",
-                        "detail":[
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                            {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                            },
-                        ],
-                    },
-                    {"id": 3,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 4,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 5,"word":"amphi","mean":"两个，两两个，两种两个，两种两个，两种两个，两种两个，两种两个，两种两个，两种种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 6,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 7,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 8,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 9,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 10,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 11,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 12,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 13,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 14,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 15,"word":"amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
-                    {"id": 16,"word":"16.amphi","mean":"两个，两种",
-                        "detail":[ {
-                            "word": "introduce",
-                            "translate": "提出；介绍；引进；作为…的开头；"
-                        }],
-                    },
+                list: [
+                    // {
+                    //   "id": 1,
+                    //   "word":"1amphi",
+                    //   "mean":"两个，两种"
+                    // },
                 ],
                 listMode: true,
-                orderMode: true
+                orderMode: false,
+				// 分页页面
+				dataPage: 0,
+				// 每页数据条数
+				dataSize: 10,
+				//推荐数据      
+				hasMore: true,
+				total: 0,
 			}
 		},
 		onLoad(option) {
@@ -216,19 +90,50 @@
             this.getList()
 		},
 		methods: {
+		    // 触底
+            lower(e) {
+                if(this.hasMore) {
+                    this.getList();
+                } else {
+                    uni.showToast({
+                        title: '没有更多了',
+                        icon: 'none',
+                        duration: 1000
+                    });
+                }
+            },
+            handleChangeCard(event) {
+                const {current} = event.detail
+                if(current == this.list.length - 1) {
+                    this.getList()
+                }
+            },
             getList() {
-                // const types = ['全部', '记忆中', '陌生词', '已掌握']
-                getList({
+				// 页码加1
+				++this.dataPage;
+				// 加载推荐数据
+				var param = {
+					pageNum: this.dataPage,
+					pageSize: this.dataSize,
                     order: this.orderMode + 0,
                     type: this.currentTab
-                }).then(response => {
-                    this.wordDataList = response.data.rows
+				}
+                getList(param).then(res => {
                     this.tabs = [
-                        {u: "全部", d: response.data.tabs[0]},
-                        {u: "记忆中", d: response.data.tabs[1]},
-                        {u: "陌生词", d: response.data.tabs[2]},
-                        {u: "已掌握", d: response.data.tabs[3]},
+                        {u: "全部", d: res.data.tabs[0]},
+                        {u: "记忆中", d: res.data.tabs[1]},
+                        {u: "陌生词", d: res.data.tabs[2]},
+                        {u: "已掌握", d: res.data.tabs[3]},
                     ]
+                    
+					let resData = res.data.rows  
+					//拼接达到数据的累加
+					//console.log(res.header)  //在响应头中X-Total-Count代表数据总数
+					//判断是否还有数据
+					const hasMore = this.dataPage * this.dataSize < (res.data.total - 0)
+                    this.list = this.list.concat(resData)
+					this.hasMore = hasMore
+					this.total = res.data.total
                 })
             },
 			setNavBarTitle() {
@@ -236,18 +141,22 @@
 					title: this.title
 				});
 			},
-			handleClick(item) {
+			handleChangeTab(item) {
 				this.currentTab = item
+                this.dataPage = 0
+                this.list = []
                 this.getList()
 			},
-            gotoWordRootDetail() {
-
-            },
+            // 列表/卡片模式切换
             switchListMode(mode) {
                 this.listMode = mode
             },
+            // 顺序/逆序模式切换
             switchOrderMode(mode) {
                 this.orderMode = mode
+				this.dataPage = 0
+				this.list = []
+				this.getList()
             }
 		}
 	}
