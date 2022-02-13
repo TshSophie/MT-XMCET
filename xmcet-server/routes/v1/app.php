@@ -38,6 +38,8 @@ Route::name('app.')->group(function (){
     Route::get('app/wordRoot/getList', [AppWordrootController::class, 'getList']);
     Route::get('app/wordRoot/getBasicInfo', [AppWordrootController::class, 'getBasicInfo']);
     Route::post('app/wordRoot/setPlan', [AppWordrootController::class, 'setPlan']);
+    Route::get('app/wordRoot/getScheduleList', [AppWordrootController::class, 'getScheduleList']);
+    Route::post('app/wordRoot/updateRecord', [AppWordrootController::class, 'updateRecord']);
 
     // 课程详情
     Route::get('app/course/getDetail', [AppCourseController::class, 'getDetail']);
