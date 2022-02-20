@@ -1,24 +1,27 @@
 <template>
 	<view class="container">
 		<span class="close" @click="handleBack">x</span>
-		<view class="header"> 
+		<view class="header">
 			学习{{studyCount}}|复习{{remaindCount}}
 		</view>
-		<view class='content'>
+		<view class='content' v-if="readyList.length > 0">
 			<view class="word">
-				{{word.word}}
+				{{readyList[0].word}}
 			</view>
 			<view class="mean">
-				释义： {{word.mean}}
+				释义： {{readyList[0].mean}}
 			</view>
 			<view class="detail">
-				<view class="detail-item" v-for="(detail, index) in word.detail" :key="detail.word">
+				<view class="detail-item" v-for="(detail, index) in readyList[0].detail" :key="detail.word">
 					<view class="item-word">{{index+1}}. {{detail.word}}</view>
 					<view class="item-translare">{{detail.translate}}</view>
 				</view>
 			</view>
 		</view>
-		<view class="option">
+		<view class="content-finish" v-else>
+			恭喜你，完成今日闯关任务！
+		</view>
+		<view class="option" v-if="readyList.length">
 			<text class="btn btn-left" @click="handleClick(1)">认识</text>
 			<text class="btn btn-middle" @click="handleClick(0)">模糊</text>
 			<!-- <text class="btn btn-right">不认识</text> -->
@@ -31,8 +34,8 @@
 	export default {
 		data() {
 			return {
-				word: 
-                    {
+				word: undefined
+                    // {
 						// "id": 2,"word":"2amphi","mean":"两个，两种两个，两种两个，两种",
                         // "detail":[
                         //     {
@@ -40,71 +43,69 @@
                         //     "translate": "提出；介绍；引进；作为…的开头；"
                         //     },
                         // ],
-                    },
+                    // },
+					,
 				list: [],
 				readyList: [],
-				current: -1
+				current: 0,
 			}
 		},
 		computed: {
 			remaindCount() {
-				return this.list.filter(item => item.n > 1 && !item.status).length
+				return this.readyList.filter(item => item.remaind).length
 			},
 			studyCount() {
-				return this.list.filter(item => item.n == 1 && !item.status).length
+				return this.list.filter(item => item.n == 1 && !item.remaind && !item.status).length
 			}
 		},
 		created() {
 			getScheduleList().then(response => {
 				this.list = this.generatePlan(response.data)
 				this.readyList = this.generateReadyList(response.data)
-				this.nextWord()
 			})
 		},
 		methods: {
 			handleClick(status) {
 				updateRecord({
-					id: this.word.id,
+					id: this.readyList[0].id,
 					status: status
 				}).then(response => {
-					this.updateWord(this.word.id, status)
+					this.updateWord(this.readyList[0], status)
 				})
 			},
-			nextWord() {
-				this.current++
-				if(this.current > this.readyList.length) {
-					this.current = this.current % this.readyList.length
+			nextWord(index) {
+				this.current = index;
+				this.word = this.readyList[this.current];
+			},
+			updateWord(rtarget, status) {
+				let index = -1;
+				let target = undefined
+				for (let i = 0; i < this.list.length; i++) {
+					const element = this.list[i];
+					if(element.id == rtarget.id) {
+						index = i;
+						target = element;
+						break;
+					}
 				}
-				this.word = this.readyList[this.current]
-			},
-			updateWord(id, status) {
-				let index = this.list.findIndex((item)=>{
-					return item.id == id
-				})
-				let target = this.list.find(item => {
-					return item.id == id
-				})
 				if(index > -1) {
+					// 设置词汇循环次数
 					if(status) {
 						target.n -= 1
 					} else {
-						target.n += 1
+						target.n = 1
+						target.remaind = true
 					}
 					this.list.splice(index, 1, target)
-					console.log(this.list)
-					let rindex = this.readyList.findIndex(item => {
-						return item.id == id
-					})
-					let rtarget = this.readyList.find(item => {
-						return item.id = id
-					})
-					if(target.n == 0) {
-						this.readyList.splice(rindex, 1)
-					} else {
-						this.readyList.push(rtarget)
-					}
 				}
-				this.nextWord()
+
+				// 复习词汇记录
+				if(!status) {
+					this.readyList.splice(0, 1)
+					this.readyList.push(target)
+				} else {
+					this.readyList.splice(0, 1)
+				}
 			},
 			// 生成计划列表
 			generatePlan(array) {
@@ -171,6 +172,12 @@
 			font-size: 13px;
 			margin-top: 10px;
 		}
+	}
+	.content-finish {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 	.option {
 		width: 100%;
